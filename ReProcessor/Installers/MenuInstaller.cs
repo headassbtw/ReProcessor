@@ -8,11 +8,11 @@ using ReProcessor.Managers;
 
 namespace ReProcessor.Installers
 {
-    class GameplayInstaller : Installer
+    class MenuInstaller : Installer
     {
         public override void InstallBindings()
         {
-            Container.Bind(typeof(IInitializable), typeof(GameplayCoreManager)).To<GameplayCoreManager>().AsSingle();
+            Container.Bind(typeof(IInitializable), typeof(MenuCoreManager)).To<MenuCoreManager>().AsSingle();
         }
     }
 }

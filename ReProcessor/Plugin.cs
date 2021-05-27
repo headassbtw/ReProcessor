@@ -1,52 +1,48 @@
 ﻿using IPA;
-using IPA.Config;
 using IPA.Config.Stores;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using IPA.Loader;
+using ReProcessor.Installers;
 using SiraUtil;
+using SiraUtil.Attributes;
 using SiraUtil.Zenject;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 
 namespace ReProcessor
 {
-    [Plugin(RuntimeOptions.SingleStartInit)]
+    [Plugin(RuntimeOptions.DynamicInit), Slog]
     public class Plugin
     {
-        internal static Plugin Instance { get; private set; }
+        //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
 
         [Init]
-        public Plugin(Zenjector zenjector)
+        public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)
         {
-            zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
-            zenjector.OnMenu<MyMenuUIInstaller>();
-            zenjector.OnGame<MyGameInstaller>();
+            Config config = conf.Generated<Config>();
+            zenjector.On<PCAppInit>().Pseudo(Container =>
+            {
+                Container.BindLoggerAsSiraLogger(logger);
+                Container.BindInstance(config).AsSingle();
+                Container.BindInstance(new UBinder<Plugin, PluginMetadata>(metadata));
+            });
+
+            //Instance = this;
+            Log = logger;
+            //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
+            zenjector.OnMenu<MenuSettingsInstaller>();
+            //zenjector.OnMenu<MenuInstaller>();
+            zenjector.OnGame<GameplayInstaller>();
 
             // Specify the scene name or contract or installer!
-            zenject.On("Menu").Register<MyMenuEffectsInstaller>();
+            //zenjector.On("Menu").Register<Installers.GameplayInstaller>();
         }
-
-        #region BSIPA Config
-        //Uncomment to use BSIPA's config
-        /*
-        [Init]
-        public void InitWithConfig(Config conf)
-        {
-            Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
-            Log.Debug("Config loaded");
-        }
-        */
-        #endregion
 
         [OnStart]
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            new GameObject("ReProcessorController").AddComponent<ReProcessorController>();
+            //new GameObject("ReProcessorController").AddComponent<ReProcessorController>();
 
         }
 
