@@ -15,6 +15,7 @@ namespace ReProcessor
     {
         //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
+        internal static Config Config { get; private set; }
 
         [Init]
         public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)
@@ -26,7 +27,7 @@ namespace ReProcessor
                 Container.BindInstance(config).AsSingle();
                 Container.BindInstance(new UBinder<Plugin, PluginMetadata>(metadata));
             });
-
+            Config = config;
             //Instance = this;
             Log = logger;
             //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!

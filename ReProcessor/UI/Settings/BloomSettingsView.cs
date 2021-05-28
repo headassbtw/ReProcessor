@@ -9,6 +9,9 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\UI\Views\BloomSettingsView.bsml")]
     class BloomSettingsView : BSMLAutomaticViewController
     {
-
+        void a()
+        {
+            
+        }
     }
 }
