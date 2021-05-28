@@ -1,4 +1,15 @@
-﻿<settings-container>
-    <checkbox-setting text='Enabled' value='enabled' />
-    <slider-setting text='Bloom Blend Factor' />
-</settings-container>
+﻿<vertical pref-height='50'>
+    <settings-container pref-width='150'>
+        <checkbox-setting text='Enabled' value='enabled' />
+        <slider-setting text='Blend Factor' />
+        <slider-setting text='Radius' />
+        <slider-setting text='Intensity' />
+        <slider-setting text='Intensity Offset' />
+        <slider-setting text='Weight' />
+        <slider-setting text='Alpha Weight' />
+    </settings-container>
+    <horizontal>
+        <button text='Cancel' />
+        <button text='Apply' />
+    </horizontal>
+</vertical>
