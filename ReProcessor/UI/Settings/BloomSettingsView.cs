@@ -6,6 +6,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 //using RuntimeUnityEditor.BSIPA4;
 using UnityEngine.Serialization;
 using Zenject;
+using ReProcessor.Files;
 
 namespace ReProcessor.UI
 {
@@ -13,23 +14,23 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\UI\Views\BloomSettingsView.bsml")]
     class BloomSettingsView : BSMLAutomaticViewController
     {
-        private Config tempConfig = new Config();
+        private BloomConfig tempConfig = Plugin.Config.preset.Bloom;
         
         
         [UIValue("bloom-en")]
         public bool Enabled
         {
-            get => Plugin.Config.Enabled;
-            set => Plugin.Config.Enabled = value;
+            get => Plugin.Config.preset.Bloom.Enabled;
+            set => Plugin.Config.preset.Bloom.Enabled = value;
         }
         [UIValue("blend-factor")]
         internal float BlendFactor
         {
-            get => tempConfig.BloomBlendFactor;
+            get => tempConfig.BlendFactor;
             set
             {
-                tempConfig.BloomBlendFactor = value;
-                Managers.MenuCoreManager._mainCamera.SetPrivateField("_bloomBlendFactor", (System.Single)value);
+                tempConfig.BlendFactor = value;
+                Managers.MenuCoreManager.MainCamAccess().SetCameraSetting("_bloomBlendFactor", (System.Single)value);
                 NotifyPropertyChanged();
             }
 
@@ -37,7 +38,9 @@ namespace ReProcessor.UI
         [UIAction("apply-button")]
         internal void Apply()
         {
-            Plugin.ApplyConfig(tempConfig);
+            var tc = Plugin.Config;
+            tc.preset.Bloom = tempConfig;
+            Plugin.ApplyConfig(tc);
         }
 
     }

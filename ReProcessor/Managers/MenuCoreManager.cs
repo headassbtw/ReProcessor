@@ -10,11 +10,19 @@ namespace ReProcessor.Managers
 {
     class MenuCoreManager : IInitializable, IDisposable
     {
+        internal static MenuCoreManager Instance;
 
-        internal static MainCamera _mainCamera;
+        internal static Camera MainCamAccess()
+        {
+            return Instance._mainCamera.camera;
+        }
+
+
+        private MainCamera _mainCamera;
 
         public MenuCoreManager(MainCamera mainCamera)
         {
+            Instance = this;
             try
             {
                 _mainCamera = mainCamera;

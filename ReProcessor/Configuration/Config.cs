@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ReProcessor.Files;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ReProcessor
@@ -12,8 +13,8 @@ namespace ReProcessor
     public class Config
     {
         public event Action<Config>? Updated;
-        public virtual bool Enabled { get; set; } = true;
-        public virtual System.Single BloomBlendFactor { get; set; } = 0.3f;
+        public virtual bool Enabled { get; set; }
+        public virtual Preset preset{ get; set;}
 
 
 

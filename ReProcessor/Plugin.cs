@@ -2,9 +2,11 @@
 using IPA.Config.Stores;
 using IPA.Loader;
 using ReProcessor.Installers;
+using ReProcessor.Files;
 using SiraUtil;
 using SiraUtil.Attributes;
 using SiraUtil.Zenject;
+using static ReProcessor.PresetExtensions;
 using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 
@@ -40,8 +42,22 @@ namespace ReProcessor
             zenjector.OnMenu<MenuInstaller>();
             zenjector.OnGame<GameplayInstaller>();
 
+            if (Config.preset == null)
+            {
+                var p = new Preset();
+                p.Name = "test";
+                p.Bloom = new BloomConfig();
+                p.Save();
+                Config.preset = Load("test");
+            }
+
             // Specify the scene name or contract or installer!
             //zenjector.On("Menu").Register<Installers.GameplayInstaller>();
+        }
+
+        internal void CreateFolders()
+        {
+            
         }
 
         [OnStart]
