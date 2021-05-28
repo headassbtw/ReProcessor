@@ -23,7 +23,7 @@ namespace ReProcessor.UI
             set => Plugin.Config.Enabled = value;
         }
         [UIValue("blend-factor")]
-        float BlendFactor
+        internal float BlendFactor
         {
             get => tempConfig.BloomBlendFactor;
             set
