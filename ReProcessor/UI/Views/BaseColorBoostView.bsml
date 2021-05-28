@@ -1,1 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+	<vertical pref-height='80' pref-width='120'>
+		<settings-container pref-width='100' pref-height='70' child-control-width='true'>
+			<checkbox-setting text='Enabled' value='color-boost-en' bind-value='true' apply-on-change='true'/>
+			<slider-setting text='Base Color Boost' value='boost' bind-value='true' apply-on-change='true'/>
+			<slider-setting text='Base Color Boost Threshold' value='boost-threshold' bind-value='true' apply-on-change='true'/>
+		</settings-container>
+		<horizontal pref-width='100' pref-height='10' horizontal-fit='PreferredSize'>
+			<horizontal pref-width='70'>
+				<!--this is a placeholder/spacer-->
+			</horizontal>
+			<horizontal pref-width='30'>
+				<button text='Cancel' />
+				<primary-button text='Apply' />
+			</horizontal>
+		</horizontal>
+	</vertical>
+</bg>

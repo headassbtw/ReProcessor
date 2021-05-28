@@ -15,7 +15,7 @@
 			</horizontal>
 			<horizontal pref-width='30'>
 				<button text='Cancel' />
-				<primary-button text='Apply' />
+				<primary-button text='Apply' on-click='apply-button' />
 			</horizontal>
         </horizontal>
     </vertical>

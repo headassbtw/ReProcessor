@@ -27,4 +27,9 @@ namespace ReProcessor.Files
         public System.Single Weight;
         public System.Single AlphaWeight;
     }
+    public class ColorBoostConfig
+    {
+        public System.Single Boost;
+        public System.Single BoostThreshold;
+    }
 }
