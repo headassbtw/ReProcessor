@@ -1,15 +1,17 @@
-﻿<vertical pref-height='50'>
-    <settings-container pref-width='150'>
-        <checkbox-setting text='Enabled' value='enabled' />
-        <slider-setting text='Blend Factor' />
-        <slider-setting text='Radius' />
-        <slider-setting text='Intensity' />
-        <slider-setting text='Intensity Offset' />
-        <slider-setting text='Weight' />
-        <slider-setting text='Alpha Weight' />
-    </settings-container>
-    <horizontal>
-        <button text='Cancel' />
-        <button text='Apply' />
-    </horizontal>
-</vertical>
+﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+     <vertical pref-height='50'>
+        <settings-container pref-width='150'>
+            <checkbox-setting text='Enabled' value='enabled' />
+            <slider-setting text='Blend Factor' />
+            <slider-setting text='Radius' />
+            <slider-setting text='Intensity' />
+            <slider-setting text='Intensity Offset' />
+            <slider-setting text='Weight' />
+            <slider-setting text='Alpha Weight' />
+        </settings-container>
+        <horizontal>
+            <button text='Cancel' />
+            <button text='Apply' />
+        </horizontal>
+    </vertical>
+</bg>
