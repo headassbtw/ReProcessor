@@ -15,7 +15,12 @@ namespace ReProcessor
     {
         //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
-        public static Config Config { get; internal set; }
+        internal static Config Config { get; private set; }
+
+        internal static void ApplyConfig(Config toApply)
+        {
+            Config = toApply;
+        }
 
         [Init]
         public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)
@@ -32,7 +37,7 @@ namespace ReProcessor
             Log = logger;
             //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
             zenjector.OnMenu<MenuSettingsInstaller>();
-            //zenjector.OnMenu<MenuInstaller>();
+            zenjector.OnMenu<MenuInstaller>();
             zenjector.OnGame<GameplayInstaller>();
 
             // Specify the scene name or contract or installer!

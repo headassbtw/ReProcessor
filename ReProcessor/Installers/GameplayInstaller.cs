@@ -12,6 +12,7 @@ namespace ReProcessor.Installers
     {
         public override void InstallBindings()
         {
+            Plugin.Log.Notice("Binding Gameplay Camera Manager");
             Container.Bind(typeof(IInitializable), typeof(GameplayCoreManager)).To<GameplayCoreManager>().AsSingle();
         }
     }

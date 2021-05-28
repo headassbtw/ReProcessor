@@ -12,6 +12,7 @@ namespace ReProcessor.Installers
     {
         public override void InstallBindings()
         {
+            Plugin.Log.Notice("Binding Menu Camera Manager");
             Container.Bind(typeof(IInitializable), typeof(MenuCoreManager)).To<MenuCoreManager>().AsSingle();
         }
     }

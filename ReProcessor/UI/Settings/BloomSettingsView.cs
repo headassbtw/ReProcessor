@@ -13,7 +13,7 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\UI\Views\BloomSettingsView.bsml")]
     class BloomSettingsView : BSMLAutomaticViewController
     {
-        private Config tempConfig;
+        private Config tempConfig = new Config();
         
         
         [UIValue("bloom-en")]
@@ -29,7 +29,7 @@ namespace ReProcessor.UI
             set
             {
                 tempConfig.BloomBlendFactor = value;
-                Managers.MenuCoreManager._mainCamera.SetPrivateField("_bloomBlendFactor", value);
+                Managers.MenuCoreManager._mainCamera.SetPrivateField("_bloomBlendFactor", (System.Single)value);
                 NotifyPropertyChanged();
             }
 
@@ -37,7 +37,7 @@ namespace ReProcessor.UI
         [UIAction("apply-button")]
         internal void Apply()
         {
-            Plugin.Config = tempConfig;
+            Plugin.ApplyConfig(tempConfig);
         }
 
     }

@@ -33,7 +33,7 @@ namespace ReProcessor.Managers
 
             Plugin.Log.Notice("Bloom Blend Factor is: " + bloomIntensity);
             Plugin.Log.Notice("Trying to set");
-            _mainCamera.camera.SetCameraSetting("_bloomBlendFactor", 0.3);
+            _mainCamera.camera.SetCameraSetting("_bloomBlendFactor", 0.3f);
             Plugin.Log.Notice("Bloom Blend Factor is: " + _mainCamera.camera.GetCameraSetting("_bloomBlendFactor"));
 
 
