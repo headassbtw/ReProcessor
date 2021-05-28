@@ -14,6 +14,7 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\UI\Views\BloomSettingsView.bsml")]
     public class BaseColorBoostViewController : BSMLAutomaticViewController
     {
+        ColorBoostConfig tempConfig = Plugin.Config.preset.ColorBoost;
 
 
 
@@ -22,7 +23,7 @@ namespace ReProcessor.UI
         internal void Apply()
         {
             var tc = Plugin.Config;
-            tc.preset.Bloom = tempConfig;
+            tc.preset.ColorBoost = tempConfig;
             Plugin.ApplyConfig(tc);
         }
     }

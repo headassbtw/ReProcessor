@@ -44,9 +44,7 @@ namespace ReProcessor
 
             if (Config.preset == null)
             {
-                var p = new Preset();
-                p.Name = "test";
-                p.Bloom = new BloomConfig();
+                var p = new Preset("test", new BloomConfig(), new ColorBoostConfig());
                 p.Save();
                 Config.preset = Load("test");
             }
