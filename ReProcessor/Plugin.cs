@@ -15,7 +15,7 @@ namespace ReProcessor
     {
         //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
-        internal static Config Config { get; internal set; }
+        public static Config Config { get; internal set; }
 
         [Init]
         public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)

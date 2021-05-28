@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ReProcessor
 {
-    internal class Config
+    public class Config
     {
         public event Action<Config>? Updated;
         public virtual bool Enabled { get; set; } = true;
