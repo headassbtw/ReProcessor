@@ -1,14 +1,4 @@
-﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
-	<vertical pref-height='80'>
-		<horizontal pref-height='70' bg='round-rect-panel'>
-			<vertical pref-height='70'>
-				<text text='FUCKIN' font-size='35'/>
-				<text text='UHHHHH' font-size='35'/>
-			</vertical>
-		</horizontal>
-		<horizontal pref-height='10' child-control-height='true'>
-			<primary-button text='Yes'/>
-			<button text='No'/>
-		</horizontal>
-	</vertical>
-</bg>
+﻿<settings-container>
+    <checkbox-setting text='Enabled' value='enabled' />
+    <slider-setting text='Bloom Blend Factor' />
+</settings-container>
