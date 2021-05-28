@@ -12,6 +12,7 @@ namespace ReProcessor
     internal class Config
     {
         public event Action<Config>? Updated;
+        public virtual bool Enabled { get; set; } = true;
         public virtual System.Single BloomBlendFactor { get; set; } = 0.3f;
 
 

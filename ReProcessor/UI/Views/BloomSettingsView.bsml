@@ -1,8 +1,8 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical pref-height='80' pref-width='120'>
         <settings-container pref-width='100' pref-height='70' child-control-width='true'>
-            <checkbox-setting text='Enabled' value='enabled' bind-value='true'/>
-            <slider-setting text='Blend Factor' bind-value='true' />
+            <checkbox-setting text='Enabled' value='bloom-en' bind-value='true'/>
+            <slider-setting text='Blend Factor' value='blend-factor' bind-value='true' />
             <slider-setting text='Radius' bind-value='true' />
             <slider-setting text='Intensity' bind-value='true' />
             <slider-setting text='Intensity Offset' bind-value='true' />
