@@ -20,6 +20,7 @@ namespace ReProcessor
         //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
         internal static Preset preset { get; set; }
+        internal static Config Config { get; set; }
         internal static string PresetName { get; private set; }
 
         [Init]
@@ -27,7 +28,7 @@ namespace ReProcessor
         {
             PresetName = "test";
             Log = logger;
-            //Config = conf.Generated<Config>();
+            Config = conf.Generated<Config>();
             try
             {
                 preset = Load(PresetName);

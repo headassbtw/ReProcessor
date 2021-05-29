@@ -35,6 +35,15 @@ namespace ReProcessor.UI
             }
             
         }
+        [UIValue("max-glow-val")]
+        internal float MaxGlowVal
+        {
+            get => Plugin.Config.MaxAmountIncrease;
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
 
         [UIValue("bloom-en")]
         internal bool Enabled

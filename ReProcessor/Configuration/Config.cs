@@ -14,8 +14,7 @@ namespace ReProcessor
     {
         public Config() { }
         public event Action<Config>? Updated;
-        public virtual bool Enabled { get; set; }
-        public virtual Preset preset { get; set; } = new Preset("test");
+        public virtual float MaxAmountIncrease { get; set; } = 2;
         
 
 
