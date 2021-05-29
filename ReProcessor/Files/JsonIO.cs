@@ -35,10 +35,8 @@ namespace ReProcessor
         {
             StreamReader r = new StreamReader(path);
             string json = r.ReadToEnd();
-            Plugin.Log.Notice(json);
             Preset items = JsonConvert.DeserializeObject<Preset>(json);
             r.Close();
-            Plugin.Log.Notice("Bloom enabled: " + items.Bloom.Enabled);
             return items;
         }
         public static void SaveJson(Preset preset, string path)

@@ -10,7 +10,10 @@
             <slider-setting text='Alpha Weight' value='alpha-weights' max='10' bind-value='true' apply-on-change='true'/>
         </settings-container>
         <horizontal pref-width='100' pref-height='20' horizontal-fit='PreferredSize'>
-			<horizontal pref-width='70'>
+			<horizontal pref-width='20'>
+				<button text='Revert To Default' on-click='revert'/>
+			</horizontal>
+			<horizontal pref-width='50'>
 				<!--this is a placeholder/spacer-->
 			</horizontal>
 			<horizontal pref-width='30'>

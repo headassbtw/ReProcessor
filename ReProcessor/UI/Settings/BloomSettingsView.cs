@@ -121,6 +121,20 @@ namespace ReProcessor.UI
                 NotifyPropertyChanged();
             }
         }
+        [UIAction("revert")]
+        internal void Revert()
+        {
+            Plugin.preset = new Preset();
+            BlendFactor = Plugin.preset.Bloom.BlendFactor;
+            Radius = Plugin.preset.Bloom.Radius;
+            Intensity = Plugin.preset.Bloom.Intensity;
+            IntensityOffset = Plugin.preset.Bloom.IntensityOffset;
+            Weight = Plugin.preset.Bloom.Weight;
+            AlphaWeights = Plugin.preset.Bloom.AlphaWeights;
+            Plugin.preset.Save();
+            Managers.MenuCoreManager.MainCamAccess().ApplyBloomPreset(Plugin.preset);
+        }
+
         [UIAction("cancel-button")]
         internal void Cancel()
         {
