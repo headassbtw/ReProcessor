@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using IPA.Utilities;
 using Newtonsoft.Json;
-using ReProcessor.Files;
+//using ReProcessor.Files;
+using static ReProcessor.Config;
 
 namespace ReProcessor
 {
@@ -32,13 +33,13 @@ namespace ReProcessor
     {
         public static Preset LoadJson(string path)
         {
-            using (StreamReader r = new StreamReader(path))
-            {
-                string json = r.ReadToEnd();
-                Preset items = JsonConvert.DeserializeObject<Preset>(json);
-                r.Close();
-                return items;
-            }
+            StreamReader r = new StreamReader(path);
+            string json = r.ReadToEnd();
+            Plugin.Log.Notice(json);
+            Preset items = JsonConvert.DeserializeObject<Preset>(json);
+            r.Close();
+            Plugin.Log.Notice("Bloom enabled: " + items.Bloom.Enabled);
+            return items;
         }
         public static void SaveJson(Preset preset, string path)
         {

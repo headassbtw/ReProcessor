@@ -40,5 +40,15 @@ namespace ReProcessor
         {
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(fieldName, value);
         }
+        internal static void ApplyBloomPreset(this Camera cam, Preset preset)
+        {
+            cam.SetCameraSetting("_bloomBlendFactor", (System.Single)preset.Bloom.BlendFactor);
+            cam.SetCameraSetting("_bloomRadius", (System.Single)preset.Bloom.Radius);
+            cam.SetCameraSetting("_bloomIntensity", (System.Single)preset.Bloom.Intensity);
+            cam.SetCameraSetting("_downBloomIntensityOffset", (System.Single)preset.Bloom.IntensityOffset);
+            cam.SetCameraSetting("_pyramidWeightsParam", (System.Single)preset.Bloom.Weight);
+            cam.SetCameraSetting("_alphaWeights", (System.Single)preset.Bloom.AlphaWeights);
+        }
+
     }
 }

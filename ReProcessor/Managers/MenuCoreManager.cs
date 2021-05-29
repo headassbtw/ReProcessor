@@ -35,16 +35,7 @@ namespace ReProcessor.Managers
 
         public void Initialize()
         {
-            Plugin.Log.Notice("FOV is: " + _mainCamera.camera.fieldOfView.ToString());
-
-            var bloomIntensity = _mainCamera.camera.GetCameraSetting("_bloomBlendFactor");
-
-            Plugin.Log.Notice("Bloom Blend Factor is: " + bloomIntensity);
-            Plugin.Log.Notice("Trying to set");
-            _mainCamera.camera.SetCameraSetting("_bloomBlendFactor", 0.3f);
-            Plugin.Log.Notice("Bloom Blend Factor is: " + _mainCamera.camera.GetCameraSetting("_bloomBlendFactor"));
-
-
+            _mainCamera.camera.ApplyBloomPreset(Plugin.preset);
         }
         public void Dispose()
         {

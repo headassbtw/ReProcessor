@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-
+/*
 namespace ReProcessor.Files
 {
 
@@ -16,7 +16,8 @@ namespace ReProcessor.Files
         public BloomConfig Bloom;
         public ColorBoostConfig ColorBoost;
 
-        public Preset(string name, BloomConfig bloom, ColorBoostConfig colorBoost)
+        public Preset() { }
+        public Preset(string name, BloomConfig bloom, ColorBoostConfig colorBoost = null)
         {
             this.Name = name;
             this.Bloom = bloom;
@@ -25,18 +26,19 @@ namespace ReProcessor.Files
     }
 
 
-    public class BloomConfig
+    internal class BloomConfig
     {
-        public bool Enabled;
-        public System.Single BlendFactor;
-        public System.Single Radius;
-        public System.Single Intensity;
-        public System.Single IntensityOffset;
-        public System.Single Weight;
-        public System.Single AlphaWeights;
+        public virtual bool Enabled;
+        public virtual System.Single BlendFactor;
+        public virtual System.Single Radius;
+        public virtual System.Single Intensity;
+        public virtual System.Single IntensityOffset;
+        public virtual System.Single Weight;
+        public virtual System.Single AlphaWeights;
 
-        public BloomConfig(System.Single blendFactor = 0.3f, System.Single radius = 5f, System.Single intensity = 1f, System.Single intensityOffset = 1f, System.Single weight = 0.01f, System.Single alphaWeights = 4f)
+        public BloomConfig(bool enabled = true, System.Single blendFactor = 0.3f, System.Single radius = 5f, System.Single intensity = 1f, System.Single intensityOffset = 1f, System.Single weight = 0.01f, System.Single alphaWeights = 4f)
         {
+            this.Enabled = enabled;
             this.BlendFactor = blendFactor;
             this.Radius = radius;
             this.Intensity = intensity;
@@ -57,3 +59,4 @@ namespace ReProcessor.Files
         }
     }
 }
+*/

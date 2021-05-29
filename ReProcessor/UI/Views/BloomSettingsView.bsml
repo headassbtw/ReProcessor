@@ -1,21 +1,21 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical pref-height='80' pref-width='120'>
-        <settings-container pref-width='100' pref-height='70' child-control-width='true'>
+        <settings-container pref-width='100' pref-height='60' child-control-width='true'>
             <checkbox-setting text='Enabled' value='bloom-en' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Blend Factor' value='blend-factor' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Radius' bind-value='true' />
-            <slider-setting text='Intensity' bind-value='true' />
-            <slider-setting text='Intensity Offset' bind-value='true' />
-            <slider-setting text='Weight' bind-value='true' />
-            <slider-setting text='Alpha Weight' bind-value='true' />
+            <slider-setting text='Blend Factor' increment='0.05' max='2' value='blend-factor' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Radius' max='10' min='2.20' increment='0.05' value='radius' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Intensity' value='intensity' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Intensity Offset' value='intensity-offset' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Weight' value='weight' increment='0.01' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Alpha Weight' value='alpha-weights' max='10' bind-value='true' apply-on-change='true'/>
         </settings-container>
-        <horizontal pref-width='100' pref-height='10' horizontal-fit='PreferredSize'>
+        <horizontal pref-width='100' pref-height='20' horizontal-fit='PreferredSize'>
 			<horizontal pref-width='70'>
 				<!--this is a placeholder/spacer-->
 			</horizontal>
 			<horizontal pref-width='30'>
-				<button text='Cancel' />
-				<primary-button text='Apply' on-click='apply-button' />
+				<button text='Back' on-click='cancel-button'/>
+				<primary-button text='Apply' on-click='apply-button'/>
 			</horizontal>
         </horizontal>
     </vertical>

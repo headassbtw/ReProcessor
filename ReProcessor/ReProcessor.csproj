@@ -148,6 +148,7 @@
     <Compile Include="UI\ButtonManager.cs" />
     <Compile Include="UI\Settings\BaseColorBoostViewController.cs" />
     <Compile Include="UI\Settings\BloomSettingsView.cs" />
+    <Compile Include="UI\Settings\EffectManager.cs" />
     <Compile Include="UI\Settings\rSettingsFlowCoordinator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <None Include="ReProcessor.csproj.user" Condition="Exists('ReProcessor.csproj.user')" />
     <EmbeddedResource Include="UI\Views\BloomSettingsView.bsml" />
     <EmbeddedResource Include="UI\Views\BaseColorBoostView.bsml" />
+    <EmbeddedResource Include="UI\Views\EffectManager.bsml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BeatSaberModdingTools.Tasks">
