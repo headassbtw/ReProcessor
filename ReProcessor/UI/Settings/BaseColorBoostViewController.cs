@@ -24,6 +24,7 @@ namespace ReProcessor.UI
             set
             {
                 Plugin.preset.ColorBoost.Boost = value;
+                Managers.MenuCoreManager.MainCamAccess().SetCameraSetting("_baseColorBoost", (System.Single)value);
                 NotifyPropertyChanged();
             }
         }
@@ -35,6 +36,7 @@ namespace ReProcessor.UI
             set
             {
                 Plugin.preset.ColorBoost.BoostThreshold = value;
+                Managers.MenuCoreManager.MainCamAccess().SetCameraSetting("_baseColorBoostThreshold", (System.Single)value);
                 NotifyPropertyChanged();
             }
         }

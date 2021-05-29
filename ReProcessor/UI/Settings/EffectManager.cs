@@ -68,7 +68,7 @@ namespace ReProcessor.UI
         {
             EffectList.data.Clear();
             EffectList.data.Add(new EffectListObject("Bloom", 0));
-            //EffectList.data.Add(new EffectListObject("Color Boost", 1));
+            EffectList.data.Add(new EffectListObject("Color Boost", 1));
             EffectList.tableView.ReloadData();
         }
     }

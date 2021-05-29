@@ -5,9 +5,6 @@
 			<slider-setting text='Base Color Boost Threshold' value='boost-threshold' bind-value='true' apply-on-change='true'/>
 		</settings-container>
 		<horizontal pref-width='100' pref-height='10' horizontal-fit='PreferredSize'>
-			<horizontal pref-width='70'>
-				<!--this is a placeholder/spacer-->
-			</horizontal>
 			<horizontal pref-width='30'>
 				<button text='Back' on-click='cancel-button'/>
 				<primary-button text='Apply' on-click='apply-button'/>
