@@ -2,7 +2,7 @@
     <vertical pref-height='80' pref-width='120'>
 		<custom-list visible-cells='6' cell-size='10' id='setting-list' contents='settings' pref-width='100' pref-height='60'>
 			<stack pref-width='100' pref-height='10' horizontal-fit='PreferredSize' child-control-width='true'>
-				<horizontal pref-width='100' pref-height='10' tags='hovered'>
+				<horizontal pref-width='100' pref-height='10' tags='hovered' active='~num'>
 					<vertical pref-width='24'/>
 					<vertical pref-width='10'>
 						<button text='-' on-click='decrease'/>
@@ -12,8 +12,12 @@
 						<button text='+' on-click='increase'/>
 					</vertical>
 				</horizontal>
-				<horizontal pref-width='100' pref-height='10' pad-left='-10'>
+				<horizontal pref-width='100' pref-height='10' pad-left='-10' active='~num'>
 					<slider-setting text='~label' value='value' bind-value='true' apply-on-change='true' font-align='Center' increment='~increment' min='~min' max='~max' preferred-width='90'/>
+					<horizontal pref-width='7'/>
+				</horizontal>
+				<horizontal pref-width='100' pref-height='10' pad-left='-10' active='~enum'>
+					<dropdown-list-setting text='~label' value='dropdown-value' bind-value='true' apply-on-change='true' font-align='Center' choices='dropdown-options' preferred-width='90'/>
 					<horizontal pref-width='7'/>
 				</horizontal>
 			</stack>

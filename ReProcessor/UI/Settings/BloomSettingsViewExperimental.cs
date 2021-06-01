@@ -52,11 +52,37 @@ namespace ReProcessor.UI
             [UIValue("increment")] private float Increment = 0.05f;
             [UIValue("min")] private float Min = Plugin.Config.MinAmountIncrease;
             [UIValue("max")] private float Max = Plugin.Config.MaxAmountIncrease;
+            [UIValue("num")]
+            internal bool IsNumber
+            {
+                get => setting.ValueType == valueType.num;
+            }
+            [UIValue("enum")]
+            internal bool IsDropdown
+            {
+                get => setting.ValueType == valueType.enm;
+            }
+            [UIValue("dropdown-options")] private List<object> passes = Defaults.Passes;
+
+            [UIValue("dropdown-value")] private string DropdownValue = "";
 
             [UIValue("value")]
-            private float Value
+            private object Value
             {
-                get => float.Parse(setting.Value.ToString());
+                get
+                {
+                    switch (setting.ValueType)
+                    {
+                        case valueType.num:
+                            return float.Parse(setting.Value.ToString());
+                        case valueType.enm:
+                            return setting.Value.ToString();
+                        case valueType.str:
+                            return setting.Value.ToString();
+                        default:
+                            return setting.Value.ToString(); ;
+                    }
+                }
                 set
                 {
                     Instance.NotifyPropertyChanged();
@@ -68,13 +94,13 @@ namespace ReProcessor.UI
             [UIAction("decrease")]
             private void DecreaseVal()
             {
-                Value -= Increment;
+                Value = (float)Value - Increment;
                 Instance.SettingList.tableView.ReloadData();
             }
             [UIAction("increase")]
             private void IncreaseVal()
             {
-                Value += Increment;
+                Value = (float)Value + Increment;
                 Instance.SettingList.tableView.ReloadData();
 
             }
@@ -89,7 +115,10 @@ namespace ReProcessor.UI
         internal void PostParse()
         {
             Instance = this;
-            Redo();
+            SettingList.data.Clear();
+            SettingList.data.Add(new EffectListObject(new CameraSetting("Prefilter Pass", "_prefilterPass", Defaults.Passes.ElementAt(0), valueType.enm)));
+            SettingList.tableView.ReloadData();
+            //Redo();
         }
 
         private void Redo()

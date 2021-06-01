@@ -13,8 +13,27 @@ namespace ReProcessor.Files
         enm,
         str
     }
+
+
     public class Defaults
     {
+        public static List<object> Passes = new object[] {
+            "Prefilter13",
+            "Prefilter3",
+            "Downsample13",
+            "Downsample4",
+            "DownsampleBilinearGamma",
+            "UpsampleTent",
+            "UpsampleBox",
+            "UpsampleTentGamma",
+            "UpsampleBoxGamma",
+            "Bilinear",
+            "BilinearGamma",
+            "UpsampleTentAndReinhardToneMapping",
+            "UpsampleTentAndACESToneMapping"
+        }.ToList();
+
+
         public static List<CameraSetting> BloomDefaults
         {
             get => new List<CameraSetting>()
