@@ -8,6 +8,7 @@ using IPA.Utilities;
 using Newtonsoft.Json;
 //using ReProcessor.Files;
 using static ReProcessor.Config;
+using ReProcessor.Files;
 
 namespace ReProcessor
 {

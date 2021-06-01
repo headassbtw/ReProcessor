@@ -13,8 +13,8 @@ using static ReProcessor.Config;
 namespace ReProcessor.UI
 {
     [ViewDefinition("ReProcessor.UI.Views.EffectManager.bsml")]
-    [HotReload(RelativePathToLayout = @"..\UI\Views\EffectManager.bsml")]
-    class EffectManager : BSMLAutomaticViewController
+    [HotReload(RelativePathToLayout = @"..\Views\EffectManager.bsml")]
+    internal class EffectManager : BSMLAutomaticViewController
     {
 
 
@@ -68,7 +68,7 @@ namespace ReProcessor.UI
         {
             EffectList.data.Clear();
             EffectList.data.Add(new EffectListObject("Bloom", 0));
-            EffectList.data.Add(new EffectListObject("Color Boost", 1));
+            //EffectList.data.Add(new EffectListObject("Color Boost", 1));
             EffectList.tableView.ReloadData();
         }
     }

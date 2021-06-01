@@ -29,7 +29,7 @@ namespace ReProcessor.Managers
 
         public void Initialize()
         {
-            _mainCamera.camera.ApplyBloomPreset(Plugin.preset);
+            //_mainCamera.camera.ApplyBloomPreset(Plugin.preset);
         }
         public void Dispose()
         {

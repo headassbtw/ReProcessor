@@ -6,15 +6,15 @@ using BeatSaberMarkupLanguage.ViewControllers;
 //using RuntimeUnityEditor.BSIPA4;
 using UnityEngine.Serialization;
 using Zenject;
-//using ReProcessor.Files;
+using ReProcessor.Files;
 using static ReProcessor.Config;
 using static ReProcessor.PresetExtensions;
-
+/*
 namespace ReProcessor.UI
 {
     [ViewDefinition("ReProcessor.UI.Views.BloomSettingsView.bsml")]
-    [HotReload(RelativePathToLayout = @"..\UI\Views\BloomSettingsView.bsml")]
-    class BloomSettingsView : BSMLAutomaticViewController
+    [HotReload(RelativePathToLayout = @"..\Views\BloomSettingsView.bsml")]
+    internal class BloomSettingsView : BSMLAutomaticViewController
     {
         private static Preset tmpPreset;
 
@@ -23,7 +23,7 @@ namespace ReProcessor.UI
             tmpPreset = Plugin.preset;
             if (tmpPreset == null)
             {
-                tmpPreset = new Preset(Plugin.PresetName, new BloomConfig(), new ColorBoostConfig());
+                tmpPreset = new Preset(Plugin.PresetName);
                 tmpPreset.Save();
 
                 tmpPreset = Load(Plugin.PresetName);
@@ -40,17 +40,6 @@ namespace ReProcessor.UI
             get => Plugin.Config.MaxAmountIncrease;
             set
             {
-                NotifyPropertyChanged();
-            }
-        }
-
-        [UIValue("bloom-en")]
-        internal bool Enabled
-        {
-            get => Plugin.preset.Bloom.Enabled;
-            set
-            {
-                Plugin.preset.Bloom.Enabled = value;
                 NotifyPropertyChanged();
             }
         }
@@ -156,4 +145,4 @@ namespace ReProcessor.UI
         }
 
     }
-}
+}*/

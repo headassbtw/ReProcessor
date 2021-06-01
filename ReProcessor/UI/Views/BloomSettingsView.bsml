@@ -1,14 +1,27 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical pref-height='80' pref-width='120'>
-        <settings-container pref-width='100' pref-height='60' child-control-width='true'>
-            <checkbox-setting text='Enabled' value='bloom-en' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Blend Factor' increment='0.05' min='-20' max='~max-glow-val' value='blend-factor' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Radius' max='~max-glow-val' min='2.20' increment='0.05' value='radius' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Intensity' value='intensity' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Intensity Offset' value='intensity-offset' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Weight' value='weight' increment='0.01' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Alpha Weight' value='alpha-weights' max='10' bind-value='true' apply-on-change='true'/>
-        </settings-container>
+		<stack pref-width='100' pref-height='60' child-control-width='true'>
+			<horizontal pref-width='100' pref-height='60'>
+				<vertical pref-width='30'/>
+				<vertical pref-width='10' bg='round-rect-panel'>
+					<button text='-'/>
+				</vertical>
+				<vertical pref-width='15'/>
+				<vertical pref-width='10' bg='round-rect-panel'>
+					<button text='+'/>
+				</vertical>
+				<vertical pref-width='1'/>
+			</horizontal>
+			<settings-container pref-width='100' pref-height='60' child-control-width='true' pad-left='-10'>
+				<slider-setting text='Blend Factor' increment='0.05' min='-20' max='~max-glow-val' value='blend-factor' bind-value='true' apply-on-change='true'/>
+				<slider-setting text='Radius' max='~max-glow-val' min='2.20' increment='0.05' value='radius' bind-value='true' apply-on-change='true'/>
+				<slider-setting text='Intensity' value='intensity' bind-value='true' apply-on-change='true'/>
+				<slider-setting text='Intensity Offset' value='intensity-offset' bind-value='true' apply-on-change='true'/>
+				<slider-setting text='Weight' value='weight' increment='0.01' bind-value='true' apply-on-change='true'/>
+				<slider-setting text='Alpha Weight' value='alpha-weights' max='10' bind-value='true' apply-on-change='true'/>
+			</settings-container>
+		</stack>
+        
         <horizontal pref-width='100' pref-height='20' horizontal-fit='PreferredSize'>
 			<horizontal pref-width='20'>
 				<button text='Revert To Default' on-click='revert'/>

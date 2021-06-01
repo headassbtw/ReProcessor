@@ -12,8 +12,9 @@ namespace ReProcessor.UI
         private FlowCoordinator _parentFlowCoordinator = null!;
         private MainFlowCoordinator _mainFlowCoordinator = null!;
         private EffectManager _effectManager = null!;
-        private BloomSettingsView _bloomSettingsView = null!;
-        private BaseColorBoostViewController _baseColorBoostView = null!;
+        private OverallSettingsView _overallSettingsView = null!;
+        private BloomSettingsView2 _bloomSettingsView = null!;
+        //private BaseColorBoostViewController _baseColorBoostView = null!;
         internal static rSettingsFlowCoordinator Instance;
         public void Initialize() { Instance = this; }
 
@@ -23,13 +24,14 @@ namespace ReProcessor.UI
 
 
         [Inject]
-        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView bloomSettingsView, EffectManager effectManager, BaseColorBoostViewController baseColorBoostViewController)
+        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView2 bloomSettingsView, EffectManager effectManager, OverallSettingsView overallSettingsView)
         {
             _buttonManager = buttonManager;
             _mainFlowCoordinator = mainFlowCoordinator;
             _bloomSettingsView = bloomSettingsView;
             _effectManager = effectManager;
-            _baseColorBoostView = baseColorBoostViewController;
+            _overallSettingsView = overallSettingsView;
+            //_baseColorBoostView = baseColorBoostViewController;
         }
 
         protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -42,7 +44,7 @@ namespace ReProcessor.UI
             if (addedToHierarchy)
             {
                 ViewController view = _effectManager;
-                ProvideInitialViewControllers(view);
+                ProvideInitialViewControllers(view, null, _overallSettingsView);
                 
             }
         }
@@ -57,18 +59,21 @@ namespace ReProcessor.UI
                     Instance.SetTitle("ReProcessor Effects");
                     view = Instance._effectManager;
                     Instance.ReplaceTopViewController(view);
+                    Instance.SetRightScreenViewController(Instance._overallSettingsView, ViewController.AnimationType.In);
                     break;
                 case 1:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Bloom");
                     view = Instance._bloomSettingsView;
                     Instance.ReplaceTopViewController(view);
+                    Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
                     break;
                 case 2:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Color Boost");
-                    view = Instance._baseColorBoostView;
-                    Instance.ReplaceTopViewController(view);
+                    //view = Instance._baseColorBoostView;
+                    //Instance.ReplaceTopViewController(view);
+                    Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
                     break;
             }
 

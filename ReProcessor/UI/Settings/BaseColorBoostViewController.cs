@@ -6,15 +6,17 @@ using BeatSaberMarkupLanguage.ViewControllers;
 //using RuntimeUnityEditor.BSIPA4;
 using UnityEngine.Serialization;
 using Zenject;
-//using ReProcessor.Files;
+using ReProcessor.Files;
 using static ReProcessor.Config;
 using static ReProcessor.PresetExtensions;
 
+//we'll fix you later oki doki?
+/*
 namespace ReProcessor.UI
 {
     [ViewDefinition("ReProcessor.UI.Views.BaseColorBoostView.bsml")]
-    [HotReload(RelativePathToLayout = @"..\UI\Views\BaseColorBoostView.bsml")]
-    public class BaseColorBoostViewController : BSMLAutomaticViewController
+    [HotReload(RelativePathToLayout = @"..\Views\BaseColorBoostView.bsml")]
+    internal class BaseColorBoostViewController : BSMLAutomaticViewController
     {
 
 
@@ -69,4 +71,4 @@ namespace ReProcessor.UI
             Plugin.preset.Save();
         }
     }
-}
+}*/

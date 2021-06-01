@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using UnityEngine;
+using ReProcessor.Files;
 
 namespace ReProcessor
 {
@@ -40,15 +41,25 @@ namespace ReProcessor
         {
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(fieldName, value);
         }
-        internal static void ApplyBloomPreset(this Camera cam, Preset preset)
+        internal static void ApplySettings(this Camera cam, List<CameraSetting> camSettings)
         {
-            cam.SetCameraSetting("_bloomBlendFactor", (System.Single)preset.Bloom.BlendFactor);
-            cam.SetCameraSetting("_bloomRadius", (System.Single)preset.Bloom.Radius);
-            cam.SetCameraSetting("_bloomIntensity", (System.Single)preset.Bloom.Intensity);
-            cam.SetCameraSetting("_downBloomIntensityOffset", (System.Single)preset.Bloom.IntensityOffset);
-            cam.SetCameraSetting("_pyramidWeightsParam", (System.Single)preset.Bloom.Weight);
-            cam.SetCameraSetting("_alphaWeights", (System.Single)preset.Bloom.AlphaWeights);
+            foreach(var setting in camSettings)
+            {
+                if(setting.ValueType == valueType.num)
+                    cam.SetCameraSetting(setting.PropertyName, System.Single.Parse(setting.Value.ToString()));
+            }
         }
-
+        internal static CameraSetting GetSetting(this List<CameraSetting> list, string property)
+        {
+            CameraSetting retrn = null!;
+            foreach(var setting in list)
+            {
+                if (setting.PropertyName == property)
+                    retrn = setting;
+                else
+                    retrn = null;
+            }
+            return retrn;
+        }
     }
 }

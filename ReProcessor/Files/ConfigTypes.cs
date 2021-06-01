@@ -5,58 +5,174 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-/*
 namespace ReProcessor.Files
 {
+    public enum valueType
+    {
+        num,
+        enm,
+        str
+    }
+    public class Defaults
+    {
+        public static List<CameraSetting> BloomDefaults
+        {
+            get => new List<CameraSetting>()
+            {
+                new CameraSetting(
+                    "Blend Factor",
+                    "_bloomBlendFactor",
+                    0.3f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Radius",
+                    "_bloomRadius",
+                    5f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Intensity",
+                    "_bloomIntensity",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Intensity Offset",
+                    "_downBloomIntensityOffset",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Weight",
+                    "_pyramidWeightsParam",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Alpha Weights",
+                    "_alphaWeights",
+                    4f,
+                    valueType.num
+                    )
+            };
+        }
+
+        public static List<CameraSetting> ColorBoostDefaults
+        {
+            get => new List<CameraSetting>()
+                {
+                    new CameraSetting(
+                    "Base Color Boost",
+                    "_baseColorBoost",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Base Color Boost Threshold",
+                    "_baseColorBoostThreshold",
+                    0.0f,
+                    valueType.num
+                    )
+                };
+        }
+    }
 
 
     public class Preset
     {
         public string Name;
-        public BloomConfig Bloom;
-        public ColorBoostConfig ColorBoost;
+        public List<CameraSetting> Bloom;
+        public List<CameraSetting> ColorBoost;
+        public List<CameraSetting> User;
 
         public Preset() { }
-        public Preset(string name, BloomConfig bloom, ColorBoostConfig colorBoost = null)
+        public Preset(string name)
+        {
+            this.Name = name;
+            this.Bloom = new List<CameraSetting>()
+            {
+                new CameraSetting(
+                    "Blend Factor",
+                    "_bloomBlendFactor",
+                    0.3f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Radius",
+                    "_bloomRadius",
+                    5f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Intensity",
+                    "_bloomIntensity",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Intensity Offset",
+                    "_downBloomIntensityOffset",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Weight",
+                    "_pyramidWeightsParam",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Alpha Weights",
+                    "_alphaWeights",
+                    4f,
+                    valueType.num
+                    )
+            };
+            this.ColorBoost = new List<CameraSetting>()
+            {
+                new CameraSetting(
+                    "Base Color Boost",
+                    "_baseColorBoost",
+                    1f,
+                    valueType.num
+                    ),
+                new CameraSetting(
+                    "Base Color Boost Threshold",
+                    "_baseColorBoostThreshold",
+                    0.0f,
+                    valueType.num
+                    )
+            };
+            this.User = new List<CameraSetting>();
+        }
+        public Preset(string name, List<CameraSetting> bloom, List<CameraSetting> colorBoost)
         {
             this.Name = name;
             this.Bloom = bloom;
             this.ColorBoost = colorBoost;
         }
-    }
-
-
-    internal class BloomConfig
-    {
-        public virtual bool Enabled;
-        public virtual System.Single BlendFactor;
-        public virtual System.Single Radius;
-        public virtual System.Single Intensity;
-        public virtual System.Single IntensityOffset;
-        public virtual System.Single Weight;
-        public virtual System.Single AlphaWeights;
-
-        public BloomConfig(bool enabled = true, System.Single blendFactor = 0.3f, System.Single radius = 5f, System.Single intensity = 1f, System.Single intensityOffset = 1f, System.Single weight = 0.01f, System.Single alphaWeights = 4f)
+        public Preset(string name, List<CameraSetting> user)
         {
-            this.Enabled = enabled;
-            this.BlendFactor = blendFactor;
-            this.Radius = radius;
-            this.Intensity = intensity;
-            this.IntensityOffset = intensityOffset;
-            this.Weight = weight;
-            this.AlphaWeights = alphaWeights;
+            this.Name = name;
+            this.User = user;
         }
     }
-    public class ColorBoostConfig
-    {
-        public System.Single Boost;
-        public System.Single BoostThreshold;
 
-        public ColorBoostConfig(System.Single boost = 0.05f, System.Single boostThreshold = 0.01f)
+
+    public class CameraSetting
+    {
+        public string FriendlyName = "";
+        public object Value;
+        public string PropertyName = "";
+        public valueType ValueType = valueType.num;
+
+        public CameraSetting(string friendlyName, string propertyName, object value, valueType type)
         {
-            this.Boost = boost;
-            this.BoostThreshold = boostThreshold;
+            this.FriendlyName = friendlyName;
+            this.PropertyName = propertyName;
+            this.Value = value;
+            this.ValueType = type;
         }
     }
 }
-*/

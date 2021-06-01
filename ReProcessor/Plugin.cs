@@ -2,7 +2,7 @@
 using IPA.Config.Stores;
 using IPA.Loader;
 using ReProcessor.Installers;
-//using ReProcessor.Files;
+using ReProcessor.Files;
 using static ReProcessor.Config;
 using SiraUtil;
 using SiraUtil.Attributes;
@@ -35,7 +35,7 @@ namespace ReProcessor
             }
             catch (Exception)
             {
-                var p = new Preset(PresetName, new BloomConfig(), new ColorBoostConfig());
+                var p = new Preset(PresetName);
                 p.Save();
                 preset = Load(PresetName);
             }

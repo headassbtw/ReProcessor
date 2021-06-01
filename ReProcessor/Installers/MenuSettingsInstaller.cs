@@ -11,9 +11,10 @@ namespace ReProcessor.Installers
         {
             Plugin.Log.Notice("Binding Menu Button");
             Container.BindInterfacesAndSelfTo<ButtonManager>().AsSingle();
-            Container.Bind<BloomSettingsView>().FromNewComponentAsViewController().AsSingle();
-            Container.Bind<BaseColorBoostViewController>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<BloomSettingsView2>().FromNewComponentAsViewController().AsSingle();
+            //Container.Bind<BaseColorBoostViewController>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<EffectManager>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<OverallSettingsView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<IInitializable>().To<rSettingsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(rSettingsFlowCoordinator)).AsSingle();
         }
     }
