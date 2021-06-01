@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 using Zenject;
 //using ReProcessor.Files;
 using static ReProcessor.Config;
+using static ReProcessor.PresetExtensions;
 
 namespace ReProcessor.UI
 {
@@ -41,9 +42,27 @@ namespace ReProcessor.UI
             }
         }
 
+        [UIAction("revert")]
+        internal void Revert()
+        {
+            Plugin.preset.ColorBoost = new ColorBoostConfig();
+            BaseColorBoostThreshold = Plugin.preset.ColorBoost.BoostThreshold;
+            BaseColorBoost = Plugin.preset.ColorBoost.Boost;
+            Plugin.preset.Save();
+            Managers.MenuCoreManager.MainCamAccess().ApplyBloomPreset(Plugin.preset);
+        }
 
         [UIAction("cancel-button")]
-        internal void Cancel() => rSettingsFlowCoordinator.SwitchMiddleView();
+        internal void Cancel()
+        {
+            Plugin.preset = Load(Plugin.PresetName);
+            Managers.MenuCoreManager.MainCamAccess().ApplyBloomPreset(Plugin.preset);
+            #region fuckin gamer
+            BaseColorBoostThreshold = Plugin.preset.ColorBoost.BoostThreshold;
+            BaseColorBoost = Plugin.preset.ColorBoost.Boost;
+            #endregion
+            rSettingsFlowCoordinator.SwitchMiddleView();
+        }
         [UIAction("apply-button")]
         internal void Apply()
         {

@@ -26,7 +26,7 @@ namespace ReProcessor
         [Init]
         public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)
         {
-            PresetName = "test";
+            PresetName = "preset";
             Log = logger;
             Config = conf.Generated<Config>();
             try

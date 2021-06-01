@@ -23,14 +23,13 @@ namespace ReProcessor.UI
             tmpPreset = Plugin.preset;
             if (tmpPreset == null)
             {
-                Plugin.Log.Notice("ASS");
-                tmpPreset = new Preset("test", new BloomConfig(), new ColorBoostConfig());
+                tmpPreset = new Preset(Plugin.PresetName, new BloomConfig(), new ColorBoostConfig());
                 tmpPreset.Save();
 
-                tmpPreset = Load("test");
+                tmpPreset = Load(Plugin.PresetName);
                 if(tmpPreset == null)
                 {
-                    Plugin.Log.Notice("FUCK YOU THAT'S WHY");
+                    Plugin.Log.Notice("something happened and i do not know why, tell headass line 32 sent ya");
                 }
             }
             
@@ -124,7 +123,7 @@ namespace ReProcessor.UI
         [UIAction("revert")]
         internal void Revert()
         {
-            Plugin.preset = new Preset();
+            Plugin.preset.Bloom = new BloomConfig();
             BlendFactor = Plugin.preset.Bloom.BlendFactor;
             Radius = Plugin.preset.Bloom.Radius;
             Intensity = Plugin.preset.Bloom.Intensity;

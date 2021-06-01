@@ -64,7 +64,7 @@ namespace ReProcessor.UI
         private async Task InitializeAsync()
         {
             _image = CreateImage();
-            using Stream mrs = _assembly.GetManifestResourceStream("ReProcessor.UI.a.png");
+            using Stream mrs = _assembly.GetManifestResourceStream("ReProcessor.UI.untitled2.png");
             using MemoryStream ms = new MemoryStream();
             await mrs.CopyToAsync(ms);
 

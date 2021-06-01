@@ -26,7 +26,7 @@ namespace ReProcessor
     }
     public class Preset
     {
-        public string Name = "test";
+        public string Name = "preset";
         public BloomConfig Bloom;
         public ColorBoostConfig ColorBoost;
 
@@ -44,7 +44,7 @@ namespace ReProcessor
         }
         public Preset()
         {
-            this.Name = "test";
+            this.Name = "preset";
             this.Bloom = new BloomConfig();
             this.ColorBoost = new ColorBoostConfig();
         }
@@ -82,8 +82,8 @@ namespace ReProcessor
     }
     public class ColorBoostConfig
     {
-        public virtual System.Single Boost { get; set; } = 0.05f;
-        public virtual System.Single BoostThreshold { get; set; } = 0.01f;
+        public virtual System.Single Boost { get; set; } = 1f;
+        public virtual System.Single BoostThreshold { get; set; } = 0.00f;
 
         public ColorBoostConfig(System.Single boost = 0.05f, System.Single boostThreshold = 0.01f)
         {

@@ -2,7 +2,7 @@
     <vertical pref-height='80' pref-width='120'>
         <settings-container pref-width='100' pref-height='60' child-control-width='true'>
             <checkbox-setting text='Enabled' value='bloom-en' bind-value='true' apply-on-change='true'/>
-            <slider-setting text='Blend Factor' increment='0.05' max='~max-glow-val' value='blend-factor' bind-value='true' apply-on-change='true'/>
+            <slider-setting text='Blend Factor' increment='0.05' min='-20' max='~max-glow-val' value='blend-factor' bind-value='true' apply-on-change='true'/>
             <slider-setting text='Radius' max='~max-glow-val' min='2.20' increment='0.05' value='radius' bind-value='true' apply-on-change='true'/>
             <slider-setting text='Intensity' value='intensity' bind-value='true' apply-on-change='true'/>
             <slider-setting text='Intensity Offset' value='intensity-offset' bind-value='true' apply-on-change='true'/>
