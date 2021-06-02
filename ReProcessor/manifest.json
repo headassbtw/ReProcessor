@@ -3,9 +3,9 @@
   "id": "ReProcessor",
   "name": "ReProcessor",
   "author": "headassbtw",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
-  "gameVersion": "1.15.0",
+  "gameVersion": "1.16.0",
   "dependsOn": {
     "BSIPA": "^4.0.5",
     "SiraUtil":  "^2.5.3"

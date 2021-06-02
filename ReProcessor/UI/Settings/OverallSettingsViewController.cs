@@ -13,7 +13,7 @@ using static ReProcessor.PresetExtensions;
 namespace ReProcessor.UI
 {
     [ViewDefinition("ReProcessor.UI.Views.OverallSettings.bsml")]
-    [HotReload(RelativePathToLayout = @"..\UI\Views\OverallSettings.bsml")]
+    [HotReload(RelativePathToLayout = @"..\Views\OverallSettings.bsml")]
     internal class OverallSettingsView : BSMLAutomaticViewController
     {
         private Config tempConfig = Plugin.Config;

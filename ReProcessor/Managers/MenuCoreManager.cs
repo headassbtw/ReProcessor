@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zenject;
 using UnityEngine;
+using static ReProcessor.PresetExtensions;
 
 namespace ReProcessor.Managers
 {
@@ -22,20 +23,15 @@ namespace ReProcessor.Managers
 
         public MenuCoreManager(MainCamera mainCamera)
         {
-            Instance = this;
-            try
-            {
-                _mainCamera = mainCamera;
-            }
-            catch (Exception e)
-            {
-                Plugin.Log.Critical("ayo fuck " + e.ToString());
-            }
+            _mainCamera = mainCamera;
         }
 
         public void Initialize()
         {
-            //_mainCamera.camera.ApplyBloomPreset(Plugin.preset);
+            Plugin.preset = Load(Plugin.PresetName);
+            Instance = this;
+            _mainCamera.camera.ApplySettings(Plugin.preset.Bloom);
+            _mainCamera.camera.ApplySettings(Plugin.preset.ColorBoost);
         }
         public void Dispose()
         {

@@ -129,6 +129,7 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Files\ConfigTypes.cs" />
+    <Compile Include="Files\JsonConverters.cs" />
     <Compile Include="Files\JsonIO.cs" />
     <Compile Include="Installers\GameplayInstaller.cs" />
     <Compile Include="Installers\MenuInstaller.cs" />
@@ -141,7 +142,9 @@
     <Compile Include="UI\ButtonManager.cs" />
     <Compile Include="UI\Settings\BaseColorBoostViewController.cs" />
     <Compile Include="UI\Settings\BloomSettingsView.cs" />
+    <Compile Include="UI\Settings\BloomSettingsViewExperimental.cs" />
     <Compile Include="UI\Settings\EffectManager.cs" />
+    <Compile Include="UI\Settings\OverallSettingsViewController.cs" />
     <Compile Include="UI\Settings\rSettingsFlowCoordinator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +157,8 @@
     <EmbeddedResource Include="UI\Views\BloomSettingsView.bsml" />
     <EmbeddedResource Include="UI\Views\BaseColorBoostView.bsml" />
     <EmbeddedResource Include="UI\Views\EffectManager.bsml" />
+    <EmbeddedResource Include="UI\Views\BloomSettingsViewExperimental.bsml" />
+    <EmbeddedResource Include="UI\Views\OverallSettings.bsml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BeatSaberModdingTools.Tasks">
@@ -167,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\untitled2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\untitled3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

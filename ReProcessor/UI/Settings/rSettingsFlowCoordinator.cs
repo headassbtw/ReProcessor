@@ -14,7 +14,7 @@ namespace ReProcessor.UI
         private EffectManager _effectManager = null!;
         private OverallSettingsView _overallSettingsView = null!;
         private BloomSettingsView2 _bloomSettingsView = null!;
-        //private BaseColorBoostViewController _baseColorBoostView = null!;
+        private BaseColorBoostViewController _baseColorBoostView = null!;
         internal static rSettingsFlowCoordinator Instance;
         public void Initialize() { Instance = this; }
 
@@ -24,14 +24,14 @@ namespace ReProcessor.UI
 
 
         [Inject]
-        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView2 bloomSettingsView, EffectManager effectManager, OverallSettingsView overallSettingsView)
+        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView2 bloomSettingsView, EffectManager effectManager, OverallSettingsView overallSettingsView, BaseColorBoostViewController baseColorBoostViewController)
         {
             _buttonManager = buttonManager;
             _mainFlowCoordinator = mainFlowCoordinator;
             _bloomSettingsView = bloomSettingsView;
             _effectManager = effectManager;
             _overallSettingsView = overallSettingsView;
-            //_baseColorBoostView = baseColorBoostViewController;
+            _baseColorBoostView = baseColorBoostViewController;
         }
 
         protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -71,8 +71,8 @@ namespace ReProcessor.UI
                 case 2:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Color Boost");
-                    //view = Instance._baseColorBoostView;
-                    //Instance.ReplaceTopViewController(view);
+                    view = Instance._baseColorBoostView;
+                    Instance.ReplaceTopViewController(view);
                     Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
                     break;
             }
@@ -90,6 +90,7 @@ namespace ReProcessor.UI
 
         internal void ButtonWasClicked()
         {
+            Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
             _parentFlowCoordinator = _mainFlowCoordinator.YoungestChildFlowCoordinatorOrSelf();
             _parentFlowCoordinator.PresentFlowCoordinator(this, animationDirection: ViewController.AnimationDirection.Vertical);
         }

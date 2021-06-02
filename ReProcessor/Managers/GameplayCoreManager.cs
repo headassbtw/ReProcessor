@@ -17,19 +17,13 @@ namespace ReProcessor.Managers
 
         public GameplayCoreManager(MainCamera mainCamera)
         {
-            try
-            {
-                _mainCamera = mainCamera;
-            }
-            catch (Exception e)
-            {
-                Plugin.Log.Critical("ayo fuck " + e.ToString());
-            }
+            _mainCamera = mainCamera;
         }
 
         public void Initialize()
         {
-            //_mainCamera.camera.ApplyBloomPreset(Plugin.preset);
+            _mainCamera.camera.ApplySettings(Plugin.preset.Bloom);
+            _mainCamera.camera.ApplySettings(Plugin.preset.ColorBoost);
         }
         public void Dispose()
         {

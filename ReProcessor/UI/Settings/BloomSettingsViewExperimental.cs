@@ -22,18 +22,6 @@ namespace ReProcessor.UI
 
         internal void Awake()
         {
-            tmpPreset = Plugin.preset;
-            if (tmpPreset == null)
-            {
-                tmpPreset = new Preset(Plugin.PresetName);
-                tmpPreset.Save();
-
-                tmpPreset = Load(Plugin.PresetName);
-                if(tmpPreset == null)
-                {
-                    Plugin.Log.Notice("something happened and i do not know why, tell headass line 32 sent ya");
-                }
-            }
             
         }
 
@@ -46,7 +34,6 @@ namespace ReProcessor.UI
         {
             internal CameraSetting setting;
             
-            internal static float SliderValue = 0.0f;
 
             [UIValue("label")] private string Label = "";
             [UIValue("increment")] private float Increment = 0.05f;
@@ -55,77 +42,94 @@ namespace ReProcessor.UI
             [UIValue("num")]
             internal bool IsNumber
             {
-                get => setting.ValueType == valueType.num;
+                get => setting.ValueType.Equals(valueType.num);
             }
             [UIValue("enum")]
             internal bool IsDropdown
             {
-                get => setting.ValueType == valueType.enm;
+                get => setting.ValueType.Equals(valueType.enm);
             }
             [UIValue("dropdown-options")] private List<object> passes = Defaults.Passes;
 
-            [UIValue("dropdown-value")] private string DropdownValue = "";
-
-            [UIValue("value")]
-            private object Value
+            [UIValue("dropdown-value")]
+            private string DropdownValue
+            {
+                get => setting.Value.ToString();
+                set
+                {
+                    Instance.NotifyPropertyChanged();
+                    setting.Value = value;
+                    
+                    Managers.MenuCoreManager.MainCamAccess().SetCameraSetting(setting);
+                }
+            }
+            [UIValue("slider-value")]
+            private float SliderValue
             {
                 get
                 {
-                    switch (setting.ValueType)
-                    {
-                        case valueType.num:
-                            return float.Parse(setting.Value.ToString());
-                        case valueType.enm:
-                            return setting.Value.ToString();
-                        case valueType.str:
-                            return setting.Value.ToString();
-                        default:
-                            return setting.Value.ToString(); ;
-                    }
+                    if (setting.ValueType.Equals(valueType.num))
+                        return (float)setting.Value;
+                    else
+                        return 0;
                 }
                 set
                 {
                     Instance.NotifyPropertyChanged();
                     setting.Value = value;
-                    Managers.MenuCoreManager.MainCamAccess().SetCameraSetting(setting.PropertyName, setting.Value);
+                    Managers.MenuCoreManager.MainCamAccess().SetCameraSetting(setting);
                 }
             }
 
             [UIAction("decrease")]
             private void DecreaseVal()
             {
-                Value = (float)Value - Increment;
+                SliderValue -= Increment;
                 Instance.SettingList.tableView.ReloadData();
             }
             [UIAction("increase")]
             private void IncreaseVal()
             {
-                Value = (float)Value + Increment;
+                SliderValue += Increment;
                 Instance.SettingList.tableView.ReloadData();
 
             }
             public EffectListObject(CameraSetting camSetting)
             {
+                Plugin.Log.Notice($"{camSetting.FriendlyName} has a value of {camSetting.Value} (type of {camSetting.Value.GetType().ToString()})");
+
                 this.setting = camSetting;
                 this.Label = setting.FriendlyName;
+                if (camSetting.ValueType.Equals(valueType.num))
+                {
+                    this.SliderValue = (float.Parse(camSetting.Value.ToString()));
+                    //this.DropdownValue = "";
+                }
+                if (camSetting.ValueType.Equals(valueType.enm))
+                {
+                    this.DropdownValue = camSetting.Value.ToString();
+                    //this.SliderValue = 0f;
+                }
             }
         }
 
         [UIAction("#post-parse")]
         internal void PostParse()
         {
+            
+            Plugin.preset = Load(Plugin.PresetName);
             Instance = this;
             SettingList.data.Clear();
-            SettingList.data.Add(new EffectListObject(new CameraSetting("Prefilter Pass", "_prefilterPass", Defaults.Passes.ElementAt(0), valueType.enm)));
-            SettingList.tableView.ReloadData();
-            //Redo();
+            Redo();
         }
 
         private void Redo()
         {
             SettingList.data.Clear();
+            Plugin.Log.Notice($"Bloom currently has {Plugin.preset.Bloom.Count()} Settings");
             foreach (var setting in Plugin.preset.Bloom)
                 SettingList.data.Add(new EffectListObject(setting));
+            Instance.NotifyPropertyChanged();
             SettingList.tableView.ReloadData();
         }
 
@@ -134,10 +138,12 @@ namespace ReProcessor.UI
         {
             Plugin.preset.Bloom = Defaults.BloomDefaults;
             
-            Plugin.preset.Save();
+            
             Managers.MenuCoreManager.MainCamAccess().ApplySettings(Plugin.preset.Bloom);
             Instance.NotifyPropertyChanged();
             Redo();
+            Plugin.preset.Save();
+            Plugin.preset = Load(Plugin.PresetName);
         }
 
         [UIAction("cancel-button")]
@@ -147,7 +153,6 @@ namespace ReProcessor.UI
             Managers.MenuCoreManager.MainCamAccess().ApplySettings(Plugin.preset.Bloom);
             rSettingsFlowCoordinator.SwitchMiddleView();
             Instance.NotifyPropertyChanged();
-            Redo();
         }
         [UIAction("apply-button")]
         internal void Apply()

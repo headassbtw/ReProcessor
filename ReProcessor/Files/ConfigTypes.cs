@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,30 @@ namespace ReProcessor.Files
                     "_alphaWeights",
                     4f,
                     valueType.num
+                    ),
+                new CameraSetting(
+                    "Pre Filter Pass",
+                    "_preFilterPass",
+                    "Prefilter13",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Downsample Pass",
+                    "_downsamplePass",
+                    "Downsample13",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Upsample Pass",
+                    "_upsamplePass",
+                    "UpsampleTent",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Final Upsample Pass",
+                    "_finalUpsamplePass",
+                    "UpsampleTent",
+                    valueType.enm
                     )
             };
         }
@@ -146,6 +171,30 @@ namespace ReProcessor.Files
                     "_alphaWeights",
                     4f,
                     valueType.num
+                    ),
+                new CameraSetting(
+                    "Pre Filter Pass",
+                    "_preFilterPass",
+                    "Prefilter13",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Downsample Pass",
+                    "_downsamplePass",
+                    "Downsample13",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Upsample Pass",
+                    "_upsamplePass",
+                    "UpsampleTent",
+                    valueType.enm
+                    ),
+                new CameraSetting(
+                    "Final Upsample Pass",
+                    "_finalUpsamplePass",
+                    "UpsampleTent",
+                    valueType.enm
                     )
             };
             this.ColorBoost = new List<CameraSetting>()
@@ -182,6 +231,7 @@ namespace ReProcessor.Files
     public class CameraSetting
     {
         public string FriendlyName = "";
+        [JsonConverter(typeof(PassJsonConverter))]
         public object Value;
         public string PropertyName = "";
         public valueType ValueType = valueType.num;

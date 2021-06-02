@@ -58,13 +58,19 @@ namespace ReProcessor.UI
 
         public void Initialize()
         {
+            Plugin.preset = PresetExtensions.Load(Plugin.PresetName);
             _ = InitializeAsync();
         }
 
         private async Task InitializeAsync()
         {
+            string variant = "2";
+            UnityEngine.Random.InitState(DateTime.UtcNow.Second);
+            int rng = UnityEngine.Random.Range(1, 10);
+            if ((rng.Equals(3)) && (DateTime.UtcNow.Month.Equals(6)))
+                variant = "3";
             _image = CreateImage();
-            using Stream mrs = _assembly.GetManifestResourceStream("ReProcessor.UI.untitled2.png");
+            using Stream mrs = _assembly.GetManifestResourceStream($"ReProcessor.UI.untitled{variant}.png");
             using MemoryStream ms = new MemoryStream();
             await mrs.CopyToAsync(ms);
 
