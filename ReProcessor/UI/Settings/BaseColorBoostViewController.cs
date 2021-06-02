@@ -38,12 +38,12 @@ namespace ReProcessor.UI
             [UIValue("num")]
             internal bool IsNumber
             {
-                get => setting.ValueType.Equals(valueType.num);
+                get => setting.ValueType.Equals(valueType.Integer) || setting.ValueType.Equals(valueType.Decimal);
             }
             [UIValue("enum")]
             internal bool IsDropdown
             {
-                get => setting.ValueType.Equals(valueType.enm);
+                get => setting.ValueType.Equals(valueType.Enumerator);
             }
             [UIValue("dropdown-options")] private List<object> passes = Defaults.Passes;
 
@@ -64,8 +64,10 @@ namespace ReProcessor.UI
             {
                 get
                 {
-                    if (setting.ValueType.Equals(valueType.num))
+                    if (setting.ValueType.Equals(valueType.Decimal))
                         return (float)setting.Value;
+                    if (setting.ValueType.Equals(valueType.Integer))
+                        return (Int32)setting.Value;
                     else
                         return 0;
                 }
@@ -96,12 +98,17 @@ namespace ReProcessor.UI
 
                 this.setting = camSetting;
                 this.Label = setting.FriendlyName;
-                if (camSetting.ValueType.Equals(valueType.num))
+                if (camSetting.ValueType.Equals(valueType.Decimal))
                 {
                     this.SliderValue = (float.Parse(camSetting.Value.ToString()));
                     //this.DropdownValue = "";
                 }
-                if (camSetting.ValueType.Equals(valueType.enm))
+                if (camSetting.ValueType.Equals(valueType.Integer))
+                {
+                    this.SliderValue = (Int32.Parse(camSetting.Value.ToString()));
+                    //this.DropdownValue = "";
+                }
+                if (camSetting.ValueType.Equals(valueType.Enumerator))
                 {
                     this.DropdownValue = camSetting.Value.ToString();
                     //this.SliderValue = 0f;

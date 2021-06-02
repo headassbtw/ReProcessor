@@ -36,15 +36,7 @@ namespace ReProcessor.UI
             [UIAction("effect-onclick")]
             private void EffectClicked()
             {
-                switch (effectIndex)
-                {
-                    case 0:
-                        rSettingsFlowCoordinator.SwitchMiddleView(1);
-                        break;
-                    case 1:
-                        rSettingsFlowCoordinator.SwitchMiddleView(2);
-                        break;
-                }
+                rSettingsFlowCoordinator.SwitchMiddleView(effectIndex + 1);
             }
 
             public EffectListObject(string name, int index = 0)
@@ -69,6 +61,7 @@ namespace ReProcessor.UI
             EffectList.data.Clear();
             EffectList.data.Add(new EffectListObject("Bloom", 0));
             EffectList.data.Add(new EffectListObject("Color Boost", 1));
+            EffectList.data.Add(new EffectListObject("User", 2));
             EffectList.tableView.ReloadData();
         }
     }

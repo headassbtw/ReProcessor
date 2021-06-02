@@ -14,7 +14,7 @@
 						</vertical>
 					</horizontal>
 					<horizontal pref-width='100' pref-height='10' pad-left='-10' active='~num'>
-						<slider-setting text='~label' value='slider-value' bind-value='true' apply-on-change='true' font-align='Center' increment='~increment' min='~min' max='~max' preferred-width='90'/>
+						<slider-setting text='~label' value='slider-value' integer-only='~int' bind-value='true' apply-on-change='true' font-align='Center' increment='~increment' min='~min' max='~max' preferred-width='90'/>
 						<horizontal pref-width='7'/>
 					</horizontal>
 					<horizontal pref-width='100' pref-height='10' pad-left='-10' active='~enum'>

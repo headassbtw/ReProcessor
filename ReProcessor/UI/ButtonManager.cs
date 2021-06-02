@@ -66,7 +66,7 @@ namespace ReProcessor.UI
         {
             string variant = "2";
             UnityEngine.Random.InitState(DateTime.UtcNow.Second);
-            int rng = UnityEngine.Random.Range(1, 10);
+            int rng = UnityEngine.Random.Range(3, 4);
             if ((rng.Equals(3)) && (DateTime.UtcNow.Month.Equals(6)))
                 variant = "3";
             _image = CreateImage();

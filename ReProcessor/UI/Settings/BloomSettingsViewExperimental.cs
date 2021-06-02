@@ -15,20 +15,18 @@ namespace ReProcessor.UI
 {
     [ViewDefinition("ReProcessor.UI.Views.BloomSettingsViewExperimental.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\BloomSettingsViewExperimental.bsml")]
-    internal class BloomSettingsView2 : BSMLAutomaticViewController
+    internal abstract class BloomSettingsView2 : BSMLAutomaticViewController
     {
         internal static BloomSettingsView2 Instance;
         private static Preset tmpPreset;
 
-        internal void Awake()
-        {
-            
-        }
+        public abstract List<CameraSetting> GetSettings();
+        public abstract List<CameraSetting> GetDefaults();
 
         [UIComponent("setting-list")]
         internal CustomCellListTableData SettingList;
         [UIValue("settings")]
-        public List<object> settingsList = new List<object>();
+        internal List<object> settingsList = new List<object>();
 
         public class EffectListObject
         {
@@ -42,12 +40,16 @@ namespace ReProcessor.UI
             [UIValue("num")]
             internal bool IsNumber
             {
-                get => setting.ValueType.Equals(valueType.num);
+                get => setting.ValueType.Equals(valueType.Decimal) || setting.ValueType.Equals(valueType.Integer);
+            }
+            [UIValue("int")] private bool integer
+            {
+                get => setting.ValueType.Equals(valueType.Integer);
             }
             [UIValue("enum")]
             internal bool IsDropdown
             {
-                get => setting.ValueType.Equals(valueType.enm);
+                get => setting.ValueType.Equals(valueType.Enumerator);
             }
             [UIValue("dropdown-options")] private List<object> passes = Defaults.Passes;
 
@@ -68,8 +70,10 @@ namespace ReProcessor.UI
             {
                 get
                 {
-                    if (setting.ValueType.Equals(valueType.num))
+                    if (setting.ValueType.Equals(valueType.Decimal))
                         return (float)setting.Value;
+                    if (setting.ValueType.Equals(valueType.Integer))
+                        return (Int32)setting.Value;
                     else
                         return 0;
                 }
@@ -100,12 +104,17 @@ namespace ReProcessor.UI
 
                 this.setting = camSetting;
                 this.Label = setting.FriendlyName;
-                if (camSetting.ValueType.Equals(valueType.num))
+                if (camSetting.ValueType.Equals(valueType.Decimal))
                 {
                     this.SliderValue = (float.Parse(camSetting.Value.ToString()));
                     //this.DropdownValue = "";
                 }
-                if (camSetting.ValueType.Equals(valueType.enm))
+                if (camSetting.ValueType.Equals(valueType.Integer))
+                {
+                    this.SliderValue = (Int32.Parse(camSetting.Value.ToString()));
+                    //this.DropdownValue = "";
+                }
+                if (camSetting.ValueType.Equals(valueType.Enumerator))
                 {
                     this.DropdownValue = camSetting.Value.ToString();
                     //this.SliderValue = 0f;
@@ -116,32 +125,32 @@ namespace ReProcessor.UI
         [UIAction("#post-parse")]
         internal void PostParse()
         {
-            
             Plugin.preset = Load(Plugin.PresetName);
             Instance = this;
             SettingList.data.Clear();
-            Redo();
+            Fill(GetSettings());
         }
 
-        private void Redo()
+        internal static void Fill(List<CameraSetting> preset)
         {
-            SettingList.data.Clear();
-            Plugin.Log.Notice($"Bloom currently has {Plugin.preset.Bloom.Count()} Settings");
-            foreach (var setting in Plugin.preset.Bloom)
-                SettingList.data.Add(new EffectListObject(setting));
+            Instance.SettingList.data.Clear();
+            Plugin.Log.Notice($"setting list currently has {preset.Count()} Settings");
+            foreach (var setting in preset)
+                Instance.SettingList.data.Add(new EffectListObject(setting));
             Instance.NotifyPropertyChanged();
-            SettingList.tableView.ReloadData();
+            Instance.SettingList.tableView.ReloadData();
         }
 
         [UIAction("revert")]
         internal void Revert()
         {
-            Plugin.preset.Bloom = Defaults.BloomDefaults;
+            GetSettings().Clear();
+            foreach (var a in GetDefaults())
+                GetSettings().Add(a);
             
-            
-            Managers.MenuCoreManager.MainCamAccess().ApplySettings(Plugin.preset.Bloom);
+            Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
             Instance.NotifyPropertyChanged();
-            Redo();
+            Fill(GetSettings());
             Plugin.preset.Save();
             Plugin.preset = Load(Plugin.PresetName);
         }
@@ -150,18 +159,18 @@ namespace ReProcessor.UI
         internal void Cancel()
         {
             Plugin.preset = Load(Plugin.PresetName);
-            Managers.MenuCoreManager.MainCamAccess().ApplySettings(Plugin.preset.Bloom);
+            Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
             rSettingsFlowCoordinator.SwitchMiddleView();
             Instance.NotifyPropertyChanged();
         }
         [UIAction("apply-button")]
         internal void Apply()
         {
-            Plugin.preset.Bloom.Clear();
+            GetSettings().Clear();
             foreach(var setting in settingsList)
             {
                 EffectListObject e = (EffectListObject)setting;
-                Plugin.preset.Bloom.Add(e.setting);
+                GetSettings().Add(e.setting);
             }
             Plugin.preset.Save();
             Instance.NotifyPropertyChanged();

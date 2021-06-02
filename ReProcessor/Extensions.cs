@@ -53,7 +53,7 @@ namespace ReProcessor
         }
         internal static void SetCameraSetting(this Camera cam, CameraSetting camSetting)
         {
-            if (camSetting.ValueType.Equals(valueType.enm))
+            if (camSetting.ValueType.Equals(valueType.Enumerator))
                 camSetting.Value = camSetting.Value.ToPass();
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(camSetting.PropertyName, camSetting.Value);
         }
@@ -61,9 +61,11 @@ namespace ReProcessor
         {
             foreach(var setting in camSettings)
             {
-                if(setting.ValueType == valueType.num)
-                    cam.SetCameraSetting(setting.PropertyName, System.Single.Parse(setting.Value.ToString()));
-                if (setting.ValueType == valueType.enm)
+                if (setting.ValueType == valueType.Decimal)
+                    cam.SetCameraSetting(setting.PropertyName, float.Parse(setting.Value.ToString()));
+                if (setting.ValueType == valueType.Integer)
+                    cam.SetCameraSetting(setting.PropertyName, Int32.Parse(setting.Value.ToString()));
+                if (setting.ValueType == valueType.Enumerator)
                     cam.SetCameraSetting(setting.PropertyName, setting.Value.ToPass());
             }
         }

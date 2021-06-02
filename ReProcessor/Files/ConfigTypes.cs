@@ -10,9 +10,10 @@ namespace ReProcessor.Files
 {
     public enum valueType
     {
-        num,
-        enm,
-        str
+        Decimal,
+        Integer,
+        Enumerator,
+        String
     }
 
 
@@ -43,61 +44,61 @@ namespace ReProcessor.Files
                     "Blend Factor",
                     "_bloomBlendFactor",
                     0.3f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Radius",
                     "_bloomRadius",
                     5f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Intensity",
                     "_bloomIntensity",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Intensity Offset",
                     "_downBloomIntensityOffset",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Weight",
                     "_pyramidWeightsParam",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Alpha Weights",
                     "_alphaWeights",
                     4f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Pre Filter Pass",
                     "_preFilterPass",
                     "Prefilter13",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Downsample Pass",
                     "_downsamplePass",
                     "Downsample13",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Upsample Pass",
                     "_upsamplePass",
                     "UpsampleTent",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Final Upsample Pass",
                     "_finalUpsamplePass",
                     "UpsampleTent",
-                    valueType.enm
+                    valueType.Enumerator
                     )
             };
         }
@@ -110,13 +111,13 @@ namespace ReProcessor.Files
                     "Base Color Boost",
                     "_baseColorBoost",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Base Color Boost Threshold",
                     "_baseColorBoostThreshold",
                     0.0f,
-                    valueType.num
+                    valueType.Decimal
                     )
                 };
         }
@@ -140,61 +141,61 @@ namespace ReProcessor.Files
                     "Blend Factor",
                     "_bloomBlendFactor",
                     0.3f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Radius",
                     "_bloomRadius",
                     5f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Intensity",
                     "_bloomIntensity",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Intensity Offset",
                     "_downBloomIntensityOffset",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Weight",
                     "_pyramidWeightsParam",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Alpha Weights",
                     "_alphaWeights",
                     4f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Pre Filter Pass",
                     "_preFilterPass",
                     "Prefilter13",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Downsample Pass",
                     "_downsamplePass",
                     "Downsample13",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Upsample Pass",
                     "_upsamplePass",
                     "UpsampleTent",
-                    valueType.enm
+                    valueType.Enumerator
                     ),
                 new CameraSetting(
                     "Final Upsample Pass",
                     "_finalUpsamplePass",
                     "UpsampleTent",
-                    valueType.enm
+                    valueType.Enumerator
                     )
             };
             this.ColorBoost = new List<CameraSetting>()
@@ -203,13 +204,13 @@ namespace ReProcessor.Files
                     "Base Color Boost",
                     "_baseColorBoost",
                     1f,
-                    valueType.num
+                    valueType.Decimal
                     ),
                 new CameraSetting(
                     "Base Color Boost Threshold",
                     "_baseColorBoostThreshold",
                     0.0f,
-                    valueType.num
+                    valueType.Decimal
                     )
             };
             this.User = new List<CameraSetting>();
@@ -234,12 +235,14 @@ namespace ReProcessor.Files
         [JsonConverter(typeof(PassJsonConverter))]
         public object Value;
         public string PropertyName = "";
-        public valueType ValueType = valueType.num;
+        [JsonConverter(typeof(EnumJsonConverter))]
+        public valueType ValueType = valueType.Decimal;
 
         public CameraSetting(string friendlyName, string propertyName, object value, valueType type)
         {
             this.FriendlyName = friendlyName;
             this.PropertyName = propertyName;
+
             this.Value = value;
             this.ValueType = type;
         }
