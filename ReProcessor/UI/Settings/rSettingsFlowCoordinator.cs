@@ -2,6 +2,7 @@
 using HMUI;
 using IPA.Utilities;
 using SiraUtil.Tools;
+using System.Threading.Tasks;
 using Zenject;
 
 namespace ReProcessor.UI
@@ -16,8 +17,9 @@ namespace ReProcessor.UI
         private BloomSettingsView2 _bloomSettingsView = null!;
         private BaseColorBoostViewController _baseColorBoostView = null!;
         private TestUserEffect _testUserEffect = null!;
+        private int exiting = 0;
         internal static rSettingsFlowCoordinator Instance;
-        public void Initialize() { Instance = this; }
+        public void Initialize() { exiting = 0;  Instance = this; }
 
         private static readonly FieldAccessor<SelectLevelCategoryViewController, IconSegmentedControl>.Accessor SegmentedControl = FieldAccessor<SelectLevelCategoryViewController, IconSegmentedControl>.GetAccessor("_levelFilterCategoryIconSegmentedControl");
         private static readonly FieldAccessor<SelectLevelCategoryViewController, SelectLevelCategoryViewController.LevelCategoryInfo[]>.Accessor Categories = FieldAccessor<SelectLevelCategoryViewController, SelectLevelCategoryViewController.LevelCategoryInfo[]>.GetAccessor("_levelCategoryInfos");
@@ -46,8 +48,7 @@ namespace ReProcessor.UI
             if (addedToHierarchy)
             {
                 ViewController view = _effectManager;
-                ProvideInitialViewControllers(view, null, _overallSettingsView);
-                
+                ProvideInitialViewControllers(view, _overallSettingsView);
             }
         }
 
@@ -61,28 +62,28 @@ namespace ReProcessor.UI
                     Instance.SetTitle("ReProcessor Effects");
                     view = Instance._effectManager;
                     Instance.ReplaceTopViewController(view);
-                    Instance.SetRightScreenViewController(Instance._overallSettingsView, ViewController.AnimationType.In);
+                    Instance.SetLeftScreenViewController(Instance._overallSettingsView, ViewController.AnimationType.In);
                     break;
                 case 1:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Bloom");
                     view = Instance._bloomSettingsView;
                     Instance.ReplaceTopViewController(view);
-                    Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
+                    Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
                     break;
                 case 2:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Color Boost");
                     view = Instance._baseColorBoostView;
                     Instance.ReplaceTopViewController(view);
-                    Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
+                    Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
                     break;
                 case 3:
                     Instance.showBackButton = false;
                     Instance.SetTitle("User Effects");
                     view = Instance._testUserEffect;
                     Instance.ReplaceTopViewController(view);
-                    Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
+                    Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
                     break;
             }
         }
@@ -104,12 +105,18 @@ namespace ReProcessor.UI
         }
         protected void OnDestroy()
         {
+            //Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
             _buttonManager.WasClicked -= ButtonWasClicked;
         }
         protected override void BackButtonWasPressed(ViewController topViewController)
         {
-            Instance.SetRightScreenViewController(null, ViewController.AnimationType.Out);
-            _parentFlowCoordinator.DismissFlowCoordinator(this);
+            //Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
+            _parentFlowCoordinator.DismissFlowCoordinator(Instance);
+        }
+
+        protected override void TransitionDidFinish()
+        {
+
         }
     }
 }

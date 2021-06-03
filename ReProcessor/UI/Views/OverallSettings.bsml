@@ -1,23 +1,22 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
 	<vertical horizontal-fit='PreferredSize'>
-		<horizontal pref-width='100' pref-height='10' bg='round-rect-panel'>
-			<text text='Overall Settings'/>
+		<horizontal pref-width='100' pref-height='10'>
+			<text text='Global Settings' font-align='Center'/>
 		</horizontal>
-		
-		<settings-container pref-width='100' pref-height='70'>
-			<string-setting text='Slider Minimum' value='min-string' font-align='Center' bind-value='true' apply-on-change='true'/>
-			<string-setting text='Slider Maximum' value='max-string' font-align='Center' bind-value='true' apply-on-change='true'/>
-		</settings-container>
+
+		<vertical pref-width='100' pref-height='70'>
+			<string-setting text='Slider Minimum' value='min-string' font-align='MidlineLeft' bind-value='true' apply-on-change='true'/>
+			<string-setting text='Slider Maximum' value='max-string' font-align='MidlineLeft' bind-value='true' apply-on-change='true'/>
+		</vertical>
 		
 		<horizontal pref-width='100' pref-height='20' horizontal-fit='PreferredSize'>
 			<horizontal pref-width='20'>
 				<button text='Revert To Default' on-click='revert'/>
 			</horizontal>
-			<horizontal pref-width='50'>
+			<horizontal pref-width='65'>
 				<!--this is a placeholder/spacer-->
 			</horizontal>
-			<horizontal pref-width='30'>
-				<button text='Back' on-click='cancel-button'/>
+			<horizontal pref-width='15'>
 				<primary-button text='Apply' on-click='apply-button'/>
 			</horizontal>
 		</horizontal>

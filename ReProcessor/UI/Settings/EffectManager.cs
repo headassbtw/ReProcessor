@@ -16,7 +16,11 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\Views\EffectManager.bsml")]
     internal class EffectManager : BSMLAutomaticViewController
     {
-
+        [UIAction("effect-selected")]
+        internal static void SpinSelected(TableView sender, EffectListObject row)
+        {
+            rSettingsFlowCoordinator.SwitchMiddleView(row.effectIndex + 1);
+        }
 
         [UIComponent("effect-list")]
         internal CustomCellListTableData EffectList;
@@ -25,19 +29,16 @@ namespace ReProcessor.UI
 
         public class EffectListObject
         {
-            int effectIndex = 0;
+            internal int effectIndex = 0;
 
             [UIValue("effect-label")]
             private string Label = "Bloom";
 
             [UIComponent("bg")]
-            private ImageView background;
+            private ImageView background = null;
 
-            [UIAction("effect-onclick")]
-            private void EffectClicked()
-            {
-                rSettingsFlowCoordinator.SwitchMiddleView(effectIndex + 1);
-            }
+            [UIValue("col")]
+            private UnityEngine.Color bGCol;
 
             public EffectListObject(string name, int index = 0)
             {
@@ -50,8 +51,15 @@ namespace ReProcessor.UI
                 var x = new UnityEngine.Color(0, 0, 0, 0.45f);
 
                 if (selected || highlighted)
-                    x.a = selected ? 0.9f : 0.6f;
+                {
+                    x.a = highlighted ? 1.0f : 0.6f;
 
+                    x.r = highlighted ? 0.4f : 0.1f;
+                    x.g = highlighted ? 0.4f : 0.1f;
+                    x.b = highlighted ? 1.0f : 0.1f;
+                }
+
+                bGCol = x;
                 background.color = x;
             }
         }
@@ -61,7 +69,8 @@ namespace ReProcessor.UI
             EffectList.data.Clear();
             EffectList.data.Add(new EffectListObject("Bloom", 0));
             EffectList.data.Add(new EffectListObject("Color Boost", 1));
-            EffectList.data.Add(new EffectListObject("User", 2));
+            if(Plugin.preset.User.Count > 0)
+                EffectList.data.Add(new EffectListObject("User", 2));
             EffectList.tableView.ReloadData();
         }
     }

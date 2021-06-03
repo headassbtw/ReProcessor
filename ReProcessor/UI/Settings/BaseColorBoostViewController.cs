@@ -15,11 +15,11 @@ using BeatSaberMarkupLanguage.Components;
 
 namespace ReProcessor.UI
 {
-    [ViewDefinition("ReProcessor.UI.Views.BaseColorBoostView.bsml")]
-    [HotReload(RelativePathToLayout = @"..\Views\BaseColorBoostView.bsml")]
-    internal class BaseColorBoostViewController : BSMLAutomaticViewController
+    [ViewDefinition("ReProcessor.UI.Views.BloomSettingsViewExperimental.bsml")]
+    [HotReload(RelativePathToLayout = @"..\Views\BloomSettingsViewExperimental.bsml")]
+    internal class BaseColorBoostViewController : BloomSettingsView2
     {
-        internal static BaseColorBoostViewController Instance;
+        /*internal static BaseColorBoostViewController Instance;
 
         [UIComponent("setting-list")]
         internal CustomCellListTableData SettingList;
@@ -169,6 +169,15 @@ namespace ReProcessor.UI
             Plugin.preset.Save();
             Instance.NotifyPropertyChanged();
             SettingList.tableView.ReloadData();
+        }*/
+        public override List<CameraSetting> GetDefaults()
+        {
+            return Defaults.ColorBoostDefaults;
+        }
+
+        public override List<CameraSetting> GetSettings()
+        {
+            return Plugin.preset.ColorBoost;
         }
     }
 }

@@ -8,13 +8,6 @@ using System.Threading.Tasks;
 
 namespace ReProcessor.Files
 {
-    public enum valueType
-    {
-        Decimal,
-        Integer,
-        Enumerator,
-        String
-    }
 
 
     public class Defaults
@@ -44,61 +37,61 @@ namespace ReProcessor.Files
                     "Blend Factor",
                     "_bloomBlendFactor",
                     0.3f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Radius",
                     "_bloomRadius",
                     5f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Intensity",
                     "_bloomIntensity",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Intensity Offset",
                     "_downBloomIntensityOffset",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Weight",
                     "_pyramidWeightsParam",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Alpha Weights",
                     "_alphaWeights",
                     4f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Pre Filter Pass",
                     "_preFilterPass",
                     "Prefilter13",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Downsample Pass",
                     "_downsamplePass",
                     "Downsample13",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Upsample Pass",
                     "_upsamplePass",
                     "UpsampleTent",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Final Upsample Pass",
                     "_finalUpsamplePass",
                     "UpsampleTent",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     )
             };
         }
@@ -111,13 +104,13 @@ namespace ReProcessor.Files
                     "Base Color Boost",
                     "_baseColorBoost",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Base Color Boost Threshold",
                     "_baseColorBoostThreshold",
                     0.0f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     )
                 };
         }
@@ -141,61 +134,61 @@ namespace ReProcessor.Files
                     "Blend Factor",
                     "_bloomBlendFactor",
                     0.3f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Radius",
                     "_bloomRadius",
                     5f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Intensity",
                     "_bloomIntensity",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Intensity Offset",
                     "_downBloomIntensityOffset",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Weight",
                     "_pyramidWeightsParam",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Alpha Weights",
                     "_alphaWeights",
                     4f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Pre Filter Pass",
                     "_preFilterPass",
                     "Prefilter13",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Downsample Pass",
                     "_downsamplePass",
                     "Downsample13",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Upsample Pass",
                     "_upsamplePass",
                     "UpsampleTent",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     ),
                 new CameraSetting(
                     "Final Upsample Pass",
                     "_finalUpsamplePass",
                     "UpsampleTent",
-                    valueType.Enumerator
+                    typeof(PyramidBloomRendererSO.Pass)
                     )
             };
             this.ColorBoost = new List<CameraSetting>()
@@ -204,13 +197,13 @@ namespace ReProcessor.Files
                     "Base Color Boost",
                     "_baseColorBoost",
                     1f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     ),
                 new CameraSetting(
                     "Base Color Boost Threshold",
                     "_baseColorBoostThreshold",
                     0.0f,
-                    valueType.Decimal
+                    typeof(System.Single)
                     )
             };
             this.User = new List<CameraSetting>();
@@ -235,10 +228,9 @@ namespace ReProcessor.Files
         [JsonConverter(typeof(PassJsonConverter))]
         public object Value;
         public string PropertyName = "";
-        [JsonConverter(typeof(EnumJsonConverter))]
-        public valueType ValueType = valueType.Decimal;
+        public System.Type ValueType = typeof(System.Single);
 
-        public CameraSetting(string friendlyName, string propertyName, object value, valueType type)
+        public CameraSetting(string friendlyName, string propertyName, object value, System.Type type)
         {
             this.FriendlyName = friendlyName;
             this.PropertyName = propertyName;

@@ -49,24 +49,34 @@ namespace ReProcessor
         }
         internal static void SetCameraSetting(this Camera cam, string fieldName, object value)
         {
+            //Plugin.Log.Notice($"Setting camera value as type \"{value.GetType()}\"");
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(fieldName, value);
         }
         internal static void SetCameraSetting(this Camera cam, CameraSetting camSetting)
         {
-            if (camSetting.ValueType.Equals(valueType.Enumerator))
+            //Plugin.Log.Notice($"Camera value is of type \"{camSetting.Value.GetType()}\"");
+            if (camSetting.ValueType.Equals(typeof(PyramidBloomRendererSO.Pass)))
                 camSetting.Value = camSetting.Value.ToPass();
+            if (camSetting.ValueType.EqualsInt())
+                camSetting.Value = Convert.ToInt32(camSetting.Value);
+            //Plugin.Log.Notice($"Setting camera value as type \"{camSetting.Value.GetType()}\"");
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(camSetting.PropertyName, camSetting.Value);
         }
         internal static void ApplySettings(this Camera cam, List<CameraSetting> camSettings)
         {
             foreach(var setting in camSettings)
             {
-                if (setting.ValueType == valueType.Decimal)
-                    cam.SetCameraSetting(setting.PropertyName, float.Parse(setting.Value.ToString()));
-                if (setting.ValueType == valueType.Integer)
+                //Console.WriteLine($"ReProcessor.Extensions.ApplySettings | setting \"{setting.FriendlyName}\" has a value of \"{setting.Value.ToString()}\" and a type of \"{setting.Value.GetType().ToString()}\"");
+
+                
+
+                if (setting.ValueType.EqualsInt())
                     cam.SetCameraSetting(setting.PropertyName, Int32.Parse(setting.Value.ToString()));
-                if (setting.ValueType == valueType.Enumerator)
-                    cam.SetCameraSetting(setting.PropertyName, setting.Value.ToPass());
+                else if (setting.ValueType == typeof(System.Single))
+                    cam.SetCameraSetting(setting.PropertyName, float.Parse(setting.Value.ToString()));
+                
+                else if (setting.ValueType == typeof(PyramidBloomRendererSO.Pass))
+                    cam.SetCameraSetting(setting.PropertyName, setting.Value);
             }
         }
         internal static CameraSetting GetSetting(this List<CameraSetting> list, string property)
@@ -80,6 +90,11 @@ namespace ReProcessor
                     retrn = null;
             }
             return retrn;
+        }
+        
+        internal static bool EqualsInt(this Type type)
+        {
+            return (type.Equals(typeof(System.Int16)) || type.Equals(typeof(System.Int32)) || type.Equals(typeof(System.Int64)));
         }
 
 

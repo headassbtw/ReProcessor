@@ -3,18 +3,12 @@
 		<horizontal pref-width='100' pref-height='80'>
 			<vertical child-expand-width='true'>
 				<stack pref-height='80'>
-					<custom-list visible-cells='5' cell-size='10' id='effect-list' contents='effects'>
-						<stack vertical-fit='Unconstrained' pref-width='100'>
-							<background id='bg' background='round-rect-panel'/>
-							<horizontal child-expand-width='false' vertical-fit='Unconstrained'>
-								<vertical horizontal-fit='Unconstrained'>
-									<text text='~effect-label' align='MidlineLeft' font-size='5' />
-								</vertical>
-							</horizontal>
-							<horizontal child-expand-width='false' vertical-fit='Unconstrained'>
-								<button text='' pref-width='100' pref-height='10' tags='hovered' on-click='effect-onclick'/>
-							</horizontal>
-						</stack>
+					<custom-list visible-cells='5' cell-size='10' id='effect-list' select-cell='effect-selected' contents='effects' preferred-width='100'>
+						<horizontal id='bg' bg='round-rect-panel' bg-color='~col' child-expand-width='false' vertical-fit='Unconstrained' pref-width='40' pad='1'>
+							<vertical horizontal-fit='Unconstrained'>
+								<text text='~effect-label' align='Center' font-size='5' />
+							</vertical>
+						</horizontal>
 					</custom-list>
 				</stack>
 			</vertical>

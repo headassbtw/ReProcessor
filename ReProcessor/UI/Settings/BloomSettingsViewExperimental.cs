@@ -40,16 +40,16 @@ namespace ReProcessor.UI
             [UIValue("num")]
             internal bool IsNumber
             {
-                get => setting.ValueType.Equals(valueType.Decimal) || setting.ValueType.Equals(valueType.Integer);
+                get => setting.ValueType.Equals(typeof(System.Single)) || setting.ValueType.EqualsInt();
             }
             [UIValue("int")] private bool integer
             {
-                get => setting.ValueType.Equals(valueType.Integer);
+                get => setting.ValueType.EqualsInt();
             }
             [UIValue("enum")]
             internal bool IsDropdown
             {
-                get => setting.ValueType.Equals(valueType.Enumerator);
+                get => setting.ValueType.Equals(typeof(PyramidBloomRendererSO.Pass));
             }
             [UIValue("dropdown-options")] private List<object> passes = Defaults.Passes;
 
@@ -70,9 +70,9 @@ namespace ReProcessor.UI
             {
                 get
                 {
-                    if (setting.ValueType.Equals(valueType.Decimal))
+                    if (setting.ValueType.Equals(typeof(System.Single)))
                         return (float)setting.Value;
-                    if (setting.ValueType.Equals(valueType.Integer))
+                    if (setting.ValueType.EqualsInt())
                         return (Int32)setting.Value;
                     else
                         return 0;
@@ -100,21 +100,22 @@ namespace ReProcessor.UI
             }
             public EffectListObject(CameraSetting camSetting)
             {
-                Plugin.Log.Notice($"{camSetting.FriendlyName} has a value of {camSetting.Value} (type of {camSetting.Value.GetType().ToString()})");
+                //Plugin.Log.Notice($"{camSetting.FriendlyName} has a value of {camSetting.Value} (type of \"{camSetting.Value.GetType().ToString()}\" with a manually specified type of\"{camSetting.ValueType.ToString()}\"");
 
                 this.setting = camSetting;
                 this.Label = setting.FriendlyName;
-                if (camSetting.ValueType.Equals(valueType.Decimal))
+                if (camSetting.ValueType.Equals(typeof(System.Single)))
                 {
                     this.SliderValue = (float.Parse(camSetting.Value.ToString()));
                     //this.DropdownValue = "";
                 }
-                if (camSetting.ValueType.Equals(valueType.Integer))
+                else if (camSetting.ValueType.EqualsInt())
                 {
-                    this.SliderValue = (Int32.Parse(camSetting.Value.ToString()));
+                    Plugin.Log.Notice("NOT MY FUCKING PROBLEM DO NOT COMPLAIN I WAS WORKING ON THIS FOR LIKE TWO HOURS");
+                    this.SliderValue = Convert.ToInt32(camSetting.Value);
                     //this.DropdownValue = "";
                 }
-                if (camSetting.ValueType.Equals(valueType.Enumerator))
+                else if (camSetting.ValueType.Equals(typeof(PyramidBloomRendererSO.Pass)))
                 {
                     this.DropdownValue = camSetting.Value.ToString();
                     //this.SliderValue = 0f;
@@ -134,7 +135,7 @@ namespace ReProcessor.UI
         internal static void Fill(List<CameraSetting> preset)
         {
             Instance.SettingList.data.Clear();
-            Plugin.Log.Notice($"setting list currently has {preset.Count()} Settings");
+            //Plugin.Log.Notice($"setting list currently has {preset.Count()} Settings");
             foreach (var setting in preset)
                 Instance.SettingList.data.Add(new EffectListObject(setting));
             Instance.NotifyPropertyChanged();
@@ -147,12 +148,11 @@ namespace ReProcessor.UI
             GetSettings().Clear();
             foreach (var a in GetDefaults())
                 GetSettings().Add(a);
-            
-            Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
             Instance.NotifyPropertyChanged();
             Fill(GetSettings());
             Plugin.preset.Save();
-            Plugin.preset = Load(Plugin.PresetName);
+            Plugin.preset.Load();
+            Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
         }
 
         [UIAction("cancel-button")]

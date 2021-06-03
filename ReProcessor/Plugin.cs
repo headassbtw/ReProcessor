@@ -11,6 +11,7 @@ using static ReProcessor.PresetExtensions;
 using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 using System;
+using System.IO;
 
 namespace ReProcessor
 {
@@ -29,15 +30,14 @@ namespace ReProcessor
             PresetName = "preset";
             Log = logger;
             Config = conf.Generated<Config>();
+            preset = Load(PresetName);
             try
             {
-                preset = Load(PresetName);
+                var a = preset.Bloom.Count;
             }
-            catch (Exception)
+            catch (NullReferenceException)
             {
-                var p = new Preset(PresetName);
-                p.Save();
-                preset = Load(PresetName);
+                RedoConfigFile("empty");
             }
             zenjector.On<PCAppInit>().Pseudo(Container =>
             {
@@ -57,6 +57,17 @@ namespace ReProcessor
 
             // Specify the scene name or contract or installer!
             //zenjector.On("Menu").Register<Installers.GameplayInstaller>();
+        }
+
+        internal static void RedoConfigFile(string reason = "")
+        {
+            if (reason != "")
+                Log.Critical($"Preset file was {reason}! Rebuilding...");
+            if(reason == "")
+                Log.Critical("Rebuilding preset file...");
+            File.Delete(Path.Combine(PRESET_SAVE_PATH, $"{PresetName}.json"));
+            preset = new Preset(PresetName);
+            preset.Save();
         }
 
         internal void CreateFolders()
