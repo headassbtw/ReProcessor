@@ -51,7 +51,7 @@ namespace ReProcessor
             //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
             zenjector.OnMenu<MenuSettingsInstaller>();
             zenjector.OnMenu<MenuInstaller>();
-            zenjector.OnGame<GameplayInstaller>();
+            zenjector.OnGame<GameplayInstaller>().ShortCircuitForMultiplayer();
 
             
 
