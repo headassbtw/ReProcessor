@@ -12,6 +12,7 @@ using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 using System;
 using System.IO;
+using UnityEngine;
 
 namespace ReProcessor
 {
@@ -79,7 +80,7 @@ namespace ReProcessor
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            //new GameObject("ReProcessorController").AddComponent<ReProcessorController>();
+            
 
         }
 
