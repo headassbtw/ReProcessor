@@ -46,6 +46,11 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="BS_Utils">
+      <HintPath>$(BeatSaberDir)\Plugins\BS_Utils.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="HMLib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\HMLib.dll</HintPath>
     </Reference>
@@ -69,6 +74,11 @@
     </Reference>
     <Reference Include="SiraUtil">
       <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="SongCore">
+      <HintPath>$(BeatSaberDir)\Plugins\SongCore.dll</HintPath>
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -136,6 +146,7 @@
     <Compile Include="Installers\MenuSettingsInstaller.cs" />
     <Compile Include="Managers\GameplayCoreManager.cs" />
     <Compile Include="Managers\MenuCoreManager.cs" />
+    <Compile Include="MapEvents\UI\Controllers\DisabledWarningViewController.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="ReProcessorController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +165,7 @@
   <ItemGroup>
     <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
     <None Include="Directory.Build.targets" Condition="Exists('Directory.Build.targets')" />
+    <EmbeddedResource Include="MapEvents\UI\Views\DisabledWarning.bsml" />
     <None Include="ReProcessor.csproj.user" Condition="Exists('ReProcessor.csproj.user')" />
     <EmbeddedResource Include="UI\Views\BloomSettingsView.bsml" />
     <EmbeddedResource Include="UI\Views\BaseColorBoostView.bsml" />
@@ -177,5 +189,6 @@
   <ItemGroup>
     <EmbeddedResource Include="UI\untitled3.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

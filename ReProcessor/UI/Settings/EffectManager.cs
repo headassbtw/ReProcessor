@@ -5,6 +5,7 @@ using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
+using UnityEngine.XR;
 using UnityEngine.Serialization;
 using Zenject;
 //using ReProcessor.Files;
@@ -16,8 +17,14 @@ namespace ReProcessor.UI
     [HotReload(RelativePathToLayout = @"..\Views\EffectManager.bsml")]
     internal class EffectManager : BSMLAutomaticViewController
     {
+        [UIValue("scrollbar-needed")]
+        internal bool ScrollbarNeeded
+        {
+            get => EffectList.data.Count > 7;
+        }
+
         [UIAction("effect-selected")]
-        internal static void SpinSelected(TableView sender, EffectListObject row)
+        internal void SpinSelected(TableView sender, EffectListObject row)
         {
             rSettingsFlowCoordinator.SwitchMiddleView(row.effectIndex + 1);
         }
@@ -63,15 +70,25 @@ namespace ReProcessor.UI
                 background.color = x;
             }
         }
-        [UIAction("#post-parse")]
-        internal void PostParse()
+        [UIAction("reload-fx")]
+        internal void ReloadFX()
         {
             EffectList.data.Clear();
             EffectList.data.Add(new EffectListObject("Bloom", 0));
             EffectList.data.Add(new EffectListObject("Color Boost", 1));
-            if(Plugin.preset.User.Count > 0)
+            if (Plugin.preset.User.Count > 0)
                 EffectList.data.Add(new EffectListObject("User", 2));
             EffectList.tableView.ReloadData();
+            if(BloomSettingsView.Instance)
+                BloomSettingsView.Instance.PostParse();
+            if(BaseColorBoostViewController.Instance)
+                BaseColorBoostViewController.Instance.PostParse();
+        }
+
+        [UIAction("#post-parse")]
+        internal void PostParse()
+        {
+            ReloadFX();
         }
     }
 }

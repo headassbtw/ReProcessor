@@ -1,17 +1,46 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
-	<vertical>
-		<horizontal pref-width='100' pref-height='80'>
-			<vertical child-expand-width='true'>
-				<stack pref-height='80'>
-					<custom-list visible-cells='5' cell-size='10' id='effect-list' select-cell='effect-selected' contents='effects' preferred-width='100'>
+	<vertical pref-width='100' pref-height='80'>
+		<horizontal pref-width='100' pref-height='70'>
+			<vertical child-expand-width='true' pref-width='90'>
+				<bg anchor-min-x='0' anchor-min-y='0.1'
+        anchor-max-x='1' anchor-max-y='0.85'
+        anchor-pos-x='0' anchor-pos-y='0'
+        size-delta-x='-5' size-delta-y='-5'
+        pivot-x='.5' pivot-y='1'>
+				<custom-list visible-cells='6' cell-size='10' id='effect-list' select-cell='effect-selected' contents='effects' preferred-width='40'>
 						<horizontal id='bg' bg='round-rect-panel' bg-color='~col' child-expand-width='false' vertical-fit='Unconstrained' pref-width='40' pad='1'>
 							<vertical horizontal-fit='Unconstrained'>
 								<text text='~effect-label' align='Center' font-size='5' />
 							</vertical>
 						</horizontal>
 					</custom-list>
-				</stack>
+				<scroll-indicator tags='IndicatorFor:effect-list'
+                      anchor-pos-x='.5' anchor-pos-y='0'
+                      anchor-min-x='1' anchor-min-y='0'
+                      anchor-max-x='1' anchor-max-y='1'
+                      size-delta-x='1' size-delta-y='-2'
+                      pivot-x='0' pivot-y='.5' />
+					</bg>
 			</vertical>
+		<vertical pref-width='20' pref-height='70' child-control-height='true' pad='1'>
+			<horizontal pref-width='10' pref-height='10'>
+				<pg-button dir='Up' click-event='effect-list#PageUp' pref-height='10'/>
+			</horizontal>
+			<horizontal pref-width='10' pref-height='50' child-expand-height='true' child-control-height='true' vertical-fit='PreferredSize'>
+				
+			</horizontal>
+			<horizontal pref-width='10' pref-height='10'>
+				<pg-button dir='Down' click-event='effect-list#PageDown' pref-height='10'/>
+			</horizontal>
+		</vertical>
+		</horizontal>
+		<horizontal pref-height='20' pref-width='100'>
+			<horizontal pref-width='70'>
+				<!--placeholder go brr-->
+			</horizontal>
+		<horizontal pref-width='30'>
+			<primary-button text='Reload' on-click='reload-fx'/>
+		</horizontal>
 		</horizontal>
 	</vertical>
 </bg>

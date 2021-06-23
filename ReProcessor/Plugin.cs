@@ -53,7 +53,7 @@ namespace ReProcessor
             zenjector.OnMenu<MenuInstaller>();
             zenjector.OnGame<GameplayInstaller>();
 
-            
+            BS_Utils.Utilities.BSEvents.lateMenuSceneLoadedFresh += BSEvents_menuSceneLoadedFresh;
 
             // Specify the scene name or contract or installer!
             //zenjector.On("Menu").Register<Installers.GameplayInstaller>();
@@ -66,13 +66,12 @@ namespace ReProcessor
             if(reason == "")
                 Log.Critical("Rebuilding preset file...");
             File.Delete(Path.Combine(PRESET_SAVE_PATH, $"{PresetName}.json"));
-            preset = new Preset(PresetName);
-            preset.Save();
+            JsonIO.NewPresetFile(PresetName);
         }
 
-        internal void CreateFolders()
+        private void BSEvents_menuSceneLoadedFresh(ScenesTransitionSetupDataSO data)
         {
-            
+            MapEvents.UI.Controllers.DisabledWarningViewController.instance.Setup();
         }
 
         [OnStart]
@@ -86,6 +85,7 @@ namespace ReProcessor
         [OnExit]
         public void OnApplicationQuit()
         {
+            BS_Utils.Utilities.BSEvents.lateMenuSceneLoadedFresh -= BSEvents_menuSceneLoadedFresh;
             Log.Debug("OnApplicationQuit");
 
         }
