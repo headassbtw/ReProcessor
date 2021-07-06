@@ -86,16 +86,16 @@ namespace ReProcessor.UI
             }
 
             [UIAction("decrease")]
-            private void DecreaseVal()
+            internal void DecreaseVal()
             {
                 SliderValue -= Increment;
-                Instance.SettingList.tableView.ReloadData();
+                Instance.SettingList.tableView.RefreshCellsContent();
             }
             [UIAction("increase")]
-            private void IncreaseVal()
+            internal void IncreaseVal()
             {
                 SliderValue += Increment;
-                Instance.SettingList.tableView.ReloadData();
+                Instance.SettingList.tableView.RefreshCellsContent();
 
             }
             public EffectListObject(CameraSetting camSetting)

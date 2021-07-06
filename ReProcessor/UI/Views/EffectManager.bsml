@@ -6,5 +6,13 @@
 				<primary-button pref-width='80' pref-height='10' text='Color Boost' on-click='cb-clicc'/>
 			</vertical>
 		</horizontal>
+		<horizontal pref-height='20' pref-width='100'>
+			<horizontal pref-width='70'>
+				<!--placeholder go brr-->
+			</horizontal>
+		<horizontal pref-width='30'>
+			<primary-button text='Reload' on-click='reload-fx'/>
+		</horizontal>
+		</horizontal>
 	</vertical>
 </bg>
