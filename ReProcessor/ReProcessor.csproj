@@ -155,6 +155,7 @@
     <Compile Include="UI\Settings\BloomSettingsView.cs" />
     <Compile Include="UI\Settings\BloomSettingsViewExperimental.cs" />
     <Compile Include="UI\Settings\EffectManager.cs" />
+    <Compile Include="UI\Settings\ErrorViewController.cs" />
     <Compile Include="UI\Settings\OverallSettingsViewController.cs" />
     <Compile Include="UI\Settings\rSettingsFlowCoordinator.cs" />
     <Compile Include="UI\Settings\TestUserEffect.cs" />
@@ -184,6 +185,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\untitled3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Views\error.bsml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

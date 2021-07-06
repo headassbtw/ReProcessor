@@ -11,6 +11,7 @@ using static ReProcessor.PresetExtensions;
 using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -22,11 +23,13 @@ namespace ReProcessor
         //internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
         internal static Preset preset { get; set; }
+        internal static List<Preset> presets { get; set; }
         internal static Config Config { get; set; }
         internal static string PresetName { get; private set; }
+        internal static Zenjector zenjector { get; private set; }
 
         [Init]
-        public Plugin(Conf conf, Zenjector zenjector, IPALogger logger, PluginMetadata metadata)
+        public Plugin(Conf conf, Zenjector _zenjector, Zenjector buttonInjector, IPALogger logger, PluginMetadata metadata)
         {
             PresetName = "preset";
             Log = logger;
@@ -34,33 +37,27 @@ namespace ReProcessor
             preset = Load(PresetName);
             try
             {
-                var a = preset.Bloom.Count;
+                int a = preset.Bloom.Count;
             }
             catch (NullReferenceException)
             {
                 RedoConfigFile("empty");
             }
-            zenjector.On<PCAppInit>().Pseudo(Container =>
+            _zenjector.On<PCAppInit>().Pseudo(Container =>
             {
                 Container.BindLoggerAsSiraLogger(logger);
                 //Container.BindInstance(Config).AsSingle();
                 Container.BindInstance(new UBinder<Plugin, PluginMetadata>(metadata));
             });
-            
+            zenjector = _zenjector;
             //Instance = this;
             
             //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
-            zenjector.OnMenu<MenuSettingsInstaller>();
-            zenjector.OnMenu<MenuInstaller>();
-            zenjector.OnGame<GameplayInstaller>().ShortCircuitForMultiplayer();
-
             
-
-            // Specify the scene name or contract or installer!
-            //zenjector.On("Menu").Register<Installers.GameplayInstaller>();
+            buttonInjector.OnMenu<MenuSettingsInstaller>();
+            
         }
-
-        internal static void RedoConfigFile(string reason = "")
+        internal static void RedoConfigFile(string reason = "fucked ahaha")
         {
             if (reason != "")
                 Log.Critical($"Preset file was {reason}! Rebuilding...");

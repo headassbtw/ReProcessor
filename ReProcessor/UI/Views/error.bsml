@@ -1,0 +1,10 @@
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+    <vertical>
+        <horizontal pref-width='100' pref-height='80'>
+            <vertical child-expand-width='true'>
+                <text text="Mod could not find the camera" font-size="7"/>
+                <text text="Something's messed up and I'm not quite sure why" font-size="5"/>
+            </vertical>
+        </horizontal>
+    </vertical>
+</bg>

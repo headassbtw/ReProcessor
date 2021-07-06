@@ -80,13 +80,13 @@
       <CanCopyToPlugins Condition="'$(CopyToPluginsError)' != ''">False</CanCopyToPlugins>
     </PropertyGroup>
     <!--Check if Beat Saber is running-->
-    <IsProcessRunning ProcessName="Beat Saber" Condition="'$(BSMTTaskAssembly)' != ''">
+    <!--<IsProcessRunning ProcessName="Beat Saber" Condition="'$(BSMTTaskAssembly)' != ''">
       <Output TaskParameter="IsRunning" PropertyName="IsRunning" />
     </IsProcessRunning>
     <PropertyGroup>
-      <!--If Beat Saber is running, output to the Pending folder-->
+      
       <PluginDir Condition="'$(IsRunning)' == 'True'">$(BeatSaberDir)\IPA\Pending\Plugins</PluginDir>
-    </PropertyGroup>
+    </PropertyGroup>-->
     <Warning Text="$(CopyToPluginsError)" Condition="'$(CopyToPluginsError)' != ''" />
     <Message Text="Copying '$(OutputAssemblyName).dll' to '$(PluginDir)'." Importance="high" Condition="$(CanCopyToPlugins)" />
     <Copy SourceFiles="$(OutputAssemblyName).dll" DestinationFiles="$(PluginDir)\$(AssemblyName).dll" Condition="$(CanCopyToPlugins)"  />

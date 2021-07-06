@@ -13,7 +13,7 @@ namespace ReProcessor
     public class Config
     {
         public Config() { }
-        public event Action<Config>? Updated;
+        public event Action<Config> Updated;
         public virtual float MinAmountIncrease { get; set; } = -3;
         public virtual float MaxAmountIncrease { get; set; } = 3;
         

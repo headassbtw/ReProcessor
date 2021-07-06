@@ -18,7 +18,7 @@ namespace ReProcessor.UI
     internal abstract class BloomSettingsView2 : BSMLAutomaticViewController
     {
         internal static BloomSettingsView2 Instance;
-        private static Preset tmpPreset;
+        //private static Preset tmpPreset;
 
         public abstract List<CameraSetting> GetSettings();
         public abstract List<CameraSetting> GetDefaults();

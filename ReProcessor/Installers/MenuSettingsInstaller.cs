@@ -16,6 +16,7 @@ namespace ReProcessor.Installers
             Container.Bind<TestUserEffect>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<EffectManager>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<OverallSettingsView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<ErrorView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<IInitializable>().To<rSettingsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(rSettingsFlowCoordinator)).AsSingle();
         }
     }
