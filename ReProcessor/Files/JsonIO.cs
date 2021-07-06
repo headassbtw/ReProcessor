@@ -52,11 +52,7 @@ namespace ReProcessor
                 Preset temp = new Preset(presetName);
                 temp.Save();
             }
-            catch
-            {
-                //this is a thing now?? tf goin on
-            }
-
+            catch(Exception){}
             return JsonIO.LoadJson(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json");
 
             

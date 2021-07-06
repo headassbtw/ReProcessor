@@ -51,7 +51,9 @@ namespace ReProcessor.MapEvents.UI.Controllers
         }
 
         [UIComponent("info-button")]
+#pragma warning disable 649 //assigned by BSML
         private Transform infoButtonTransform;
+#pragma warning restore 649
 
         internal void Setup()
         {
@@ -59,6 +61,7 @@ namespace ReProcessor.MapEvents.UI.Controllers
             standardLevel = Resources.FindObjectsOfTypeAll<StandardLevelDetailViewController>().First();
             BSMLParser.instance.Parse(BeatSaberMarkupLanguage.Utilities.GetResourceContent(Assembly.GetExecutingAssembly(), "ReProcessor.MapEvents.UI.Views.DisabledWarning.bsml"), standardLevel.transform.Find("LevelDetail").gameObject, this);
             infoButtonTransform.localScale *= 0.7f;//no scale property in bsml as of now so manually scaling it
+            // ReSharper disable once PossibleNullReferenceException
             (standardLevel.transform.Find("LevelDetail").Find("FavoriteToggle")?.transform as RectTransform).anchoredPosition = new Vector2(3, -2);
         }
 

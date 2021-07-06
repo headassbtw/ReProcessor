@@ -13,7 +13,9 @@ namespace ReProcessor
     public class Config
     {
         public Config() { }
-        public event Action<Config> Updated;
+#pragma warning disable 8632 //shut the fuck up rider
+        public event Action<Config>? Updated;
+#pragma warning restore 8632
         public virtual float MinAmountIncrease { get; set; } = -3;
         public virtual float MaxAmountIncrease { get; set; } = 3;
         

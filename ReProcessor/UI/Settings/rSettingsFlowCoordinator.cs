@@ -3,8 +3,6 @@ using HMUI;
 using IPA.Utilities;
 using SiraUtil.Tools;
 using System.Threading.Tasks;
-using ReProcessor.Installers;
-using ReProcessor.Managers;
 using Zenject;
 
 namespace ReProcessor.UI
@@ -21,18 +19,17 @@ namespace ReProcessor.UI
         private BloomSettingsView2 _bloomSettingsView = null!;
         private BaseColorBoostViewController _baseColorBoostView = null!;
         private TestUserEffect _testUserEffect = null!;
-        private ErrorView _errorView = null!;
         //private int exiting = 0;
         internal static rSettingsFlowCoordinator Instance;
         public void Initialize() {Instance = this; }
-        internal static bool hasErrored = true;
+
         private static readonly FieldAccessor<SelectLevelCategoryViewController, IconSegmentedControl>.Accessor SegmentedControl = FieldAccessor<SelectLevelCategoryViewController, IconSegmentedControl>.GetAccessor("_levelFilterCategoryIconSegmentedControl");
         private static readonly FieldAccessor<SelectLevelCategoryViewController, SelectLevelCategoryViewController.LevelCategoryInfo[]>.Accessor Categories = FieldAccessor<SelectLevelCategoryViewController, SelectLevelCategoryViewController.LevelCategoryInfo[]>.GetAccessor("_levelCategoryInfos");
 
 
 
         [Inject]
-        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView bloomSettingsView, EffectManager effectManager, OverallSettingsView overallSettingsView, BaseColorBoostViewController baseColorBoostViewController, TestUserEffect testUserEffect, ErrorView errorView)
+        protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, BloomSettingsView bloomSettingsView, EffectManager effectManager, OverallSettingsView overallSettingsView, BaseColorBoostViewController baseColorBoostViewController, TestUserEffect testUserEffect)
         {
             _buttonManager = buttonManager;
             _mainFlowCoordinator = mainFlowCoordinator;
@@ -41,7 +38,6 @@ namespace ReProcessor.UI
             _overallSettingsView = overallSettingsView;
             _baseColorBoostView = baseColorBoostViewController;
             _testUserEffect = testUserEffect;
-            _errorView = errorView;
         }
 
         protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -54,18 +50,15 @@ namespace ReProcessor.UI
             if (addedToHierarchy)
             {
                 ViewController view = _effectManager;
-                if(!hasErrored)
-                    ProvideInitialViewControllers(view, _overallSettingsView);
-                else if(hasErrored)
-                    ProvideInitialViewControllers(_errorView);
-                }
+                ProvideInitialViewControllers(view, _overallSettingsView);
+            }
         }
         internal static void RevertCurrentSettings()
         {
             if(Instance.title != "ReProcessor Effects")
             {
                 CurrentView.Revert();
-                CurrentView.SettingList.tableView.ReloadData();
+                ((BloomSettingsView2)CurrentView).SettingList.tableView.ReloadData();
             }
                 
             else
@@ -109,8 +102,8 @@ namespace ReProcessor.UI
                 case 3:
                     Instance.showBackButton = false;
                     Instance.SetTitle("User Effects");
-                    view = Instance._testUserEffect;
                     CurrentView = (BloomSettingsView2)view;
+                    view = Instance._testUserEffect;
                     Instance.ReplaceTopViewController(view);
                     Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
                     break;

@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using ReProcessor.Installers;
 using Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,10 +17,10 @@ namespace ReProcessor.UI
 {
     internal class ButtonManager : IInitializable, IDisposable
     {
-#pragma warning disable 8632 //SHUT THE FUCK UP RIDER
+#pragma warning disable 8632 //shut the fuck up rider
         private ClickableImage? _image;
         public event Action? WasClicked;
-#pragma warning restore 8632
+#pragma warning restore 8632 //shut the fuck up rider
         private readonly Assembly _assembly;
         private readonly DiContainer _container;
         private readonly TweeningManager _tweeningManager;
@@ -51,24 +50,17 @@ namespace ReProcessor.UI
             }
         }
 
-        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TweeningManager tweeningManager, LevelSelectionNavigationController levelSelectionNavigationController, MainCamera mainCamera)
+        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TweeningManager tweeningManager, LevelSelectionNavigationController levelSelectionNavigationController)
         {
             _container = container;
             _tweeningManager = tweeningManager;
             _assembly = metadataBinder.Value.Assembly;
             _levelSelectionNavigationController = levelSelectionNavigationController;
-            if(mainCamera != null)
-            {
-                rSettingsFlowCoordinator.hasErrored = false;
-                Plugin.zenjector.OnMenu<MenuInstaller>();
-                Plugin.zenjector.OnGame<GameplayInstaller>().ShortCircuitForMultiplayer();
-            }
         }
 
         public void Initialize()
         {
             Plugin.preset = PresetExtensions.Load(Plugin.PresetName);
-            
             _ = InitializeAsync();
         }
 
