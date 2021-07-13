@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IPA.Utilities;
 using Newtonsoft.Json;
+//using ReProcessor.Files;
 using static ReProcessor.Config;
 using ReProcessor.Files;
 
@@ -27,7 +28,7 @@ namespace ReProcessor
                 Directory.CreateDirectory(PRESET_SAVE_PATH);
             if (!File.Exists(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json"))
             {
-                File.Create(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json").Close();
+                File.Create(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json");
                 Preset temp = new Preset(preset.Name);
                 temp.Save();
             }
@@ -45,10 +46,8 @@ namespace ReProcessor
             if (!Directory.Exists(PRESET_SAVE_PATH))
                 Directory.CreateDirectory(PRESET_SAVE_PATH);
             if (!File.Exists(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json"))
-                JsonIO.NewPresetFile(presetName);
-            try
             {
-                File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json").Close();
+                File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json");
                 Preset temp = new Preset(presetName);
                 temp.Save();
             }
@@ -61,24 +60,9 @@ namespace ReProcessor
 
     class JsonIO
     {
-        public static string PRESET_SAVE_PATH = Path.Combine(UnityGame.UserDataPath, "ReProcessor", "Presets");
-        public static void NewPresetFile(string name)
-        {
-            File.Create(Path.Combine(PRESET_SAVE_PATH, name) + ".json").Close();
-            using (StreamWriter w = new StreamWriter(Path.Combine(PRESET_SAVE_PATH, name) + ".json"))
-            {
-                var newPreset = new Preset(name);
-                JsonSerializer serializer = new JsonSerializer();
-                string contents = JsonConvert.SerializeObject(newPreset);
-                var jtw = new JsonTextWriter(w);
-
-                jtw.Formatting = Formatting.Indented;
-                serializer.Serialize(jtw, newPreset);
-                w.Close();
-            }
-        }
         public static Preset LoadJson(string path)
         {
+            
             StreamReader r = new StreamReader(path);
             string json = r.ReadToEnd();
             r.Close();

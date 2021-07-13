@@ -86,16 +86,16 @@ namespace ReProcessor.UI
             }
 
             [UIAction("decrease")]
-            internal void DecreaseVal()
+            private void DecreaseVal()
             {
                 SliderValue -= Increment;
-                Instance.SettingList.tableView.RefreshCellsContent();
+                Instance.SettingList.tableView.ReloadData();
             }
             [UIAction("increase")]
-            internal void IncreaseVal()
+            private void IncreaseVal()
             {
                 SliderValue += Increment;
-                Instance.SettingList.tableView.RefreshCellsContent();
+                Instance.SettingList.tableView.ReloadData();
 
             }
             public EffectListObject(CameraSetting camSetting)
@@ -126,7 +126,6 @@ namespace ReProcessor.UI
         [UIAction("#post-parse")]
         internal void PostParse()
         {
-
             Plugin.preset = Load(Plugin.PresetName);
             Instance = this;
             SettingList.data.Clear();
