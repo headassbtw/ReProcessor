@@ -12,7 +12,6 @@ using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 using System;
 using System.IO;
-using UnityEngine;
 
 namespace ReProcessor
 {
@@ -52,7 +51,7 @@ namespace ReProcessor
             //zenjector.OnApp<MyMainInstaller>().WithParameters(10); // Use Zenject's installer parameter system!
             zenjector.OnMenu<MenuSettingsInstaller>();
             zenjector.OnMenu<MenuInstaller>();
-            zenjector.OnGame<GameplayInstaller>().ShortCircuitForMultiplayer();
+            zenjector.OnGame<GameplayInstaller>();
 
             
 
@@ -80,7 +79,7 @@ namespace ReProcessor
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            
+            //new GameObject("ReProcessorController").AddComponent<ReProcessorController>();
 
         }
 
