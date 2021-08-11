@@ -97,7 +97,7 @@ namespace ReProcessor.UI
             image.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
 
             image.rectTransform.SetParent(_levelSelectionNavigationController.transform);
-            image.rectTransform.localPosition = new Vector3(79f, 18f, 0f);
+            image.rectTransform.localPosition = new Vector3(79f, 12.5f, 0f);
             image.rectTransform.localScale = new Vector3(.3f, .3f, .3f);
             image.rectTransform.sizeDelta = new Vector2(20f, 20f);
             gameObject.AddComponent<LayoutElement>();
