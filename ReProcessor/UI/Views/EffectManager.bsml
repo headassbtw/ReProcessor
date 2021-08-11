@@ -2,8 +2,15 @@
 	<vertical>
 		<horizontal pref-width='100' pref-height='80'>
 			<vertical child-expand-width='true'>
-				<primary-button pref-width='80' pref-height='10' text='Bloom' on-click='bloom-clicc'/>
-				<primary-button pref-width='80' pref-height='10' text='Color Boost' on-click='cb-clicc'/>
+				<stack pref-height='80'>
+					<custom-list visible-cells='5' cell-size='10' id='effect-list' select-cell='effect-selected' contents='effects' preferred-width='100'>
+						<horizontal id='bg' bg='round-rect-panel' bg-color='~col' child-expand-width='false' vertical-fit='Unconstrained' pref-width='40' pad='1'>
+							<vertical horizontal-fit='Unconstrained'>
+								<text text='~effect-label' align='Center' font-size='5' />
+							</vertical>
+						</horizontal>
+					</custom-list>
+				</stack>
 			</vertical>
 		</horizontal>
 	</vertical>

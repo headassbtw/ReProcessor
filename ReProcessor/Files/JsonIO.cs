@@ -28,7 +28,7 @@ namespace ReProcessor
                 Directory.CreateDirectory(PRESET_SAVE_PATH);
             if (!File.Exists(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json"))
             {
-                File.Create(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json").Close();
+                File.Create(Path.Combine(PRESET_SAVE_PATH, preset.Name) + ".json");
                 Preset temp = new Preset(preset.Name);
                 temp.Save();
             }
@@ -47,7 +47,7 @@ namespace ReProcessor
                 Directory.CreateDirectory(PRESET_SAVE_PATH);
             if (!File.Exists(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json"))
             {
-                File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json").Close();
+                File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json");
                 Preset temp = new Preset(presetName);
                 temp.Save();
             }

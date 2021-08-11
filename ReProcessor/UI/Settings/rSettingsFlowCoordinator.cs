@@ -9,8 +9,6 @@ namespace ReProcessor.UI
 {
     internal class rSettingsFlowCoordinator : FlowCoordinator, IInitializable
     {
-        internal static BloomSettingsView2 CurrentView = null!;
-
         private ButtonManager _buttonManager = null!;
         private FlowCoordinator _parentFlowCoordinator = null!;
         private MainFlowCoordinator _mainFlowCoordinator = null!;
@@ -53,25 +51,10 @@ namespace ReProcessor.UI
                 ProvideInitialViewControllers(view, _overallSettingsView);
             }
         }
-        internal static void RevertCurrentSettings()
-        {
-            if(Instance.title != "ReProcessor Effects")
-            {
-                CurrentView.Revert();
-                ((BloomSettingsView2)CurrentView).SettingList.tableView.ReloadData();
-            }
-                
-            else
-            {
-                Plugin.Log.Notice("Fuck");
-            }
-        }
-
 
         internal static void SwitchMiddleView(int effectIndex = 0)
         {
-            ViewController view = null!;
-
+            ViewController view;
             switch (effectIndex)
             {
                 case 0:
@@ -85,24 +68,19 @@ namespace ReProcessor.UI
                     Instance.showBackButton = false;
                     Instance.SetTitle("Bloom");
                     view = Instance._bloomSettingsView;
-                    CurrentView = (BloomSettingsView2)view;
                     Instance.ReplaceTopViewController(view);
                     Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
-                    ((BloomSettingsView2)view).SettingList.tableView.ReloadData();
                     break;
                 case 2:
                     Instance.showBackButton = false;
                     Instance.SetTitle("Color Boost");
                     view = Instance._baseColorBoostView;
-                    CurrentView = (BloomSettingsView2)view;
                     Instance.ReplaceTopViewController(view);
                     Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
-                    ((BloomSettingsView2)view).SettingList.tableView.ReloadData();
                     break;
                 case 3:
                     Instance.showBackButton = false;
                     Instance.SetTitle("User Effects");
-                    CurrentView = (BloomSettingsView2)view;
                     view = Instance._testUserEffect;
                     Instance.ReplaceTopViewController(view);
                     Instance.SetLeftScreenViewController(null, ViewController.AnimationType.Out);
