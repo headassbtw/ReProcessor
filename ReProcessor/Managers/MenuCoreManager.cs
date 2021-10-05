@@ -9,14 +9,16 @@ using static ReProcessor.PresetExtensions;
 
 namespace ReProcessor.Managers
 {
-    class MenuCoreManager : IInitializable, IDisposable
+    class MenuCoreManager
     {
         internal static MenuCoreManager Instance;
 
         internal static Camera MainCamAccess()
         {
-            if(Instance._mainCamera != null)
+            if (Instance._mainCamera != null)
+            {
                 return Instance._mainCamera;
+            }
             else
             {
                 Instance._mainCamera = Camera.main;
@@ -25,11 +27,14 @@ namespace ReProcessor.Managers
         }
 
 
-        private Camera _mainCamera;
-
-        public MenuCoreManager(MainCamera mainCamera)
+        public Camera _mainCamera;
+        [Inject]
+        public MenuCoreManager()
         {
             _mainCamera = Camera.main;
+            string ass2 = _mainCamera == null ? "" : " not";
+            Plugin.Log.Critical($"camera.main is{ass2} null");
+            
         }
 
         public void Initialize()

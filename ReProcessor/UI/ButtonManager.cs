@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using ReProcessor.Managers;
 using Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -60,6 +61,10 @@ namespace ReProcessor.UI
 
         public void Initialize()
         {
+            var ass = new MenuCoreManager();
+            ass.Initialize();
+            ass._mainCamera.ApplySettings(Plugin.preset.ColorBoost);
+            ass._mainCamera.ApplySettings(Plugin.preset.Bloom);
             Plugin.preset = PresetExtensions.Load(Plugin.PresetName);
             _ = InitializeAsync();
         }

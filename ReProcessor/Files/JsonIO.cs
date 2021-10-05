@@ -45,14 +45,19 @@ namespace ReProcessor
             if (!Directory.Exists(PRESET_SAVE_PATH))
                 Directory.CreateDirectory(PRESET_SAVE_PATH);
             if (!File.Exists(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json"))
-                JsonIO.NewPresetFile(presetName);
-            try
             {
-                File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json").Close();
-                Preset temp = new Preset(presetName);
-                temp.Save();
+                Plugin.Log.Debug("preset file did not exist, creating new");
+                JsonIO.NewPresetFile(presetName);
+                try
+                {
+                    //i crave death
+                    File.Create(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json").Close();
+                    Preset temp = new Preset(presetName);
+                    temp.Save();
+                }
+                catch(Exception){}
             }
-            catch(Exception){}
+                
             return JsonIO.LoadJson(Path.Combine(PRESET_SAVE_PATH, presetName) + ".json");
 
             

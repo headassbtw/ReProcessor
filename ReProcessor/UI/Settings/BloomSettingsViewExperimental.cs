@@ -155,6 +155,7 @@ namespace ReProcessor.UI
         [UIAction("cancel-button")]
         internal void Cancel()
         {
+            Plugin.preset.Load();
             Plugin.Log.Notice($"{this.GetType().ToString()} is calling Cancel");
             Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
             rSettingsFlowCoordinator.SwitchMiddleView();
@@ -163,7 +164,8 @@ namespace ReProcessor.UI
         [UIAction("apply-button")]
         internal void Apply()
         {
-            Plugin.preset.Load();
+            Plugin.preset.Save();
+            //Plugin.preset.Load();
             Plugin.Log.Notice($"{this.GetType().ToString()} is calling Apply");
             GetSettings().Clear();
             foreach(var setting in settingsList)
@@ -171,7 +173,7 @@ namespace ReProcessor.UI
                 EffectListObject e = (EffectListObject)setting;
                 GetSettings().Add(e.setting);
             }
-            Plugin.preset.Save();
+            
             Instance.NotifyPropertyChanged();
             SettingList.tableView.ReloadData();
         }

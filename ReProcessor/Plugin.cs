@@ -13,6 +13,7 @@ using IPALogger = IPA.Logging.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ReProcessor.Managers;
 using UnityEngine;
 
 namespace ReProcessor
@@ -31,6 +32,7 @@ namespace ReProcessor
         [Init]
         public Plugin(Conf conf, Zenjector _zenjector, Zenjector buttonInjector, IPALogger logger, PluginMetadata metadata)
         {
+            
             PresetName = "preset";
             Log = logger;
             Config = conf.Generated<Config>();
@@ -76,6 +78,7 @@ namespace ReProcessor
         [OnStart]
         public void OnApplicationStart()
         {
+            
             Log.Debug("OnApplicationStart");
             
 
