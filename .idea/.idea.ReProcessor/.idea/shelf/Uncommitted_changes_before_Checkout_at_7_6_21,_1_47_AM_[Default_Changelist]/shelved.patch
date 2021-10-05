@@ -1,0 +1,79 @@
+Index: .idea/.idea.ReProcessor/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"dd8f87f9-bddf-474a-8606-ee0268a05c7b\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/Configuration/Config.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/Configuration/Config.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/MapEvents/UI/Controllers/DisabledWarningViewController.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/MapEvents/UI/Controllers/DisabledWarningViewController.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/ReProcessor/UI/Settings/rSettingsFlowCoordinator.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ReProcessor/UI/Settings/rSettingsFlowCoordinator.cs\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"XML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"headassbtw\" />\n        <option value=\"headassbtw (linux)\" />\n      </list>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"RESET_MODE\" value=\"HARD\" />\n  </component>\n  <component name=\"GithubPullRequestsUISettings\">\n    <option name=\"selectedUrlAndAccountId\">\n      <UrlAndAccount>\n        <option name=\"accountId\" value=\"92869025-705d-4086-bf1e-385fd28ecf54\" />\n        <option name=\"url\" value=\"https://github.com/headassbtw/ReProcessor\" />\n      </UrlAndAccount>\n    </option>\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/manifest.json\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/UI/Settings/rSettingsFlowCoordinator.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Plugin.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Files/ConfigTypes.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Managers/GameplayCoreManager.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Managers/MenuCoreManager.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Installers/GameplayInstaller.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Installers/MenuSettingsInstaller.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Installers/MenuInstaller.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Properties/AssemblyInfo.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/ReProcessor/Configuration/Config.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <changedPaths>\n      <option value=\"$PROJECT_DIR$/ReProcessor/Directory.Build.targets\" />\n      <option value=\"$PROJECT_DIR$/ReProcessor/Plugin.cs\" />\n      <option value=\"$PROJECT_DIR$/ReProcessor/ReProcessor.csproj\" />\n      <option value=\"$PROJECT_DIR$/ReProcessor/ReProcessor.csproj.user\" />\n    </changedPaths>\n  </component>\n  <component name=\"ProjectId\" id=\"1uOA3Wq5J1O3nF6usS3Mf4J8U8j\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.keymap\" />\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"Attach to Unity Editor\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"Unity Debug\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\">\n      <option name=\"allowRunningInParallel\" value=\"false\" />\n      <option name=\"listenPortForConnections\" value=\"false\" />\n      <option name=\"pid\" />\n      <option name=\"projectPathOnTarget\" />\n      <option name=\"selectedOptions\">\n        <list />\n      </option>\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"dd8f87f9-bddf-474a-8606-ee0268a05c7b\" name=\"Default Changelist\" comment=\"\" />\n      <created>1624526076431</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1624526076431</updated>\n      <workItem from=\"1624526084002\" duration=\"614000\" />\n      <workItem from=\"1624527122566\" duration=\"415000\" />\n      <workItem from=\"1624527908557\" duration=\"40000\" />\n      <workItem from=\"1624527967973\" duration=\"157000\" />\n      <workItem from=\"1624557342877\" duration=\"134000\" />\n      <workItem from=\"1624557584371\" duration=\"187000\" />\n      <workItem from=\"1624561512445\" duration=\"770000\" />\n      <workItem from=\"1624833334848\" duration=\"163000\" />\n      <workItem from=\"1624950362348\" duration=\"95000\" />\n      <workItem from=\"1625556261593\" duration=\"2518000\" />\n      <workItem from=\"1625558856207\" duration=\"1779000\" />\n      <workItem from=\"1625560684766\" duration=\"313000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"now warns you of the stroke it has when it can't find the camera\">\n      <created>1625558627353</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1625558627353</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"tf\">\n      <created>1625558756686</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1625558756686</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"fixed deps, they somehow weren't breaking?????????\">\n      <created>1625559094047</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1625559094047</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"4\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"UnityCheckinConfiguration\" checkUnsavedScenes=\"true\" />\n  <component name=\"UnityProjectConfiguration\" hasMinimizedUI=\"false\" />\n  <component name=\"UnityUnitTestConfiguration\" currentTestLauncher=\"NUnit\" />\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"CLEAR_INITIAL_COMMIT_MESSAGE\" value=\"true\" />\n    <MESSAGE value=\"now warns you of the stroke it has when it can't find the camera\" />\n    <MESSAGE value=\"tf\" />\n    <MESSAGE value=\"fixed deps, they somehow weren't breaking?????????\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fixed deps, they somehow weren't breaking?????????\" />\n  </component>\n</project>
+===================================================================
+diff --git a/.idea/.idea.ReProcessor/.idea/workspace.xml b/.idea/.idea.ReProcessor/.idea/workspace.xml
+--- a/.idea/.idea.ReProcessor/.idea/workspace.xml	
++++ b/.idea/.idea.ReProcessor/.idea/workspace.xml	
+@@ -1,14 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="dd8f87f9-bddf-474a-8606-ee0268a05c7b" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/Configuration/Config.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Configuration/Config.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/MapEvents/UI/Controllers/DisabledWarningViewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/MapEvents/UI/Controllers/DisabledWarningViewController.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/Settings/rSettingsFlowCoordinator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/Settings/rSettingsFlowCoordinator.cs" afterDir="false" />
+-    </list>
++    <list default="true" id="dd8f87f9-bddf-474a-8606-ee0268a05c7b" name="Default Changelist" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -27,6 +20,11 @@
+         <option value="headassbtw" />
+         <option value="headassbtw (linux)" />
+       </list>
++    </option>
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="master" />
++      </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+     <option name="RESET_MODE" value="HARD" />
+@@ -111,7 +109,7 @@
+       <workItem from="1624950362348" duration="95000" />
+       <workItem from="1625556261593" duration="2518000" />
+       <workItem from="1625558856207" duration="1779000" />
+-      <workItem from="1625560684766" duration="313000" />
++      <workItem from="1625560684766" duration="495000" />
+     </task>
+     <task id="LOCAL-00001" summary="now warns you of the stroke it has when it can't find the camera">
+       <created>1625558627353</created>
+@@ -134,7 +132,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1625559094047</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="WHY IS STUFF BREAKINGGGGGGGGGGGGGGGGGGGGGGGGGGGg">
++      <created>1625561020208</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1625561020208</updated>
++    </task>
++    <task id="LOCAL-00005" summary="a">
++      <created>1625561167132</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1625561167132</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -166,6 +178,8 @@
+     <MESSAGE value="now warns you of the stroke it has when it can't find the camera" />
+     <MESSAGE value="tf" />
+     <MESSAGE value="fixed deps, they somehow weren't breaking?????????" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fixed deps, they somehow weren't breaking?????????" />
++    <MESSAGE value="WHY IS STUFF BREAKINGGGGGGGGGGGGGGGGGGGGGGGGGGGg" />
++    <MESSAGE value="a" />
++    <option name="LAST_COMMIT_MESSAGE" value="a" />
+   </component>
+ </project>
+\ No newline at end of file
