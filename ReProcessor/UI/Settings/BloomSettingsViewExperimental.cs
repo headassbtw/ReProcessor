@@ -163,6 +163,7 @@ namespace ReProcessor.UI
         [UIAction("apply-button")]
         internal void Apply()
         {
+            Plugin.preset.Load();
             Plugin.Log.Notice($"{this.GetType().ToString()} is calling Apply");
             GetSettings().Clear();
             foreach(var setting in settingsList)

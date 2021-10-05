@@ -15,23 +15,29 @@ namespace ReProcessor.Managers
 
         internal static Camera MainCamAccess()
         {
-            return Instance._mainCamera.camera;
+            if(Instance._mainCamera != null)
+                return Instance._mainCamera;
+            else
+            {
+                Instance._mainCamera = Camera.main;
+                return Instance._mainCamera;
+            }
         }
 
 
-        private MainCamera _mainCamera;
+        private Camera _mainCamera;
 
         public MenuCoreManager(MainCamera mainCamera)
         {
-            _mainCamera = mainCamera;
+            _mainCamera = Camera.main;
         }
 
         public void Initialize()
         {
             Plugin.preset = Load(Plugin.PresetName);
             Instance = this;
-            _mainCamera.camera.ApplySettings(Plugin.preset.Bloom);
-            _mainCamera.camera.ApplySettings(Plugin.preset.ColorBoost);
+            _mainCamera.ApplySettings(Plugin.preset.Bloom);
+            _mainCamera.ApplySettings(Plugin.preset.ColorBoost);
         }
         public void Dispose()
         {
