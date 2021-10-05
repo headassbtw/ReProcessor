@@ -158,7 +158,6 @@
     <Compile Include="UI\Settings\ErrorViewController.cs" />
     <Compile Include="UI\Settings\OverallSettingsViewController.cs" />
     <Compile Include="UI\Settings\rSettingsFlowCoordinator.cs" />
-    <Compile Include="UI\Settings\TestUserEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />

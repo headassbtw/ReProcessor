@@ -4,7 +4,6 @@ using System.Linq;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
-//using RuntimeUnityEditor.BSIPA4;
 using UnityEngine.Serialization;
 using Zenject;
 using ReProcessor.Files;
@@ -18,9 +17,9 @@ namespace ReProcessor.UI
     internal abstract class BloomSettingsView2 : BSMLAutomaticViewController
     {
         internal static BloomSettingsView2 Instance;
-        //private static Preset tmpPreset;
 
         public abstract List<CameraSetting> GetSettings();
+        
         public abstract List<CameraSetting> GetDefaults();
 
         [UIComponent("setting-list")]
@@ -100,8 +99,6 @@ namespace ReProcessor.UI
             }
             public EffectListObject(CameraSetting camSetting)
             {
-                //Plugin.Log.Notice($"{camSetting.FriendlyName} has a value of {camSetting.Value} (type of \"{camSetting.Value.GetType().ToString()}\" with a manually specified type of\"{camSetting.ValueType.ToString()}\"");
-
                 this.setting = camSetting;
                 this.Label = setting.FriendlyName;
                 if (camSetting.ValueType.Equals(typeof(System.Single)))
@@ -136,7 +133,6 @@ namespace ReProcessor.UI
         internal static void Fill(List<CameraSetting> preset)
         {
             Instance.SettingList.data.Clear();
-            //Plugin.Log.Notice($"setting list currently has {preset.Count()} Settings");
             foreach (var setting in preset)
                 Instance.SettingList.data.Add(new EffectListObject(setting));
             Instance.NotifyPropertyChanged();
@@ -159,7 +155,7 @@ namespace ReProcessor.UI
         [UIAction("cancel-button")]
         internal void Cancel()
         {
-            Plugin.preset = Load(Plugin.PresetName);
+            Plugin.Log.Notice($"{this.GetType().ToString()} is calling Cancel");
             Managers.MenuCoreManager.MainCamAccess().ApplySettings(GetSettings());
             rSettingsFlowCoordinator.SwitchMiddleView();
             Instance.NotifyPropertyChanged();
@@ -167,6 +163,7 @@ namespace ReProcessor.UI
         [UIAction("apply-button")]
         internal void Apply()
         {
+            Plugin.Log.Notice($"{this.GetType().ToString()} is calling Apply");
             GetSettings().Clear();
             foreach(var setting in settingsList)
             {

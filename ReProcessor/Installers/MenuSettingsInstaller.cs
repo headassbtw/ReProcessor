@@ -13,7 +13,6 @@ namespace ReProcessor.Installers
             Container.BindInterfacesAndSelfTo<ButtonManager>().AsSingle();
             Container.Bind<BloomSettingsView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<BaseColorBoostViewController>().FromNewComponentAsViewController().AsSingle();
-            Container.Bind<TestUserEffect>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<EffectManager>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<OverallSettingsView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<ErrorView>().FromNewComponentAsViewController().AsSingle();

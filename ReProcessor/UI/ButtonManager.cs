@@ -23,7 +23,7 @@ namespace ReProcessor.UI
 #pragma warning restore 8632 //shut the fuck up rider
         private readonly Assembly _assembly;
         private readonly DiContainer _container;
-        private readonly TweeningManager _tweeningManager;
+        private readonly TimeTweeningManager _tweeningManager;
         private readonly LevelSelectionNavigationController _levelSelectionNavigationController;
         //private static readonly Color _emptyColor = new Color(0.15f, 0f, 0f, 1f);
 
@@ -50,7 +50,7 @@ namespace ReProcessor.UI
             }
         }
 
-        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TweeningManager tweeningManager, LevelSelectionNavigationController levelSelectionNavigationController)
+        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TimeTweeningManager tweeningManager, LevelSelectionNavigationController levelSelectionNavigationController)
         {
             _container = container;
             _tweeningManager = tweeningManager;
