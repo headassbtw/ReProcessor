@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c411c931-a675-4706-990b-06cdd1cb2235" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ReProcessor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ReProcessor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Files/JsonIO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/Installers/MenuInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Installers/MenuInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/Installers/MenuSettingsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Installers/MenuSettingsInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/Managers/MenuCoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Managers/MenuCoreManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/Plugin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Plugin.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/ButtonManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/Settings/BloomSettingsViewExperimental.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReProcessor/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReProcessor/UI/Views/EffectManager.bsml" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/UI/Views/EffectManager.bsml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReProcessor/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ReProcessor/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="55564" />
+    <option name="totalTimeSeconds" value="56004" />
     <option name="gitIntegration" value="true" />
     <option name="naggedAbout" value="1" />
   </component>
@@ -120,7 +116,7 @@
       <workItem from="1628646457710" duration="44000" />
       <workItem from="1628658237690" duration="539000" />
       <workItem from="1633154683142" duration="1024000" />
-      <workItem from="1633406653723" duration="4947000" />
+      <workItem from="1633406653723" duration="5455000" />
     </task>
     <task id="LOCAL-00002" summary="version bumped, moved the button to not interfere with cherry">
       <created>1628645918533</created>
@@ -157,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633409946688</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="i crave death">
+      <created>1633411684923</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1633411684923</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +227,7 @@
     <MESSAGE value="ASS (works on 1.18)" />
     <MESSAGE value="fuck you rider" />
     <MESSAGE value="i am going to shit my pants if unity fails to find the camera one more goddamn time" />
-    <option name="LAST_COMMIT_MESSAGE" value="i am going to shit my pants if unity fails to find the camera one more goddamn time" />
+    <MESSAGE value="i crave death" />
+    <option name="LAST_COMMIT_MESSAGE" value="i crave death" />
   </component>
 </project>

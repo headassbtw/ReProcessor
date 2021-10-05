@@ -1,9 +1,19 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
 	<vertical>
 		<horizontal pref-width='100' pref-height='80'>
-			<vertical child-expand-width='true'>
+			
+			<vertical  pref-height='80'>
+				<horizontal pref-height='20'>
+					<!--placeholder go brr-->
+				</horizontal>
 				<primary-button pref-width='80' pref-height='10' text='Bloom' on-click='bloom-clicc'/>
+				<horizontal pref-height='20'>
+					<!--placeholder go brr-->
+				</horizontal>
 				<primary-button pref-width='80' pref-height='10' text='Color Boost' on-click='cb-clicc'/>
+				<horizontal pref-height='20'>
+					<!--placeholder go brr-->
+				</horizontal>
 			</vertical>
 		</horizontal>
 		<horizontal pref-height='20' pref-width='100'>
