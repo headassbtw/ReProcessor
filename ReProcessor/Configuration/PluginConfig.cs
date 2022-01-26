@@ -3,7 +3,7 @@ using IPA.Config.Stores;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 
-namespace ReProcessor2.Configuration
+namespace ReProcessor.Configuration
 {
     internal class PluginConfig
     {

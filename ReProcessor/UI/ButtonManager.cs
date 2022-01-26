@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using ReProcessor.Managers;
+using SiraUtil.Logging;
 using Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,13 +17,14 @@ using Zenject;
 
 namespace ReProcessor.UI
 {
-    internal class ButtonManager : IInitializable, IDisposable
+    public class ButtonManager : IInitializable, IDisposable
     {
 #pragma warning disable 8632 //shut the fuck up rider
         private ClickableImage? _image;
         public event Action? WasClicked;
 #pragma warning restore 8632 //shut the fuck up rider
         private readonly Assembly _assembly;
+        private SiraLog _log;
         private readonly DiContainer _container;
         private readonly TimeTweeningManager _tweeningManager;
         private readonly LevelSelectionNavigationController _levelSelectionNavigationController;
@@ -51,21 +53,18 @@ namespace ReProcessor.UI
             }
         }
 
-        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TimeTweeningManager tweeningManager, LevelSelectionNavigationController levelSelectionNavigationController)
+        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TimeTweeningManager tweeningManager,
+            LevelSelectionNavigationController levelSelectionNavigationController, SiraLog log)
         {
             _container = container;
             _tweeningManager = tweeningManager;
             _assembly = metadataBinder.Value.Assembly;
             _levelSelectionNavigationController = levelSelectionNavigationController;
+            _log = log;
         }
 
         public void Initialize()
         {
-            var ass = new MenuCoreManager();
-            ass.Initialize();
-            ass._mainCamera.ApplySettings(Plugin.preset.ColorBoost);
-            ass._mainCamera.ApplySettings(Plugin.preset.Bloom);
-            Plugin.preset = PresetExtensions.Load(Plugin.PresetName);
             _ = InitializeAsync();
         }
 
@@ -77,13 +76,14 @@ namespace ReProcessor.UI
             if ((rng.Equals(3)) && (DateTime.UtcNow.Month.Equals(6)))
                 variant = "3";
             _image = CreateImage();
-            using Stream mrs = _assembly.GetManifestResourceStream($"ReProcessor.UI.untitled{variant}.png");
+            using Stream mrs = _assembly.GetManifestResourceStream($"ReProcessor.Resources.MenuButtonImages.untitled{variant}.png");
             using MemoryStream ms = new MemoryStream();
             await mrs.CopyToAsync(ms);
 
             _image.OnClickEvent += Clicked;
             _image.sprite = BeatSaberMarkupLanguage.Utilities.LoadSpriteRaw(ms.ToArray());
             _image.sprite.texture.wrapMode = TextureWrapMode.Clamp;
+            _log.Debug($"Button Init'd");
         }
 
         public void Dispose()
@@ -94,7 +94,9 @@ namespace ReProcessor.UI
 
         private void Clicked(PointerEventData _)
         {
+            _log.Debug($"Button clicked");
             WasClicked?.Invoke();
+            _log.Debug($"Button event fired");
         }
 
         private ClickableImage CreateImage()

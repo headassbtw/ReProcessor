@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReProcessor2", "ReProcessor2\ReProcessor2.csproj", "{058C88F3-2805-45B9-8C6A-5B5D7090F8BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReProcessor", "ReProcessor\ReProcessor.csproj", "{058C88F3-2805-45B9-8C6A-5B5D7090F8BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

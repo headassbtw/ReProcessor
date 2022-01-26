@@ -3,7 +3,7 @@
 <Project>
   <!-- Manifest -->
   <PropertyGroup>
-    <AssemblyName>ReProcessor2</AssemblyName>
+    <AssemblyName>ReProcessor</AssemblyName>
     <Authors>$ModAuthor$</Authors>
     <Version>1.0.0</Version>
     <GameVersion>1.16.4</GameVersion>

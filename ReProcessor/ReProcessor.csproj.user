@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-		<BeatSaberDir>/home/headass/steam/steamapps/common/Beat Saber</BeatSaberDir>
+    <BeatSaberDir>/home/headass/.local/share/Steam/steamapps/common/Beat Saber</BeatSaberDir>
   </PropertyGroup>
 </Project>

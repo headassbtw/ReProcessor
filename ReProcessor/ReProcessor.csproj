@@ -2,16 +2,17 @@
     <PropertyGroup>
         <ProductVersion>8.0.30703</ProductVersion>
         <ProjectGuid>{058C88F3-2805-45B9-8C6A-5B5D7090F8BF}</ProjectGuid>
-        <RootNamespace>ReProcessor2</RootNamespace>
-        <AssemblyName>ReProcessor2</AssemblyName>
+        <RootNamespace>ReProcessor</RootNamespace>
+        <AssemblyName>ReProcessor</AssemblyName>
         <TargetFramework>net472</TargetFramework>
         <DebugSymbols>true</DebugSymbols>
         <LocalRefsDir Condition="Exists('..\Refs')">..\Refs</LocalRefsDir>
         <BeatSaberDir>$(LocalRefsDir)</BeatSaberDir>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
-        <AssemblyTitle>ReProcessor2</AssemblyTitle>
-        <Product>ReProcessor2</Product>
-        <Copyright>Copyright © $ModAuthor$</Copyright>
+        <AssemblyTitle>ReProcessor</AssemblyTitle>
+        <Product>ReProcessor</Product>
+        <Copyright>Copyright © headassbtw</Copyright>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition="$(DefineConstants.Contains('CIBuild')) OR '$(NCrunch)' == '1'">
         <DisableCopyToPlugins>True</DisableCopyToPlugins>
@@ -21,7 +22,7 @@
         <DisableZipRelease>True</DisableZipRelease>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System.Data.DataSetExtensions"/>
+        <Reference Include="System.Data.DataSetExtensions" />
         <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
             <SpecificVersion>False</SpecificVersion>
             <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
@@ -50,6 +51,11 @@
         <Reference Include="UnityEngine">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
             <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <Private>False</Private>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+            <SpecificVersion>False</SpecificVersion>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
@@ -87,6 +93,18 @@
             <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
             <Private>False</Private>
         </Reference>
+        <Reference Include="VRUI">
+            <HintPath>$(BeatSaberDir)/Beat Saber_Data/Managed/VRUI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="HMRendering">
+            <HintPath>$(BeatSaberDir)/Beat Saber_Data/Managed/HMRendering.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Rendering">
+            <HintPath>$(BeatSaberDir)/Beat Saber_Data/Managed/Rendering.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="BeatSaberModdingTools.Tasks">
@@ -94,11 +112,23 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')"/>
-        <None Include="Directory.Build.targets" Condition="Exists('Directory.Build.targets')"/>
-        <None Include="ReProcessor2.csproj.user" Condition="Exists('ReProcessor2.csproj.user')"/>
+        <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
+        <None Include="Directory.Build.targets" Condition="Exists('Directory.Build.targets')" />
+        <None Include="ReProcessor.csproj.user" Condition="Exists('ReProcessor2.csproj.user')" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Resources\MenuButtonImages\untitled2.png" />
+      <EmbeddedResource Include="Resources\MenuButtonImages\untitled2.png" />
+      <None Remove="Resources\MenuButtonImages\untitled3.png" />
+      <EmbeddedResource Include="Resources\MenuButtonImages\untitled3.png" />
+      <None Remove="UI\Views\TestView\TestView.bsml" />
+      <EmbeddedResource Include="UI\Views\MainView\View.bsml" />
+      <None Remove="UI\Views\ColorBoostView\View.bsml" />
+      <EmbeddedResource Include="UI\Views\ColorBoostView\View.bsml" />
+      <None Remove="UI\Views\ConfigManager\View.bsml" />
+      <EmbeddedResource Include="UI\Views\ConfigManager\View.bsml" />
     </ItemGroup>
 </Project>

@@ -3,11 +3,12 @@ using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using SiraUtil.Zenject;
-using ReProcessor2.Configuration;
-using ReProcessor2.Installers;
+using ReProcessor.Configuration;
+using ReProcessor.Installers;
+using SiraUtil.Logging;
 using IPALogger = IPA.Logging.Logger;
 
-namespace ReProcessor2
+namespace ReProcessor
 {
     [Plugin(RuntimeOptions.DynamicInit),
      NoEnableDisable] // NoEnableDisable supresses the warnings of not having a OnEnable/OnStart
@@ -26,10 +27,11 @@ namespace ReProcessor2
 
             zenjector.UseLogger(logger);
             zenjector.UseMetadataBinder<Plugin>();
-
-            // This logic also goes for installing to Menu and Game. "Location." will give you a list of places to install to.
+            
+            
             zenjector.Install<AppInstaller>(Location.App, config.Generated<PluginConfig>());
-            // zenjector.Install<{Menu|Game}Installer>(Location.{Menu|Game}>()); Remove the one you don't need and the { }.
+            zenjector.Install<MenuInstaller>(Location.Menu);
+            zenjector.Install<GameInstaller>(Location.GameCore);
         }
     }
 }

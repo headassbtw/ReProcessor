@@ -1,7 +1,8 @@
-using ReProcessor2.Configuration;
+using ReProcessor.Configuration;
+using ReProcessor.Managers;
 using Zenject;
 
-namespace ReProcessor2.Installers
+namespace ReProcessor.Installers
 {
     internal class AppInstaller : Installer
     {
@@ -15,6 +16,9 @@ namespace ReProcessor2.Installers
         public override void InstallBindings()
         {
             Container.BindInstance(_config);
+            
+            Container.BindInterfacesAndSelfTo<ConfigManager>().AsSingle();
+            
         }
     }
 }

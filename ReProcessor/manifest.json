@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
-  "id": "Name of your mod",
-  "name": "Name of your Mod",
-  "author": "Your name",
-  "version": "MAJOR.MINOR.PATCH",
+  "id": "reprocessor",
+  "name": "ReProcessor",
+  "author": "headassbtw",
+  "version": "2.0.0",
   "description": "",
   "gameVersion": "1.19.0",
   "dependsOn": {
