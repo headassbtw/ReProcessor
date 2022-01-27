@@ -3,7 +3,7 @@
         <vertical background="panel-top" pref-width="110" pref-height="17">
             <horizontal pref-height="10" child-expand-width="true">
                 <page-button direction="Left" pref-height="10" pref-width="10" on-click="Back"/>
-                <text align="Center" font-size="10" text="Color Boost"/>
+                <text align="Center" font-size="10" text="Properties"/>
                 <vertical pref-width="10"/>
             </horizontal>
             <horizontal pref-width="110" pref-height="7" child-expand-width="true" child-control-width="true">
@@ -12,8 +12,8 @@
             </horizontal>
         </vertical>
         <scrollable-settings-container id="cb-items" pref-height="80">
-            <slider-setting pref-width="90" apply-on-change="true" show-buttons="true" text="Base Color Boost" value="_bcb" bind-value="true" increment="0.1" max="2" min="-2"/>
-            <slider-setting pref-width="90" apply-on-change="true" show-buttons="true" text="Base Color Boost Threshold" value="_bcbT" bind-value="true" increment="0.1" max="2" min="-2"/>
+            <slider-setting pref-width="90" apply-on-change="true" show-buttons="true" text="temp_slider" increment="0.1" max="2" min="-2"/>
+            <dropdown-list-setting pref-width="90" apply-on-change="true" text="temp_dropdown" options="d"/>
         </scrollable-settings-container>
     </vertical>
 </bg>

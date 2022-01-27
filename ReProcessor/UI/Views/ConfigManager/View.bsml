@@ -14,8 +14,8 @@
             
             <vertical pref-width="20" background="round-rect-panel" background-color="#20202080">
                 <page-button event-click='CfgList#PageUp' direction='Up'/>
-                <button on-click="Apply" text="Load" face-color="fuchsia"/>
-                <button on-click="Save" text="Save" face-color="darkblue"/>
+                <!--<button on-click="Apply" text="Load" face-color="fuchsia"/>-->
+                <button on-click="Save" text="Save" face-color="lime"/>
                 <page-button event-click='CfgList#PageDown' direction='Down'/>
                 <button text="Delete" face-color="red" outline-color="red" color="red"/>
             </vertical>
