@@ -57,11 +57,16 @@ namespace ReProcessor.UI.Views.TestView
                 Destroy(obj.transform.GetChild(i).gameObject);
             }
         }
+        [UIComponent("tmps")] SliderSetting tmp_slider;
+        [UIComponent("tmpd")] DropDownListSetting tmp_dropdown;
         
         SliderSetting CreateSlider(string name, Transform parent)
         {
             var sld = UnityEngine.Object.Instantiate(TemplateSlider, parent, false);
-            sld.transform.SetParent(parent);
+
+            //sld.transform.position -= new Vector3(0, 2000, 0);
+            //sld.transform.SetParent(parent);
+            sld.gameObject.SetActive(true);
             sld.name = name;
             sld.transform.GetChild(0).GetComponent<CurvedTextMeshPro>().text = name;
             sld.Setup();
@@ -69,19 +74,29 @@ namespace ReProcessor.UI.Views.TestView
             return sld;
         }
 
+        private Transform _Container;
+        
         private SliderSetting TemplateSlider;
         private DropDownListSetting TemplateDropdown;
         
         [UIAction("#post-parse")]
         void PostParse()
         {
-            var s = Resources.FindObjectsOfTypeAll<SliderSetting>().Last(x => (x.name == "BSMLSliderSetting"));
-            TemplateSlider = UnityEngine.Object.Instantiate(s, transform, false);
+            _Container = tmp_slider.transform.parent;
+            var s = tmp_slider;
+            //var s = Resources.FindObjectsOfTypeAll<SliderSetting>().Last(x => (x.name == "BSMLSliderSetting"));
+            TemplateSlider = Instantiate(s, transform, false);
+            TemplateSlider.gameObject.SetActive(false);
             s.gameObject.SetActive(false);
+            Destroy(s.gameObject);
             
             //var d = Resources.FindObjectsOfTypeAll<DropDownListSetting>().Last(x => (x.name == "BSMLDropdownList"));
-            //TemplateDropdown = UnityEngine.Object.Instantiate(d, transform, false);
-            //d.gameObject.SetActive(false);
+            var d = tmp_dropdown;
+            TemplateDropdown = UnityEngine.Object.Instantiate(d, transform, false);
+            TemplateDropdown.gameObject.SetActive(false);
+            d.gameObject.SetActive(false);
+            YeetChildren(d.transform.parent.gameObject);
+            BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
         }
         
         
@@ -90,15 +105,17 @@ namespace ReProcessor.UI.Views.TestView
         {
             
             NotifyPropertyChanged();
-
+            _log.Notice($"Running on {gameObject.name}");
             var c = gameObject.transform
+                .GetChild(0) //BSMLBackground?
                 .GetChild(0) //BSMLVerticalLayoutGroup
-                .GetChild(0) //BSMLVerticalLayoutGroup
-                .GetChild(1) //BSMLScrollableSettingsContainer
+                .GetChild(1) //BSMLVerticalLayoutGroup
+                .GetChild(0) //BSMLScrollableSettingsContainer
                 .GetChild(1) //Viewport
                 .GetChild(0) //BSMLScrollViewContent
                 .GetChild(0) //BSMLScrollViewContentContainer
                 ; //lmao
+            //var c = _Container;
 
             YeetChildren(c.gameObject);
             var m = Camera.main.MainEffectContainerSO().mainEffect;
@@ -106,7 +123,7 @@ namespace ReProcessor.UI.Views.TestView
             
             
             
-            foreach (var prop in _cfgManager.TempPreset.Bloom)
+            foreach (var prop in _cfgManager.TempPreset.Props)
             {
                 if (prop.Value.ValueType == typeof(Single))
                 {
@@ -115,17 +132,6 @@ namespace ReProcessor.UI.Views.TestView
                     sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
 
 
-                }
-            }
-            foreach (var prop in _cfgManager.TempPreset.ColorBoost)
-            {
-                if (prop.Value.ValueType == typeof(Single))
-                {
-                    var sld = CreateSlider(prop.Key,c);
-                    sld.Value = Convert.ToSingle(2);
-                    sld.associatedValue = new BSMLFieldValue(m, m.PrivateField(prop.Value.PropertyName));
-                    sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
-                    
                 }
             }
 
@@ -146,7 +152,6 @@ namespace ReProcessor.UI.Views.TestView
             
             _camManager.ApplyAll(_cfgManager.CurrentPreset);
             _cfgManager.TempPreset = _cfgManager.CurrentPreset;
-            _settings.RevertMiddleController();
         }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using BeatSaberMarkupLanguage;
 using HMUI;
+using ReProcessor.Configuration;
+using ReProcessor.Managers;
+using ReProcessor.UI.Views.NoBloomError;
 using ReProcessor.UI.Views.TestView;
 using SiraUtil.Logging;
 using Zenject;
@@ -10,25 +13,36 @@ namespace ReProcessor.UI
     public class rSettingsFlowCoordinator : FlowCoordinator, IInitializable
     {
         private SiraLog _log;
+
+        private CamManager _cam;
+        private ConfigManager _cfg;
+        
         private LastResort _spaceResetter;
         private ButtonManager _buttonManager = null!;
         private FlowCoordinator _parentFlowCoordinator = null!;
-        private MainViewController _mainController;
         private ColorBoostController _boostController;
         private ConfigViewController _cfgController;
         private MainFlowCoordinator _mainFlowCoordinator = null!;
+        private NoBloomController _noBloomController;
+        private PluginConfig _pluginConfig;
         [Inject]
         protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator,
-            MainViewController mainController, ColorBoostController cbController, ConfigViewController configController,
-            SiraLog log, LastResort resetter)
+             ColorBoostController cbController, ConfigViewController configController, NoBloomController nobloom,
+            SiraLog log, LastResort resetter, CamManager cam, ConfigManager config, PluginConfig pluginConfig)
         {
             _buttonManager = buttonManager;
+
+            _cam = cam;
+            _cfg = config;
+            
             _mainFlowCoordinator = mainFlowCoordinator;
-            _mainController = mainController;
             _cfgController = configController;
             _boostController = cbController;
+            _noBloomController = nobloom;
             _spaceResetter = resetter;
             _log = log;
+
+            _pluginConfig = pluginConfig;
         }
         
         protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -40,40 +54,29 @@ namespace ReProcessor.UI
                 SetTitle("ReProcessor 2");
                 showBackButton = true;
             }
+
             if (addedToHierarchy)
             {
-                ViewController view = _mainController;
-                ProvideInitialViewControllers(view, null, _cfgController);
+                if (Extensions.Reflection.BloomOn())
+                {
+                    ProvideInitialViewControllers(_boostController, _cfgController);
+                }
+                else
+                {
+                    ProvideInitialViewControllers(_noBloomController);
+                }
             }
-            
         }
 
-        internal void RevertMiddleController()
-        {
-            showBackButton = true;
-            ReplaceTopViewController(_mainController);
-        }
-        internal void SetMiddleController(int controller)
-        {
-            
-            showBackButton = false;
-            switch (controller)
-            {
-                case 0:
-                    ReplaceTopViewController(_mainController);
-                    break;
-                case 1: //bloom
-                    ReplaceTopViewController(_mainController);
-                break;
-                case 2: //color boost
-                    ReplaceTopViewController(_boostController);
-                break;
-            }
-        }
+        
         
 
         protected void Start()
         {
+            _log.Notice($"Loading preset\"{_pluginConfig.Preset}\"");
+            _cam.ApplyAll(_cfg.Presets[_pluginConfig.Preset]); //lol, lmao, kek, rofl
+            
+            
             _buttonManager.WasClicked += ButtonWasClicked;
         }
 
@@ -88,10 +91,15 @@ namespace ReProcessor.UI
             _parentFlowCoordinator.PresentFlowCoordinator(this, animationDirection: ViewController.AnimationDirection.Vertical);
             _spaceResetter.gameObject.SetActive(true);
         }
+
+        public void ShidAndFard()
+        {
+            _parentFlowCoordinator.DismissFlowCoordinator(this);
+        }
         protected override void BackButtonWasPressed(ViewController topViewController)
         {
             _spaceResetter.gameObject.SetActive(false);
-            _parentFlowCoordinator.DismissFlowCoordinator(this);
+            ShidAndFard();
         }
         public void Initialize()
         {

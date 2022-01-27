@@ -1,19 +1,16 @@
 <bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical pref-width="110">
-        <vertical background="panel-top" pref-width="110" pref-height="17">
+        <vertical background="panel-top" pref-width="110" pref-height="13">
             <horizontal pref-height="10" child-expand-width="true">
-                <page-button direction="Left" pref-height="10" pref-width="10" on-click="Back"/>
                 <text align="Center" font-size="10" text="Properties"/>
-                <vertical pref-width="10"/>
-            </horizontal>
-            <horizontal pref-width="110" pref-height="7" child-expand-width="true" child-control-width="true">
-                <primary-button text="Apply" pref-width="45" on-click="Apply" pref-height="7"/>
-                <button text="Test" on-click="Test" pref-width="45" pref-height="7"/>
+                <primary-button text="Apply" pref-width="25" on-click="Apply" pref-height="10"/>
             </horizontal>
         </vertical>
-        <scrollable-settings-container id="cb-items" pref-height="80">
-            <slider-setting pref-width="90" apply-on-change="true" show-buttons="true" text="temp_slider" increment="0.1" max="2" min="-2"/>
-            <dropdown-list-setting pref-width="90" apply-on-change="true" text="temp_dropdown" options="d"/>
-        </scrollable-settings-container>
+        <vertical background-color="#20202080" background="round-rect-panel" pref-width="110">
+            <scrollable-settings-container id="cb-items" pref-height="80">
+                <slider-setting id="tmps" pref-width="90" apply-on-change="true" show-buttons="true" text="temp_slider" increment="0.01" max="5" min="-5"/>
+                <dropdown-list-setting id="tmpd" pref-width="90" apply-on-change="true" text="temp_dropdown" options="d"/>
+            </scrollable-settings-container>
+        </vertical>
     </vertical>
 </bg>

@@ -6,6 +6,7 @@ using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
+using ReProcessor.Configuration;
 using ReProcessor.Extensions;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
@@ -20,17 +21,20 @@ namespace ReProcessor.UI.Views.TestView
     {
         
         public void Initialize(){}
+        private PluginConfig _conf;
         private ConfigManager _cfg;
         private CamManager _cam;
         private ColorBoostController _colorBoostController;
         private SiraLog _log;
         private string choice;
         [Inject]
-        protected void Construct(ConfigManager config, CamManager cam, SiraLog log, ColorBoostController cbCtl)
+        protected void Construct(ConfigManager config, CamManager cam, SiraLog log, ColorBoostController cbCtl, PluginConfig conf)
         {
             _cfg = config;
             _cam = cam;
             _log = log;
+            _conf = conf;
+            choice = _conf.Preset;
             _colorBoostController = cbCtl;
         }
 
@@ -40,7 +44,9 @@ namespace ReProcessor.UI.Views.TestView
         [UIAction("cfgSelect")]
         public void cfgSelect(TableView _, int row)
         {
+            
             choice = CfgList.data[row].text;
+            _conf.Preset = choice;
             Apply();
         }
 
@@ -48,28 +54,15 @@ namespace ReProcessor.UI.Views.TestView
         void Save()
         {
             var m = Camera.main.MainEffectContainerSO().mainEffect;
-            foreach (var prop in _cfg.TempPreset.Bloom)
+            foreach (var prop in _cfg.TempPreset.Props)
             {
                 if (prop.Value.ValueType == typeof(Single))
                 {
                     var f = m.PrivateField(prop.Value.PropertyName);
-                    _cfg.CurrentPreset.Bloom[prop.Key].Value = f.GetValue(m);
-
-
+                    _cfg.CurrentPreset.Props[prop.Key].Value = f.GetValue(m);
                 }
             }
-            foreach (var prop in _cfg.TempPreset.ColorBoost)
-            {
-                if (prop.Value.ValueType == typeof(Single))
-                {
-                    var f = m.PrivateField(prop.Value.PropertyName);
-                    _cfg.CurrentPreset.ColorBoost[prop.Key].Value = f.GetValue(m);
-                    
-                }
-            }
-
             _cfg.Presets[choice] = _cfg.CurrentPreset;
-            
             _cfg.Save(choice);
         }
         
@@ -77,7 +70,6 @@ namespace ReProcessor.UI.Views.TestView
         void Apply()
         {
             _cfg.Set(choice);
-            
             _cam.ApplyAll(_cfg.CurrentPreset);
             _colorBoostController.ReloadProps();
         }
@@ -85,7 +77,7 @@ namespace ReProcessor.UI.Views.TestView
         [UIAction("#post-parse")]
         void PostParse()
         {
-            _cfg.GetPresets();
+            Reload();
         }
         
         [UIAction("Reload")]

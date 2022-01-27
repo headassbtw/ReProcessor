@@ -1,23 +1,21 @@
 <bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical>
-        <horizontal background="panel-top" pref-height="10" pref-width="110">
-            <horizontal pref-width="90">
+        <vertical background="panel-top" pref-width="110" pref-height="13">
+            <horizontal pref-height="10" child-expand-width="true">
                 <text align="Center" font-size="10" text="Config"/>
+                <primary-button text="Reload" pref-width="25" on-click="Reload" pref-height="10"/>
             </horizontal>
-            <primary-button on-click="Reload" text="Reload" pref-width="20"/>
-        </horizontal>
-        
-        <horizontal pref-width="110">
-            <horizontal background="round-rect-panel" background-color="#20202080">
-                <list id='CfgList' select-cell='cfgSelect' pref-width="90" />
+        </vertical>
+        <horizontal pref-width="110" pref-height="60">
+            <horizontal  pref-width="90" pref-height="60" background="round-rect-panel" background-color="#20202080">
+                <list id='CfgList' select-cell='cfgSelect'/>
+                
             </horizontal>
             
-            <vertical pref-width="20" background="round-rect-panel" background-color="#20202080">
+            <vertical pref-height="60" pref-width="20" background="round-rect-panel" background-color="#20202080">
                 <page-button event-click='CfgList#PageUp' direction='Up'/>
-                <!--<button on-click="Apply" text="Load" face-color="fuchsia"/>-->
                 <button on-click="Save" text="Save" face-color="lime"/>
                 <page-button event-click='CfgList#PageDown' direction='Down'/>
-                <button text="Delete" face-color="red" outline-color="red" color="red"/>
             </vertical>
         </horizontal>
     </vertical>

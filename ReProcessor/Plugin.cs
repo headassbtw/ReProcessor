@@ -5,6 +5,7 @@ using IPA.Config.Stores;
 using SiraUtil.Zenject;
 using ReProcessor.Configuration;
 using ReProcessor.Installers;
+using ReProcessor.Managers;
 using SiraUtil.Logging;
 using IPALogger = IPA.Logging.Logger;
 
@@ -27,7 +28,7 @@ namespace ReProcessor
 
             zenjector.UseLogger(logger);
             zenjector.UseMetadataBinder<Plugin>();
-            
+
             
             zenjector.Install<AppInstaller>(Location.App, config.Generated<PluginConfig>());
             zenjector.Install<MenuInstaller>(Location.Menu);

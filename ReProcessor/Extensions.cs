@@ -66,6 +66,12 @@ namespace ReProcessor.Extensions
             //Plugin.Log.Notice($"Setting camera value as type \"{value.GetType()}\"");
             cam.MainEffectContainerSO().mainEffect.SetPrivateField(fieldName, value);
         }
+
+        internal static bool BloomOn()
+        {
+            var t = Camera.main.MainEffectContainerSO().mainEffect.GetType();
+            return t == typeof(PyramidBloomMainEffectSO);
+        }
         internal static void SetCameraSetting(this Camera cam, CameraSetting camSetting)
         {
             //_log.Notice($"Setting property \"{camSetting.Name}\" with type \"{camSetting.ValueType}\" and value \"{camSetting.Value}\"");

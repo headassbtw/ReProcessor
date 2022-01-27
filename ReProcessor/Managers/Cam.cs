@@ -28,9 +28,8 @@ namespace ReProcessor.Managers
 
         public void Reset()
         {
-            
-            _mainCam.ApplySettings(Configuration.Defaults.DefaultBloom().Values.ToList());
-            _mainCam.ApplySettings(Configuration.Defaults.ColorBoost().Values.ToList());
+            Preset def = new Preset();
+            ApplyAll(def);
         }
         
         public void Apply(CameraSetting setting)
@@ -40,8 +39,7 @@ namespace ReProcessor.Managers
 
         public void ApplyAll(Preset preset)
         {
-            _mainCam.ApplyBloom(preset);
-            _mainCam.ApplyColorBoost(preset);
+            _mainCam.ApplyProps(preset);
         }
         
         public void Initialize()

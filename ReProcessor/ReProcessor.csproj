@@ -125,7 +125,6 @@
       <None Remove="Resources\MenuButtonImages\untitled3.png" />
       <EmbeddedResource Include="Resources\MenuButtonImages\untitled3.png" />
       <None Remove="UI\Views\TestView\TestView.bsml" />
-      <EmbeddedResource Include="UI\Views\MainView\View.bsml" />
       <None Remove="UI\Views\ColorBoostView\View.bsml" />
       <EmbeddedResource Include="UI\Views\ColorBoostView\View.bsml" />
       <None Remove="UI\Views\ConfigManager\View.bsml" />

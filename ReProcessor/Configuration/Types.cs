@@ -19,7 +19,7 @@ namespace ReProcessor.Configuration
 
     public class Defaults
     {
-        public static Dictionary<string,CameraSetting> DefaultBloom()
+        public static Dictionary<string,CameraSetting> Props()
         {
             Dictionary<string,CameraSetting> rtn = new();
             rtn.Add("Radius",new CameraSetting("_bloomRadius",5f,typeof(System.Single)));
@@ -32,12 +32,6 @@ namespace ReProcessor.Configuration
             rtn.Add("Downsample Pass",new CameraSetting("_downsamplePass","Downsample13",typeof(PyramidBloomRendererSO.Pass)));
             rtn.Add("Upsample Pass",new CameraSetting("_upsamplePass","UpsampleTent",typeof(PyramidBloomRendererSO.Pass)));
             rtn.Add("Final Upsample Pass",new CameraSetting("_finalUpsamplePass","UpsampleTent",typeof(PyramidBloomRendererSO.Pass)));
-            return rtn;
-        }
-
-        public static Dictionary<string,CameraSetting> ColorBoost()
-        {
-            Dictionary<string,CameraSetting> rtn = new();
             rtn.Add("Base Color Boost",new CameraSetting("_baseColorBoost",1f,typeof(System.Single)));
             rtn.Add("Base Color Boost Threshold",new CameraSetting("_baseColorBoostThreshold",0.0f,typeof(System.Single)));
             return rtn;
@@ -47,14 +41,12 @@ namespace ReProcessor.Configuration
     {
         public string Name;
 
-        public Dictionary<string,CameraSetting> Bloom;
-        public Dictionary<string,CameraSetting> ColorBoost;
+        public Dictionary<string,CameraSetting> Props;
 
         public Preset(string name = "Default")
         {
             Name = name;
-            Bloom = Defaults.DefaultBloom();
-            ColorBoost = Defaults.ColorBoost();
+            Props = Defaults.Props();
         }
     }
 }
