@@ -16,9 +16,8 @@ namespace ReProcessor.Installers
         public override void InstallBindings()
         {
             Container.BindInstance(_config).AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<ConfigManager>().AsSingle();
-            
         }
     }
 }
