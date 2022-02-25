@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using IPA.Utilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using ReProcessor.Configuration;
 using SiraUtil.Logging;
 using Zenject;
@@ -12,7 +13,7 @@ namespace ReProcessor.Managers
 {
     internal class ConfigManager : IInitializable
     {
-        private static readonly string PresetSavePath = Path.Combine(UnityGame.UserDataPath, "ReProcessor", "Presets");
+        private static readonly string PresetSavePath = Path.Combine(UnityGame.UserDataPath, nameof(ReProcessor), "Presets");
 
         private readonly SiraLog _log;
         private readonly JsonSerializer _jsonSerializer;
@@ -22,6 +23,7 @@ namespace ReProcessor.Managers
             _log = log;
             _jsonSerializer = JsonSerializer.Create(new JsonSerializerSettings
             {
+                Converters = new List<JsonConverter> { new StringEnumConverter() },
                 Formatting = Formatting.Indented
             });
         }
