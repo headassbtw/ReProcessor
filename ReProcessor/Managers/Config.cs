@@ -3,27 +3,32 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using IPA.Utilities;
+using Newtonsoft.Json;
 using ReProcessor.Configuration;
 using SiraUtil.Logging;
-using UnityEngine;
 using Zenject;
 
 namespace ReProcessor.Managers
 {
-    public class ConfigManager : IInitializable, IDisposable
+    internal class ConfigManager : IInitializable
     {
-        public Preset CurrentPreset;
-        public Preset TempPreset;
-        public static string PRESET_SAVE_PATH = Path.Combine(UnityGame.UserDataPath, "ReProcessor", "Presets");
-        private SiraLog _log;
-        ConfigManager(SiraLog log)
+        private static readonly string PresetSavePath = Path.Combine(UnityGame.UserDataPath, "ReProcessor", "Presets");
+
+        private readonly SiraLog _log;
+        private readonly JsonSerializer _jsonSerializer;
+
+        public ConfigManager(SiraLog log)
         {
             _log = log;
+            _jsonSerializer = JsonSerializer.Create(new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            });
         }
 
-        
-        public Dictionary<string, Preset> Presets = new Dictionary<string, Preset>();
-
+        public Dictionary<string, Preset> Presets { get; private set; } = new();
+        public Preset CurrentPreset { get; private set; }
+        public Preset TempPreset { get; private set; }
 
         public void Set(string name)
         {
@@ -36,16 +41,17 @@ namespace ReProcessor.Managers
             CurrentPreset = Presets[name];
             TempPreset = CurrentPreset;
         }
+
         public void GetPresets()
         {
             Presets.Clear();
-            var presets = Directory.GetFiles(PRESET_SAVE_PATH);
+            var presets = Directory.GetFiles(PresetSavePath);
 
             foreach (var preset in presets)
             {
                 try
                 {
-                    Preset pr = Files.IO.LoadJson(preset);
+                    Preset pr = LoadJson(preset);
                     Presets.Add(pr.Name, pr);
                 }
                 catch (ArgumentException e)
@@ -54,23 +60,24 @@ namespace ReProcessor.Managers
                 }
             }
         }
-        
+
         public void Initialize()
         {
             Presets = new Dictionary<string, Preset>();
-            if (!Directory.Exists(PRESET_SAVE_PATH))
+            if (!Directory.Exists(PresetSavePath))
             {
                 _log.Error("Presets folder does not exist, creating...");
-                Directory.CreateDirectory(PRESET_SAVE_PATH);
+                Directory.CreateDirectory(PresetSavePath);
             }
 
-            int presets = Directory.GetFiles(PRESET_SAVE_PATH).Length;
+            int presets = Directory.GetFiles(PresetSavePath).Length;
             _log.Notice($"{presets} Presets.");
             if (presets <= 0)
             {
                 _log.Error("No presets were found, creating...");
-                Files.IO.SaveJson(new Preset(), Path.Combine(PRESET_SAVE_PATH, "Default.json"));
+                SaveJson(Preset.CreateDefault(), Path.Combine(PresetSavePath, "Default.json"));
             }
+
             GetPresets();
             Set(Presets.Keys.FirstOrDefault()); //TODO: FIX SHIT
         }
@@ -79,12 +86,21 @@ namespace ReProcessor.Managers
         {
             CurrentPreset = TempPreset;
             Presets[name] = CurrentPreset;
-            Files.IO.SaveJson(Presets[name], Path.Combine(PRESET_SAVE_PATH, $"{name}.json"));
+            SaveJson(Presets[name], Path.Combine(PresetSavePath, $"{name}.json"));
         }
 
-        public void Dispose()
+        private Preset LoadJson(string path)
         {
-            
+            using var streamReader = new StreamReader(path);
+            using var jsonTextReader = new JsonTextReader(streamReader);
+            return _jsonSerializer.Deserialize<Preset>(jsonTextReader) ?? Preset.CreateDefault(); // TODO
+        }
+
+        private void SaveJson(Preset preset, string path)
+        {
+            using var streamWriter = new StreamWriter(path);
+            using var jsonTextWriter = new JsonTextWriter(streamWriter);
+            _jsonSerializer.Serialize(jsonTextWriter, preset);
         }
     }
 }
