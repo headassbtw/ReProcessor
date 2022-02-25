@@ -3,14 +3,15 @@ using BeatSaberMarkupLanguage;
 using HMUI;
 using ReProcessor.Configuration;
 using ReProcessor.Managers;
+using ReProcessor.UI.Views.ColorBoostView;
+using ReProcessor.UI.Views.ConfigManager;
 using ReProcessor.UI.Views.NoBloomError;
-using ReProcessor.UI.Views.TestView;
 using SiraUtil.Logging;
 using Zenject;
 
 namespace ReProcessor.UI
 {
-    public class rSettingsFlowCoordinator : FlowCoordinator, IInitializable
+    internal class rSettingsFlowCoordinator : FlowCoordinator
     {
         private SiraLog _log;
 

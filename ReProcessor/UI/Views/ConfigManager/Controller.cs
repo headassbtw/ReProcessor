@@ -8,14 +8,12 @@ using ReProcessor.Managers;
 using SiraUtil.Logging;
 using Zenject;
 
-namespace ReProcessor.UI.Views.TestView
+namespace ReProcessor.UI.Views.ConfigManager
 {
     [ViewDefinition("ReProcessor.UI.Views.ConfigManager.View.bsml")]
     [HotReload(RelativePathToLayout = @"View.bsml")]
-    public class ConfigViewController : BSMLAutomaticViewController, IInitializable
+    internal class ConfigViewController : BSMLAutomaticViewController
     {
-        
-        public void Initialize(){}
         private PluginConfig _conf;
         private ConfigManager _cfg;
         private CamManager _cam;

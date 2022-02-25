@@ -18,14 +18,12 @@ using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 
-namespace ReProcessor.UI.Views.TestView
+namespace ReProcessor.UI.Views.ColorBoostView
 {
     [ViewDefinition("ReProcessor.UI.Views.ColorBoostView.View.bsml")]
     [HotReload(RelativePathToLayout = @"View.bsml")]
-    public class ColorBoostController : BSMLAutomaticViewController, IInitializable
+    internal class ColorBoostController : BSMLAutomaticViewController
     {
-        
-        public void Initialize(){}
         private rSettingsFlowCoordinator _settings;
         private CamManager _camManager;
         private ConfigManager _cfgManager;
