@@ -17,7 +17,7 @@ namespace ReProcessor.Installers
             Container.Bind<NoBloomController>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<ColorBoostController>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<ConfigViewController>().FromNewComponentAsViewController().AsSingle();
-            Container.Bind<SettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<UI.SettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }
