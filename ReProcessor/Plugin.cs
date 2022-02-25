@@ -32,7 +32,6 @@ namespace ReProcessor
             
             zenjector.Install<AppInstaller>(Location.App, config.Generated<PluginConfig>());
             zenjector.Install<MenuInstaller>(Location.Menu);
-            zenjector.Install<GameInstaller>(Location.GameCore);
         }
     }
 }
