@@ -7,7 +7,7 @@
   "description": "",
   "gameVersion": "1.19.0",
   "dependsOn": {
-    "BSIPA": "^4.2.0",
+    "BSIPA": "^4.2.1",
     "BeatSaberMarkupLanguage": "^1.5.12",
     "SiraUtil": "^3.0.0"
   }
