@@ -13,21 +13,19 @@
         <Product>ReProcessor</Product>
         <Copyright>Copyright © headassbtw</Copyright>
         <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
+    
     <PropertyGroup Condition="$(DefineConstants.Contains('CIBuild')) OR '$(NCrunch)' == '1'">
         <DisableCopyToPlugins>True</DisableCopyToPlugins>
     </PropertyGroup>
+
     <PropertyGroup Condition="'$(NCrunch)' == '1'">
         <DisableCopyToPlugins>True</DisableCopyToPlugins>
         <DisableZipRelease>True</DisableZipRelease>
     </PropertyGroup>
+
     <ItemGroup>
-        <Reference Include="System.Data.DataSetExtensions" />
-        <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-            <SpecificVersion>False</SpecificVersion>
-            <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
         <Reference Include="Main">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Main.dll</HintPath>
             <Private>False</Private>
@@ -52,10 +50,9 @@
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+        <Reference Include="UnityEngine.InputLegacyModule">
             <Private>False</Private>
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
-            <SpecificVersion>False</SpecificVersion>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
@@ -65,16 +62,8 @@
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.UI.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="UnityEngine.UIElementsModule">
-            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
         <Reference Include="UnityEngine.UIModule">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.UIModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.VRModule">
-            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.VRModule.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="Zenject">
@@ -106,6 +95,7 @@
             <Private>false</Private>
         </Reference>
     </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="BeatSaberModdingTools.Tasks">
             <Version>1.4.2</Version>
@@ -114,23 +104,17 @@
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
+
     <ItemGroup>
         <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
         <None Include="Directory.Build.targets" Condition="Exists('Directory.Build.targets')" />
         <None Include="ReProcessor.csproj.user" Condition="Exists('ReProcessor2.csproj.user')" />
     </ItemGroup>
+
     <ItemGroup>
-      <None Remove="Resources\MenuButtonImages\untitled2.png" />
-      <EmbeddedResource Include="Resources\MenuButtonImages\untitled2.png" />
-      <None Remove="Resources\MenuButtonImages\untitled3.png" />
-      <EmbeddedResource Include="Resources\MenuButtonImages\untitled3.png" />
-      <None Remove="UI\Views\TestView\TestView.bsml" />
-      <None Remove="UI\Views\ColorBoostView\View.bsml" />
-      <EmbeddedResource Include="UI\Views\ColorBoostView\View.bsml" />
-      <None Remove="UI\Views\ConfigManager\View.bsml" />
-      <EmbeddedResource Include="UI\Views\ConfigManager\View.bsml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Extensions" />
+        <EmbeddedResource Include="Resources\MenuButtonImages\untitled2.png" />
+        <EmbeddedResource Include="Resources\MenuButtonImages\untitled3.png" />
+        <EmbeddedResource Include="UI\Views\ColorBoostView\View.bsml" />
+        <EmbeddedResource Include="UI\Views\ConfigManager\View.bsml" />
     </ItemGroup>
 </Project>
