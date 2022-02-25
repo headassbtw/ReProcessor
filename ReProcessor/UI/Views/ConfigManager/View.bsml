@@ -7,11 +7,11 @@
             </horizontal>
         </vertical>
         <horizontal pref-width="110" pref-height="60">
-            <horizontal  pref-width="90" pref-height="60" background="round-rect-panel" background-color="#20202080">
+            <horizontal pref-width="90" pref-height="60" background="round-rect-panel" background-color="#20202080">
                 <list id='CfgList' select-cell='cfgSelect'/>
-                
+
             </horizontal>
-            
+
             <vertical pref-height="60" pref-width="20" background="round-rect-panel" background-color="#20202080">
                 <page-button event-click='CfgList#PageUp' direction='Up'/>
                 <button on-click="Save" text="Save" face-color="lime"/>
@@ -19,5 +19,5 @@
             </vertical>
         </horizontal>
     </vertical>
-    
+
 </bg>

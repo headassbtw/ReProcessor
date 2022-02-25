@@ -13,11 +13,11 @@
         </vertical>
     </vertical>
     <modal show-event='flashlight-warning' hide-event='hide-flashlight-warning' move-to-center='true' click-off-closes='false' size-delta-x='100' size-delta-y='70'>
-        		<vertical pref-width='100' pref-height='70' bg='round-rect-panel' vertical-fit='PreferredSize' horizontal-fit='PreferredSize'>
-        			<text word-wrapping="true" font-size="30" text="HEY"></text>
-        			<text word-wrapping="true" font-size="5" text="some settings may actually make your headset into a flashlight"></text>
-        			<text font-size="7" color="#FFAAAA" word-wrapping="true" text="press spacebar on your keyboard to temporarily reset the settings"></text>
-        			<primary-button on-click="yep-okay" text="sick"></primary-button>
-        		</vertical>
-        </modal>
+        <vertical pref-width='100' pref-height='70' bg='round-rect-panel' vertical-fit='PreferredSize' horizontal-fit='PreferredSize'>
+            <text word-wrapping="true" font-size="30" text="HEY"/>
+            <text word-wrapping="true" font-size="5" text="some settings may actually make your headset into a flashlight"/>
+            <text font-size="7" color="#FFAAAA" word-wrapping="true" text="press spacebar on your keyboard to temporarily reset the settings"/>
+            <primary-button on-click="yep-okay" text="sick"/>
+        </vertical>
+    </modal>
 </bg>
