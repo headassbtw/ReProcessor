@@ -130,4 +130,7 @@
       <None Remove="UI\Views\ConfigManager\View.bsml" />
       <EmbeddedResource Include="UI\Views\ConfigManager\View.bsml" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Extensions" />
+    </ItemGroup>
 </Project>

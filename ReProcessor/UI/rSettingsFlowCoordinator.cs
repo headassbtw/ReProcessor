@@ -57,7 +57,7 @@ namespace ReProcessor.UI
 
             if (addedToHierarchy)
             {
-                if (Extensions.Reflection.BloomOn())
+                if (CamManager.BloomSupported)
                 {
                     ProvideInitialViewControllers(_boostController, _cfgController);
                 }

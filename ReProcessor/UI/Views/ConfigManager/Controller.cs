@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
-using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
 using ReProcessor.Configuration;
-using ReProcessor.Extensions;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
-using UnityEngine;
 using Zenject;
 
 namespace ReProcessor.UI.Views.TestView
@@ -53,15 +47,7 @@ namespace ReProcessor.UI.Views.TestView
         [UIAction("Save")]
         void Save()
         {
-            var m = Camera.main.MainEffectContainerSO().mainEffect;
-            foreach (var prop in _cfg.TempPreset.Props)
-            {
-                if (prop.Value.ValueType == typeof(Single))
-                {
-                    var f = m.PrivateField(prop.Value.PropertyName);
-                    _cfg.CurrentPreset.Props[prop.Key].Value = f.GetValue(m);
-                }
-            }
+            _cfg.TempPreset = _cam.SaveAll(_cfg.TempPreset);
             _cfg.Presets[choice] = _cfg.CurrentPreset;
             _cfg.Save(choice);
         }

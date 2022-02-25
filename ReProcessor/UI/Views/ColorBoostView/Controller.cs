@@ -4,19 +4,15 @@ using System.Linq;
 using System.Reflection;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Components.Settings;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Tags;
-using BeatSaberMarkupLanguage.TypeHandlers;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
-using ReProcessor.Configuration;
-using ReProcessor.Extensions;
+using IPA.Utilities;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace ReProcessor.UI.Views.TestView
@@ -118,7 +114,7 @@ namespace ReProcessor.UI.Views.TestView
             //var c = _Container;
 
             YeetChildren(c.gameObject);
-            var m = Camera.main.MainEffectContainerSO().mainEffect;
+            
             
             
             
@@ -127,11 +123,14 @@ namespace ReProcessor.UI.Views.TestView
             {
                 if (prop.Value.ValueType == typeof(Single))
                 {
+                    Type type = _camManager._mainEffect.GetType();
+                    BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+                    
+                    
+                    
                     var sld = CreateSlider(prop.Key,c);
-                    sld.associatedValue = new BSMLFieldValue(m, m.PrivateField(prop.Value.PropertyName));
+                    sld.associatedValue = new BSMLFieldValue(_camManager._mainEffect, type.GetField(prop.Value.PropertyName, bindingFlags));
                     sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
-
-
                 }
             }
 
