@@ -1,5 +1,6 @@
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
+using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
 using ReProcessor.Configuration;
@@ -34,6 +35,8 @@ namespace ReProcessor.UI.Views.TestView
 
         [UIComponent("CfgList")] public CustomListTableData CfgList = new CustomListTableData();
 
+        [UIParams]
+        BSMLParserParams parserParams;
 
         [UIAction("cfgSelect")]
         public void cfgSelect(TableView _, int row)
@@ -63,6 +66,8 @@ namespace ReProcessor.UI.Views.TestView
         [UIAction("#post-parse")]
         void PostParse()
         {
+            
+            
             Reload();
         }
         

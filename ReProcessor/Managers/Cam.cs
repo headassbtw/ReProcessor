@@ -49,10 +49,12 @@ namespace ReProcessor.Managers
         public Preset SaveAll(Preset inn)
         {
             Preset rtn = new Preset();
+            rtn.Name = inn.Name;
             foreach (var prop in inn.Props)
             {
-                if (prop.Value.ValueType == typeof(int))
-                    inn.Props[prop.Key].Value = _mainEffect.GetField<int, PyramidBloomMainEffectSO>(prop.Value.PropertyName);
+                if (prop.Value.ValueType == typeof(int) || prop.Value.ValueType == typeof(Single))
+                    rtn.Props[prop.Key].Value =
+                        Convert.ToSingle(_mainEffect.GetField<Single, PyramidBloomMainEffectSO>(prop.Value.PropertyName));
             }
             return rtn;
         }
@@ -60,20 +62,10 @@ namespace ReProcessor.Managers
         
         public void ApplyAll(Preset preset)
         {
-            
             foreach (var prop in preset.Props)
             {
-                if (prop.Value.ValueType == typeof(int))
-                    _mainEffect.SetField(prop.Value.PropertyName, (int) prop.Value.Value);
-                //game says this cast isn't valid?????
-                //if (prop.Value.ValueType == typeof(PyramidBloomRendererSO.Pass))
-                //    pyramid.SetField(prop.Value.PropertyName, (PyramidBloomRendererSO.Pass) prop.Value.Value);
-                
-                if (_mainEffect is PyramidBloomMainEffectSO pyramid)
-                {
-                    
-
-                }
+                if (prop.Value.ValueType == typeof(int) || prop.Value.ValueType == typeof(Single))
+                    _mainEffect.SetField(prop.Value.PropertyName, Convert.ToSingle(prop.Value.Value));
                 
             }
         }

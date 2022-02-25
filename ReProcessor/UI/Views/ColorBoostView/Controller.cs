@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
@@ -10,6 +12,7 @@ using BeatSaberMarkupLanguage.Tags;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
 using IPA.Utilities;
+using ReProcessor.Configuration;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
 using UnityEngine;
@@ -27,16 +30,21 @@ namespace ReProcessor.UI.Views.TestView
         private CamManager _camManager;
         private ConfigManager _cfgManager;
         private SiraLog _log;
+        private PluginConfig _conf;
         [Inject]
-        protected void Construct(rSettingsFlowCoordinator settings, CamManager camManager, ConfigManager cfgManager, SiraLog log)
+        protected void Construct(rSettingsFlowCoordinator settings, CamManager camManager, ConfigManager cfgManager, SiraLog log, PluginConfig conf)
         {
             _settings = settings;
             _camManager = camManager;
             _cfgManager = cfgManager;
             _log = log;
+            _conf = conf;
         }
 
         [UIValue("d")] private List<object> shit = new object[]{"a","SHI"}.ToList();
+        
+        [UIParams]
+        BSMLParserParams parserParams;
         
         [UIComponent("cb-items")]
         private ScrollableSettingsContainerTag Settings;
@@ -45,7 +53,6 @@ namespace ReProcessor.UI.Views.TestView
         void YeetChildren(GameObject obj)
         {
             int c = obj.transform.childCount;
-            _log.Notice($"{c} Children of {obj.name}, yeeting...");
             for (int i = 0; i < c; i++)
             {
                 
@@ -74,6 +81,19 @@ namespace ReProcessor.UI.Views.TestView
         
         private SliderSetting TemplateSlider;
         private DropDownListSetting TemplateDropdown;
+
+        IEnumerator SingleFrameGoBrrThanksGame()
+        {
+            yield return new WaitForSeconds(0.5f);
+            parserParams.EmitEvent("flashlight-warning");
+        }
+
+        [UIAction("yep-okay")]
+        private void Yeah_Okay()
+        {
+            _conf.Introduced = true;
+            parserParams.EmitEvent("hide-flashlight-warning");
+        }
         
         [UIAction("#post-parse")]
         void PostParse()
@@ -93,9 +113,14 @@ namespace ReProcessor.UI.Views.TestView
             d.gameObject.SetActive(false);
             YeetChildren(d.transform.parent.gameObject);
             BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
+            if(!_conf.Introduced)
+                SharedCoroutineStarter.instance.StartCoroutine(SingleFrameGoBrrThanksGame());
         }
-        
-        
+
+
+        private Dictionary<string, BSMLFieldValue> _values = new Dictionary<string, BSMLFieldValue>();
+
+
         [UIAction("Test")]
         public void ReloadProps()
         {
@@ -114,28 +139,24 @@ namespace ReProcessor.UI.Views.TestView
             //var c = _Container;
 
             YeetChildren(c.gameObject);
-            
-            
-            
-            
-            
             foreach (var prop in _cfgManager.TempPreset.Props)
             {
                 if (prop.Value.ValueType == typeof(Single))
                 {
-                    Type type = _camManager._mainEffect.GetType();
-                    BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
                     
-                    
+                    if (!_values.ContainsKey(prop.Value.PropertyName))
+                    {
+                        Type type = _camManager._mainEffect.GetType();
+                        BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+                        _values.Add(prop.Value.PropertyName,new BSMLFieldValue(_camManager._mainEffect,
+                            type.GetField(prop.Value.PropertyName, bindingFlags)));
+                    }
                     
                     var sld = CreateSlider(prop.Key,c);
-                    sld.associatedValue = new BSMLFieldValue(_camManager._mainEffect, type.GetField(prop.Value.PropertyName, bindingFlags));
+                    sld.associatedValue = _values[prop.Value.PropertyName];
                     sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
                 }
             }
-
-
-
         }
 
         [UIAction("Apply")]

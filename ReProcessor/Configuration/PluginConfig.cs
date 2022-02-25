@@ -10,5 +10,6 @@ namespace ReProcessor.Configuration
         public static PluginConfig Instance { get; set; }
 
         public virtual string Preset { get; internal set; } = "Default";
+        public virtual bool Introduced { get; internal set; } = false;
     }
 }
