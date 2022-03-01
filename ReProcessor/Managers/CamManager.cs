@@ -2,6 +2,7 @@ using System;
 using IPA.Utilities;
 using ReProcessor.Configuration;
 using SiraUtil.Logging;
+using UnityEngine;
 
 namespace ReProcessor.Managers
 {
@@ -11,9 +12,9 @@ namespace ReProcessor.Managers
         internal readonly PyramidBloomMainEffectSO? _mainEffect;
         internal PyramidBloomEffectProxy proxy { get; private set; }
 
-        public CamManager(SiraLog logger, MainCamera mainCamera)
+        public CamManager(SiraLog logger)
         {
-            var mainCam = mainCamera.camera;
+            var mainCam = Camera.main;
             if (mainCam == null)
             {
                 logger.Critical("aw fuck maincam is null, bruh");

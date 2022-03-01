@@ -11,7 +11,7 @@ using Zenject;
 
 namespace ReProcessor.UI
 {
-    internal class SettingsFlowCoordinator : FlowCoordinator, IInitializable, IDisposable
+    internal class ReSettingsFlowCoordinator : FlowCoordinator, IInitializable, IDisposable
     {
         private SiraLog _log = null!;
 
@@ -31,7 +31,7 @@ namespace ReProcessor.UI
         protected void Construct(ButtonManager buttonManager, MainFlowCoordinator mainFlowCoordinator, LazyInject<ColorBoostController> cbController, LazyInject<ConfigViewController> configController,
             LazyInject<NoBloomController> nobloom, SiraLog log, LastResort resetter, CamManager cam, ConfigManager config, PluginConfig pluginConfig)
         {
-            _log.Debug("creating rSettingsFlowCoordinator");
+            _log = log;
             _buttonManager = buttonManager;
 
             _cam = cam;
@@ -42,10 +42,9 @@ namespace ReProcessor.UI
             _boostControllerLazy = cbController;
             _noBloomControllerLazy = nobloom;
             _spaceResetter = resetter;
-            _log = log;
+            
 
             _pluginConfig = pluginConfig;
-            _log.Debug("rSettingsFlowCoordinator Created");
             
             _log.Notice($"Loading preset\"{_pluginConfig.Preset}\"");
             _cam.ApplyAll(_cfg.Presets[_pluginConfig.Preset].Props); //lol, lmao, kek, rofl
@@ -84,7 +83,6 @@ namespace ReProcessor.UI
 
         internal void ButtonWasClicked()
         {
-            _log.Debug("rsettings knows button was clicked");
             _parentFlowCoordinator = _mainFlowCoordinator.YoungestChildFlowCoordinatorOrSelf();
             _parentFlowCoordinator.PresentFlowCoordinator(this, animationDirection: ViewController.AnimationDirection.Vertical);
             _spaceResetter.gameObject.SetActive(true);
