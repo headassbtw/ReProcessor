@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
@@ -137,37 +135,37 @@ namespace ReProcessor.UI.Views.ColorBoostView
             //var c = _Container;
 
             YeetChildren(c.gameObject);
-            foreach (var prop in _cfgManager.TempPreset.Props)
-            {
-                if (prop.Value.ValueType == typeof(Single))
-                {
-                    if (!_values.ContainsKey(prop.Value.PropertyName))
-                    {
-                        Type type = _camManager._mainEffect.GetType();
-                        BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-                        _values.Add(prop.Value.PropertyName, new BSMLFieldValue(_camManager._mainEffect,
-                            type.GetField(prop.Value.PropertyName, bindingFlags)));
-                    }
-
-                    var sld = CreateSlider(prop.Key, c);
-                    sld.associatedValue = _values[prop.Value.PropertyName];
-                    sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
-                }
-            }
+            // foreach (var prop in _cfgManager.TempPreset.Props)
+            // {
+            //     if (prop.Value.ValueType == typeof(Single))
+            //     {
+            //         if (!_values.ContainsKey(prop.Value.PropertyName))
+            //         {
+            //             Type type = _camManager._mainEffect.GetType();
+            //             BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+            //             _values.Add(prop.Value.PropertyName, new BSMLFieldValue(_camManager._mainEffect,
+            //                 type.GetField(prop.Value.PropertyName, bindingFlags)));
+            //         }
+            //
+            //         var sld = CreateSlider(prop.Key, c);
+            //         sld.associatedValue = _values[prop.Value.PropertyName];
+            //         sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
+            //     }
+            // }
         }
 
         [UIAction("Apply")]
         void Apply()
         {
-            _cfgManager.CurrentPreset = _cfgManager.TempPreset;
-            _camManager.ApplyAll(_cfgManager.CurrentPreset);
+            // _cfgManager.CurrentPreset = _cfgManager.TempPreset;
+            // _camManager.ApplyAll(_cfgManager.CurrentPreset);
         }
 
         [UIAction("Back")]
         void GoBack()
         {
-            _camManager.ApplyAll(_cfgManager.CurrentPreset);
-            _cfgManager.TempPreset = _cfgManager.CurrentPreset;
+            // _camManager.ApplyAll(_cfgManager.CurrentPreset);
+            // _cfgManager.TempPreset = _cfgManager.CurrentPreset;
         }
     }
 }

@@ -11,8 +11,8 @@ namespace ReProcessor.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<CamManager>().AsSingle();
-            Container.BindInterfacesAndSelfTo<LastResort>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<CamManager>().AsSingle();
+            Container.Bind<LastResort>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<ButtonManager>().AsSingle();
             Container.Bind<NoBloomController>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<ColorBoostController>().FromNewComponentAsViewController().AsSingle();

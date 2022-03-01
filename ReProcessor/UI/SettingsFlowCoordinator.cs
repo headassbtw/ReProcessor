@@ -1,3 +1,4 @@
+using System;
 using BeatSaberMarkupLanguage;
 using HMUI;
 using ReProcessor.Configuration;
@@ -10,7 +11,7 @@ using Zenject;
 
 namespace ReProcessor.UI
 {
-    internal class SettingsFlowCoordinator : FlowCoordinator
+    internal class SettingsFlowCoordinator : FlowCoordinator, IInitializable, IDisposable
     {
         private SiraLog _log = null!;
 
@@ -44,32 +45,8 @@ namespace ReProcessor.UI
 
             _pluginConfig = pluginConfig;
         }
-
-        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
-        {
-            _log.Debug("rSettingsFlowCoordinator DidActivate");
-            if (firstActivation)
-            {
-                SetTitle("ReProcessor 2");
-                showBackButton = true;
-            }
-
-            if (!addedToHierarchy)
-            {
-                return;
-            }
-
-            if (_cam.BloomSupported)
-            {
-                ProvideInitialViewControllers(_boostControllerLazy.Value, _cfgControllerLazy.Value);
-            }
-            else
-            {
-                ProvideInitialViewControllers(_noBloomControllerLazy.Value);
-            }
-        }
-
-        protected void Start()
+        
+        public void Initialize()
         {
             _log.Notice($"Loading preset\"{_pluginConfig.Preset}\"");
             _cam.ApplyAll(_cfg.Presets[_pluginConfig.Preset].Props); //lol, lmao, kek, rofl
@@ -77,9 +54,28 @@ namespace ReProcessor.UI
             _buttonManager.WasClicked += ButtonWasClicked;
         }
 
-        protected void OnDestroy()
+        public void Dispose()
         {
             _buttonManager.WasClicked -= ButtonWasClicked;
+        }
+
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
+        {
+            _log.Debug("SettingsFlowCoordinator DidActivate");
+            if (firstActivation)
+            {
+                SetTitle("ReProcessor 2");
+                showBackButton = true;
+                
+                if (_cam.BloomSupported)
+                {
+                    ProvideInitialViewControllers(_boostControllerLazy.Value, _cfgControllerLazy.Value);
+                }
+                else
+                {
+                    ProvideInitialViewControllers(_noBloomControllerLazy.Value);
+                }
+            }
         }
 
         internal void ButtonWasClicked()
