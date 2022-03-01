@@ -9,6 +9,7 @@ namespace ReProcessor.Managers
     {
         internal readonly bool BloomSupported;
         internal readonly PyramidBloomMainEffectSO? _mainEffect;
+        internal PyramidBloomEffectProxy proxy { get; private set; }
 
         public CamManager(SiraLog logger, MainCamera mainCamera)
         {
@@ -26,6 +27,7 @@ namespace ReProcessor.Managers
                 {
                     _mainEffect = pyramid;
                     BloomSupported = true;
+                    proxy = new PyramidBloomEffectProxy(_mainEffect!);
                 }
                 else
                 {
@@ -50,7 +52,7 @@ namespace ReProcessor.Managers
             var rtn = new Preset(inn.Name);
             var cameraSettings = rtn.Props;
 
-            var proxy = new PyramidBloomEffectProxy(_mainEffect!);
+            
 
             cameraSettings.BloomRadius = proxy.BloomRadius;
             cameraSettings.BlendFactor = proxy.BlendFactor;

@@ -10,6 +10,7 @@ using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Tags;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
+using IPA.Utilities;
 using ReProcessor.Configuration;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
@@ -34,6 +35,7 @@ namespace ReProcessor.UI.Views.ColorBoostView
             _cfgManager = cfgManager;
             _log = log;
             _conf = conf;
+            log.Debug("ColorBoostViewController created");
         }
 
         [UIValue("d")]
@@ -137,6 +139,15 @@ namespace ReProcessor.UI.Views.ColorBoostView
             //var c = _Container;
 
             YeetChildren(c.gameObject);
+            
+            Type prType = _camManager.proxy.GetType();
+            var f = new BSMLFieldValue(_camManager.proxy, prType.GetField("BaseColorBoostThreshold"));
+            
+            var sld = CreateSlider("Test", c);
+            _values.Add("Test",f);
+            sld.associatedValue = _values["Test"];
+            sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
+            /*
             foreach (var prop in _cfgManager.TempPreset.Props)
             {
                 if (prop.Value.ValueType == typeof(Single))
@@ -148,26 +159,22 @@ namespace ReProcessor.UI.Views.ColorBoostView
                         _values.Add(prop.Value.PropertyName, new BSMLFieldValue(_camManager._mainEffect,
                             type.GetField(prop.Value.PropertyName, bindingFlags)));
                     }
-
-                    var sld = CreateSlider(prop.Key, c);
-                    sld.associatedValue = _values[prop.Value.PropertyName];
-                    sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
                 }
-            }
+            }*/
         }
 
         [UIAction("Apply")]
         void Apply()
         {
-            _cfgManager.CurrentPreset = _cfgManager.TempPreset;
-            _camManager.ApplyAll(_cfgManager.CurrentPreset);
+            
+            //_camManager.ApplyAll(_cfgManager.CurrentPreset);
         }
 
         [UIAction("Back")]
         void GoBack()
         {
-            _camManager.ApplyAll(_cfgManager.CurrentPreset);
-            _cfgManager.TempPreset = _cfgManager.CurrentPreset;
+            //_camManager.ApplyAll(_cfgManager.CurrentPreset.Props);
+            //_cfgManager.TempPreset = _cfgManager.CurrentPreset;
         }
     }
 }

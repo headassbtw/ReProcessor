@@ -43,7 +43,7 @@ namespace ReProcessor.UI.Views.ConfigManager
         [UIAction("Save")]
         private void Save()
         {
-            _cfg.TempPreset = _cam.SaveAll(_cfg.TempPreset);
+            //_cfg.TempPreset = _cam.SaveAll(_cfg.TempPreset);
             _cfg.Presets[choice] = _cfg.CurrentPreset;
             _cfg.Save(choice);
         }
@@ -52,7 +52,7 @@ namespace ReProcessor.UI.Views.ConfigManager
         private void Apply()
         {
             _cfg.Set(choice);
-            _cam.ApplyAll(_cfg.CurrentPreset);
+            //_cam.ApplyAll(_cfg.CurrentPreset);
             _colorBoostController.ReloadProps();
         }
 
