@@ -55,7 +55,7 @@ namespace ReProcessor.UI
         
         public void Initialize()
         {
-            
+            _log.Notice("rSettingsFlowCoordinator initialized");
         }
 
         public void Dispose()

@@ -114,8 +114,9 @@ namespace ReProcessor.UI.Views.ColorBoostView
             d.gameObject.SetActive(false);
             YeetChildren(d.transform.parent.gameObject);
             BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
+            
             if (!_conf.Introduced)
-                SharedCoroutineStarter.instance.StartCoroutine(SingleFrameGoBrrThanksGame());
+                StartCoroutine(SingleFrameGoBrrThanksGame());
         }
 
 
