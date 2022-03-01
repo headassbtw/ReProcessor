@@ -94,8 +94,16 @@ namespace ReProcessor.Managers
         private Preset LoadJson(string path)
         {
             using var streamReader = new StreamReader(path);
-            using var jsonTextReader = new JsonTextReader(streamReader);
-            return _jsonSerializer.Deserialize<Preset>(jsonTextReader) ?? Preset.CreateDefault(); // TODO
+            try
+            {
+                using var jsonTextReader = new JsonTextReader(streamReader);
+                return _jsonSerializer.Deserialize<Preset>(jsonTextReader) ?? new Preset(Path.GetFileName(path));
+            }
+            catch (Exception e)
+            {
+               _log.Warn(e);
+               return new Preset(Path.GetFileName(path));
+            }
         }
 
         private void SaveJson(Preset preset, string path)
