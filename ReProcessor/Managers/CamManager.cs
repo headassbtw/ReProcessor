@@ -10,10 +10,13 @@ namespace ReProcessor.Managers
     {
         internal readonly bool BloomSupported;
         internal readonly PyramidBloomMainEffectSO? _mainEffect;
+        private ConfigManager _cfg;
         internal PyramidBloomEffectProxy proxy { get; private set; }
-
-        public CamManager(SiraLog logger)
+        private SiraLog _log;
+        public CamManager(SiraLog logger, ConfigManager config)
         {
+            _log = logger;
+            _cfg = config;
             var mainCam = Camera.main;
             if (mainCam == null)
             {
@@ -29,6 +32,9 @@ namespace ReProcessor.Managers
                     _mainEffect = pyramid;
                     BloomSupported = true;
                     proxy = new PyramidBloomEffectProxy(_mainEffect!);
+                    
+                    
+                    ApplyAll(_cfg.Presets[_cfg.Current].Props);
                 }
                 else
                 {
@@ -43,14 +49,14 @@ namespace ReProcessor.Managers
             ApplyAll(def.Props);
         }
 
-        public Preset SaveAll(Preset inn)
+        public Preset SaveAll(string name)
         {
             if (!BloomSupported)
             {
                 throw new InvalidOperationException("Bloom support isn't available, method isn't allowed to be called.");
             }
 
-            var rtn = new Preset(inn.Name);
+            var rtn = new Preset(name);
             var cameraSettings = rtn.Props;
 
             
@@ -78,9 +84,7 @@ namespace ReProcessor.Managers
             {
                 throw new InvalidOperationException("Bloom support isn't available, method isn't allowed to be called.");
             }
-
-            var proxy = new PyramidBloomEffectProxy(_mainEffect!);
-
+            
             proxy.BloomRadius = cameraSettings.BloomRadius;
             proxy.BlendFactor = cameraSettings.BlendFactor;
             proxy.Intensity = cameraSettings.Intensity;

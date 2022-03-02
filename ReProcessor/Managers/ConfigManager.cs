@@ -14,11 +14,11 @@ namespace ReProcessor.Managers
     internal class ConfigManager : IInitializable
     {
         private static readonly string PresetSavePath = Path.Combine(UnityGame.UserDataPath, nameof(ReProcessor), "Presets");
-
+        internal string Current;
         private readonly SiraLog _log;
         private readonly JsonSerializer _jsonSerializer;
 
-        public ConfigManager(SiraLog log)
+        public ConfigManager(SiraLog log,PluginConfig conf)
         {
             _log = log;
             _jsonSerializer = JsonSerializer.Create(new JsonSerializerSettings
@@ -26,11 +26,10 @@ namespace ReProcessor.Managers
                 Converters = new List<JsonConverter> { new StringEnumConverter() },
                 Formatting = Formatting.Indented
             });
+            Current = conf.Preset;
         }
 
         public Dictionary<string, Preset> Presets { get; private set; } = new();
-        public Preset CurrentPreset { get; private set; }
-        public Preset TempPreset { get; private set; }
 
         public void Set(string name)
         {
@@ -39,16 +38,13 @@ namespace ReProcessor.Managers
                 _log.Notice($"Preset {name} does not exist, or is not loaded");
                 return;
             }
-
-            CurrentPreset = Presets[name];
-            TempPreset = CurrentPreset;
+            
         }
 
         public void GetPresets()
         {
             Presets.Clear();
             var presets = Directory.GetFiles(PresetSavePath);
-
             foreach (var preset in presets)
             {
                 try
@@ -81,13 +77,11 @@ namespace ReProcessor.Managers
             }
 
             GetPresets();
-            Set(Presets.Keys.FirstOrDefault()); //TODO: FIX SHIT
+            Set(Current); //TODO: FIX SHIT
         }
 
         public void Save(string name)
         {
-            CurrentPreset = TempPreset;
-            Presets[name] = CurrentPreset;
             SaveJson(Presets[name], Path.Combine(PresetSavePath, $"{name}.json"));
         }
 

@@ -1,13 +1,18 @@
-<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
     <vertical pref-width="110">
         <vertical background="panel-top" pref-width="110" pref-height="13">
             <horizontal pref-height="10" child-expand-width="true">
                 <text align="Center" font-size="10" text="Properties"/>
+                <button text="apply" on-click="refresh"/>
             </horizontal>
         </vertical>
         <vertical background-color="#20202080" background="round-rect-panel" pref-width="110">
             <scrollable-settings-container id="cb-items" pref-height="80">
                 <slider-setting id="tmps" pref-width="90" apply-on-change="true" show-buttons="true" text="temp_slider" increment="0.01" max="5" min="-5"/>
+
+                <slider-setting id="cb" value="cb-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Color Boost" increment="0.01" max="5" min="-5"/>
+                
                 <dropdown-list-setting id="tmpd" pref-width="90" apply-on-change="true" text="temp_dropdown" options="d"/>
             </scrollable-settings-container>
         </vertical>

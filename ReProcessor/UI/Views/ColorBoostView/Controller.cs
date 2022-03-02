@@ -112,8 +112,8 @@ namespace ReProcessor.UI.Views.ColorBoostView
             TemplateDropdown = UnityEngine.Object.Instantiate(d, transform, false);
             TemplateDropdown.gameObject.SetActive(false);
             d.gameObject.SetActive(false);
-            YeetChildren(d.transform.parent.gameObject);
-            BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
+            //YeetChildren(d.transform.parent.gameObject);
+            //BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
             
             if (!_conf.Introduced)
                 StartCoroutine(SingleFrameGoBrrThanksGame());
@@ -123,10 +123,34 @@ namespace ReProcessor.UI.Views.ColorBoostView
         private Dictionary<string, BSMLFieldValue> _values = new Dictionary<string, BSMLFieldValue>();
 
 
+        void CreateUISlider(Transform container, string label, string value)
+        {
+            if (_values.ContainsKey(label)) return;
+            Type prType = _camManager.proxy.GetType();
+            var f = new BSMLFieldValue(_camManager.proxy, prType.GetField(value));
+            _values.Add(label,f);
+            var sld = CreateSlider(label, container);
+            
+            sld.associatedValue = _values[label];
+            // sld.Value = Convert.ToSingle(f.GetValue());
+        }
+
+        [UIComponent("cb")] private SliderSetting ColorBoostSlider = null!;      
+        [UIValue("cb-val")] private float BaseColorBoost
+        {
+            get => _camManager.proxy.BaseColorBoost;
+            set => _camManager.proxy.BaseColorBoost = value;
+        }
+        
+        [UIAction("refresh")] void a(){NotifyPropertyChanged();}
+        
         [UIAction("Test")]
         public void ReloadProps()
         {
             NotifyPropertyChanged();
+            BaseColorBoost = _camManager.proxy.BaseColorBoost;
+            
+            
             _log.Notice($"Running on {gameObject.name}");
             var c = gameObject.transform
                     .GetChild(0) //BSMLBackground?
@@ -139,15 +163,15 @@ namespace ReProcessor.UI.Views.ColorBoostView
                 ; //lmao
             //var c = _Container;
 
-            YeetChildren(c.gameObject);
+            //YeetChildren(c.gameObject);
+
+
+            //CreateUISlider(c, "Test", "BaseColorBoostThreshold");
+            //CreateUISlider(c, "Test 2", "BaseColorBoost");
             
-            Type prType = _camManager.proxy.GetType();
-            var f = new BSMLFieldValue(_camManager.proxy, prType.GetField("BaseColorBoostThreshold"));
-            
-            var sld = CreateSlider("Test", c);
-            _values.Add("Test",f);
-            sld.associatedValue = _values["Test"];
-            sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
+
+
+
             /*
             foreach (var prop in _cfgManager.TempPreset.Props)
             {
