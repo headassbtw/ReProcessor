@@ -5,6 +5,7 @@ using HMUI;
 using ReProcessor.Configuration;
 using ReProcessor.Managers;
 using ReProcessor.UI.Views.ColorBoostView;
+using SiraUtil.Logging;
 using Zenject;
 
 namespace ReProcessor.UI.Views.ConfigManager
@@ -18,11 +19,13 @@ namespace ReProcessor.UI.Views.ConfigManager
         private CamManager _cam;
         private ColorBoostController _colorBoostController;
         private string choice;
+        private SiraLog _log;
 
         [Inject]
-        protected void Construct(Managers.ConfigManager config, CamManager cam, ColorBoostController cbCtl, PluginConfig conf)
+        protected void Construct(Managers.ConfigManager config, SiraLog log, CamManager cam, ColorBoostController cbCtl, PluginConfig conf)
         {
             _cfg = config;
+            _log = log;
             _cam = cam;
             _conf = conf;
             choice = _conf.Preset;
@@ -40,6 +43,8 @@ namespace ReProcessor.UI.Views.ConfigManager
             
             _cfg.Set(choice);
             _cam.ApplyAll(_cfg.Presets[choice].Props);
+            _log.Notice($"applying {choice}");
+            _log.Notice($"BaseColorBoost {_cfg.Presets[choice].Props.BaseColorBoost}");
             _colorBoostController.ReloadProps();
 
         }
@@ -55,6 +60,7 @@ namespace ReProcessor.UI.Views.ConfigManager
         [UIAction("#post-parse")]
         public void PostParse()
         {
+            CfgList.tableView.SelectCellWithIdx(0);
             Reload();
         }
 

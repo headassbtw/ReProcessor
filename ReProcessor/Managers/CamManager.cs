@@ -9,6 +9,7 @@ namespace ReProcessor.Managers
     internal class CamManager
     {
         internal readonly bool BloomSupported;
+        public event Action? ResetEvent;
         internal readonly PyramidBloomMainEffectSO? _mainEffect;
         private ConfigManager _cfg;
         internal PyramidBloomEffectProxy proxy { get; private set; }
@@ -45,8 +46,8 @@ namespace ReProcessor.Managers
 
         public void Reset()
         {
-            var def = Preset.CreateDefault();
-            ApplyAll(def.Props);
+            ResetEvent?.Invoke();
+            ApplyAll(_cfg.Presets[_cfg.Current].Props);
         }
 
         public Preset SaveAll(string name)

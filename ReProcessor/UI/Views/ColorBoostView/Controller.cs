@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
@@ -11,6 +12,7 @@ using BeatSaberMarkupLanguage.Tags;
 using BeatSaberMarkupLanguage.ViewControllers;
 using HMUI;
 using IPA.Utilities;
+using IPA.Utilities.Async;
 using ReProcessor.Configuration;
 using ReProcessor.Managers;
 using SiraUtil.Logging;
@@ -29,17 +31,20 @@ namespace ReProcessor.UI.Views.ColorBoostView
         private PluginConfig _conf = null!;
 
         [Inject]
-        protected void Construct(CamManager camManager, Managers.ConfigManager cfgManager, SiraLog log, PluginConfig conf)
+        protected void Construct(CamManager camManager, Managers.ConfigManager cfgManager, SiraLog log,
+            PluginConfig conf)
         {
             _camManager = camManager;
             _cfgManager = cfgManager;
             _log = log;
             _conf = conf;
+            
             log.Debug("ColorBoostViewController created");
         }
+        [UIValue("passes")] List<object> passes => Enum.GetValues(typeof(PyramidBloomRendererSO.Pass)).Cast<object>().ToList();
 
-        [UIValue("d")]
-        private List<object> shit = new object[] { "a", "SHI" }.ToList();
+         private List<object> fff = new List<object>
+            {Enum.GetValues(typeof(PyramidBloomRendererSO.Pass)).Cast<PyramidBloomRendererSO.Pass>()}.ToList();
 
         [UIParams]
         private readonly BSMLParserParams _parserParams = null!;
@@ -47,41 +52,7 @@ namespace ReProcessor.UI.Views.ColorBoostView
         [UIComponent("cb-items")]
         private ScrollableSettingsContainerTag Settings;
 
-        //me
-        void YeetChildren(GameObject obj)
-        {
-            int c = obj.transform.childCount;
-            for (int i = 0; i < c; i++)
-            {
-                Destroy(obj.transform.GetChild(0).gameObject);
-                Destroy(obj.transform.GetChild(i).gameObject);
-            }
-        }
-
-        [UIComponent("tmps")]
-        SliderSetting tmp_slider;
-
-        [UIComponent("tmpd")]
-        DropDownListSetting tmp_dropdown;
-
-        SliderSetting CreateSlider(string name, Transform parent)
-        {
-            var sld = UnityEngine.Object.Instantiate(TemplateSlider, parent, false);
-
-            //sld.transform.position -= new Vector3(0, 2000, 0);
-            //sld.transform.SetParent(parent);
-            sld.gameObject.SetActive(true);
-            sld.name = name;
-            sld.transform.GetChild(0).GetComponent<CurvedTextMeshPro>().text = name;
-            sld.Setup();
-            sld.ApplyValue();
-            return sld;
-        }
-
         private Transform _Container;
-
-        private SliderSetting TemplateSlider;
-        private DropDownListSetting TemplateDropdown;
 
         IEnumerator SingleFrameGoBrrThanksGame()
         {
@@ -99,99 +70,91 @@ namespace ReProcessor.UI.Views.ColorBoostView
         [UIAction("#post-parse")]
         void PostParse()
         {
-            _Container = tmp_slider.transform.parent;
-            var s = tmp_slider;
-            //var s = Resources.FindObjectsOfTypeAll<SliderSetting>().Last(x => (x.name == "BSMLSliderSetting"));
-            TemplateSlider = Instantiate(s, transform, false);
-            TemplateSlider.gameObject.SetActive(false);
-            s.gameObject.SetActive(false);
-            Destroy(s.gameObject);
-
-            //var d = Resources.FindObjectsOfTypeAll<DropDownListSetting>().Last(x => (x.name == "BSMLDropdownList"));
-            var d = tmp_dropdown;
-            TemplateDropdown = UnityEngine.Object.Instantiate(d, transform, false);
-            TemplateDropdown.gameObject.SetActive(false);
-            d.gameObject.SetActive(false);
-            //YeetChildren(d.transform.parent.gameObject);
-            //BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
+            _log.Warn("Enums:");
+            foreach (var en in passes)
+            {
+                _log.Warn(((PyramidBloomRendererSO.Pass) en).ToString());
+            }
             
             if (!_conf.Introduced)
                 StartCoroutine(SingleFrameGoBrrThanksGame());
         }
-
-
-        private Dictionary<string, BSMLFieldValue> _values = new Dictionary<string, BSMLFieldValue>();
-
-
-        void CreateUISlider(Transform container, string label, string value)
-        {
-            if (_values.ContainsKey(label)) return;
-            Type prType = _camManager.proxy.GetType();
-            var f = new BSMLFieldValue(_camManager.proxy, prType.GetField(value));
-            _values.Add(label,f);
-            var sld = CreateSlider(label, container);
-            
-            sld.associatedValue = _values[label];
-            // sld.Value = Convert.ToSingle(f.GetValue());
-        }
-
-        [UIComponent("cb")] private SliderSetting ColorBoostSlider = null!;      
-        [UIValue("cb-val")] private float BaseColorBoost
-        {
-            get => _camManager.proxy.BaseColorBoost;
-            set => _camManager.proxy.BaseColorBoost = value;
-        }
         
-        [UIAction("refresh")] void a(){NotifyPropertyChanged();}
+        [UIValue("bloomradius-val")] private float BloomRadius
+        {   get => _camManager.proxy.BloomRadius;
+            set => _camManager.proxy.BloomRadius = value;}
+        [UIValue("blendfactor-val")] private float BlendFactor
+        {   get => _camManager.proxy.BlendFactor;
+            set => _camManager.proxy.BlendFactor = value;}
+        [UIValue("intensity-val")] private float Intensity
+        {   get => _camManager.proxy.Intensity;
+            set => _camManager.proxy.Intensity = value;}
+        [UIValue("intensityoffset-val")] private float IntensityOffset
+        {   get => _camManager.proxy.IntensityOffset;
+            set => _camManager.proxy.IntensityOffset = value;}
+        [UIValue("weight-val")] private float Weight
+        {   get => _camManager.proxy.Weight;
+            set => _camManager.proxy.Weight = value;}
+        [UIValue("alphaweights-val")] private float AlphaWeights
+        {   get => _camManager.proxy.AlphaWeights;
+            set => _camManager.proxy.AlphaWeights = value;}
+        
+        
+        
+        [UIValue("basecolorboost-val")] private float BaseColorBoost
+        {   get => _camManager.proxy.BaseColorBoost;
+            set => _camManager.proxy.BaseColorBoost = value;}
+        [UIValue("basecolorboostthreshold-val")] private float BaseColorBoostThreshold
+        {   get => _camManager.proxy.BaseColorBoostThreshold;
+            set => _camManager.proxy.BaseColorBoostThreshold = value;}
+
+        [UIValue("prefilter-val")] private PyramidBloomRendererSO.Pass PreFilterPass
+        {   get => _camManager.proxy.PreFilterPass;
+            set => _camManager.proxy.PreFilterPass = value;}
+        [UIValue("downsample-val")] private PyramidBloomRendererSO.Pass DownSamplePass
+        {   get => _camManager.proxy.DownSamplePass;
+            set => _camManager.proxy.DownSamplePass = value;}
+        [UIValue("upsample-val")] private PyramidBloomRendererSO.Pass UpSamplePass
+        {   get => _camManager.proxy.UpSamplePass;
+            set => _camManager.proxy.UpSamplePass = value;}
+        [UIValue("finalupsample-val")] private PyramidBloomRendererSO.Pass FinalUpSamplePass
+        {   get => _camManager.proxy.FinalUpSamplePass;
+            set => _camManager.proxy.FinalUpSamplePass = value;}
+        
+        
+        [UIAction("refresh")] async void a(){await ReloadPropsOnMainThread();}
         
         [UIAction("Test")]
         public void ReloadProps()
         {
-            NotifyPropertyChanged();
-            BaseColorBoost = _camManager.proxy.BaseColorBoost;
             
-            
-            _log.Notice($"Running on {gameObject.name}");
-            var c = gameObject.transform
-                    .GetChild(0) //BSMLBackground?
-                    .GetChild(0) //BSMLVerticalLayoutGroup
-                    .GetChild(1) //BSMLVerticalLayoutGroup
-                    .GetChild(0) //BSMLScrollableSettingsContainer
-                    .GetChild(1) //Viewport
-                    .GetChild(0) //BSMLScrollViewContent
-                    .GetChild(0) //BSMLScrollViewContentContainer
-                ; //lmao
-            //var c = _Container;
-
-            //YeetChildren(c.gameObject);
+            ReloadPropsOnMainThread();
+        }
 
 
-            //CreateUISlider(c, "Test", "BaseColorBoostThreshold");
-            //CreateUISlider(c, "Test 2", "BaseColorBoost");
-            
-
-
-
-            /*
-            foreach (var prop in _cfgManager.TempPreset.Props)
+        async Task ReloadPropsOnMainThread()
+        {
+            await UnityMainThreadTaskScheduler.Factory.StartNew(() =>
             {
-                if (prop.Value.ValueType == typeof(Single))
-                {
-                    if (!_values.ContainsKey(prop.Value.PropertyName))
-                    {
-                        Type type = _camManager._mainEffect.GetType();
-                        BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-                        _values.Add(prop.Value.PropertyName, new BSMLFieldValue(_camManager._mainEffect,
-                            type.GetField(prop.Value.PropertyName, bindingFlags)));
-                    }
-                }
-            }*/
+                NotifyPropertyChanged(nameof(BloomRadius));
+                NotifyPropertyChanged(nameof(BlendFactor));
+                NotifyPropertyChanged(nameof(Intensity));
+                NotifyPropertyChanged(nameof(IntensityOffset));
+                NotifyPropertyChanged(nameof(Weight));
+                NotifyPropertyChanged(nameof(AlphaWeights));
+                NotifyPropertyChanged(nameof(PreFilterPass));
+                NotifyPropertyChanged(nameof(DownSamplePass));
+                NotifyPropertyChanged(nameof(UpSamplePass));
+                NotifyPropertyChanged(nameof(FinalUpSamplePass));
+                NotifyPropertyChanged(nameof(BaseColorBoost));
+                NotifyPropertyChanged(nameof(BaseColorBoostThreshold));
+            }).ConfigureAwait(false);
         }
 
         [UIAction("Apply")]
         void Apply()
         {
-            
+           
             //_camManager.ApplyAll(_cfgManager.CurrentPreset);
         }
 

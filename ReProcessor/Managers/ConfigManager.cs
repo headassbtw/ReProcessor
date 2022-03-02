@@ -33,10 +33,10 @@ namespace ReProcessor.Managers
 
         public void Set(string name)
         {
+            Current = name;
             if (!Presets.ContainsKey(name))
             {
                 _log.Notice($"Preset {name} does not exist, or is not loaded");
-                return;
             }
             
         }

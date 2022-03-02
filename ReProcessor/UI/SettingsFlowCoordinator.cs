@@ -45,9 +45,6 @@ namespace ReProcessor.UI
             
 
             _pluginConfig = pluginConfig;
-            
-            _log.Notice($"Loading preset\"{_pluginConfig.Preset}\"");
-            _cam.ApplyAll(_cfg.Presets[_pluginConfig.Preset].Props); //lol, lmao, kek, rofl
 
             _buttonManager.WasClicked += ButtonWasClicked;
         }

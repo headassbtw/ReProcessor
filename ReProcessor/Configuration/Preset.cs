@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace ReProcessor.Configuration
 {
     internal interface ICameraSettings
@@ -68,6 +70,12 @@ namespace ReProcessor.Configuration
         {
             Name = name;
             Props = CameraSettings.Default;
+        }
+        [JsonConstructor]
+        public Preset(string name, CameraSettings props)
+        {
+            Name = name;
+            Props = props;
         }
 
         public static Preset CreateDefault() => new("Default");

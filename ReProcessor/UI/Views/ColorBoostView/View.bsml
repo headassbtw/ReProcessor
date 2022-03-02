@@ -4,16 +4,25 @@
         <vertical background="panel-top" pref-width="110" pref-height="13">
             <horizontal pref-height="10" child-expand-width="true">
                 <text align="Center" font-size="10" text="Properties"/>
-                <button text="apply" on-click="refresh"/>
             </horizontal>
         </vertical>
         <vertical background-color="#20202080" background="round-rect-panel" pref-width="110">
             <scrollable-settings-container id="cb-items" pref-height="80">
-                <slider-setting id="tmps" pref-width="90" apply-on-change="true" show-buttons="true" text="temp_slider" increment="0.01" max="5" min="-5"/>
-
-                <slider-setting id="cb" value="cb-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Color Boost" increment="0.01" max="5" min="-5"/>
                 
-                <dropdown-list-setting id="tmpd" pref-width="90" apply-on-change="true" text="temp_dropdown" options="d"/>
+                <slider-setting value="bloomradius-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Radius" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="blendfactor-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Blend Factor" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="intensity-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Intensity" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="intensityoffset-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Intensity Offset" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="weight-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Weight" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="alphaweights-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Alpha Weights" increment="0.01" max="5" min="-5"/>
+                
+                <dropdown-list-setting value="prefilter-val" pref-width="90" apply-on-change="true" text="PreFilter Pass" options="passes"/>
+                <dropdown-list-setting value="downsample-val" pref-width="90" apply-on-change="true" text="Downsample Pass" options="passes"/>
+                <dropdown-list-setting value="upsample-val" pref-width="90" apply-on-change="true" text="Upsample Pass" options="passes"/>
+                <dropdown-list-setting value="finalupsample-val" pref-width="90" apply-on-change="true" text="Final Upsample Pass" options="passes"/>
+                
+                <slider-setting value="basecolorboost-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Color Boost" increment="0.01" max="5" min="-5"/>
+                <slider-setting value="basecolorboostthreshold-val" bind-value="true" pref-width="90" apply-on-change="true" show-buttons="true" text="Color Boost Threshold" increment="0.01" max="5" min="-5"/>
             </scrollable-settings-container>
         </vertical>
     </vertical>
