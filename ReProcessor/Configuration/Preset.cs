@@ -63,21 +63,21 @@ namespace ReProcessor.Configuration
 
     internal class Preset
     {
-        public readonly string Name;
+        public readonly int ConfigVersion;
         public readonly CameraSettings Props;
 
-        public Preset(string name)
+        public Preset(int version)
         {
-            Name = name;
+            ConfigVersion = version;
             Props = CameraSettings.Default;
         }
         [JsonConstructor]
-        public Preset(string name, CameraSettings props)
+        public Preset( int version, CameraSettings props)
         {
-            Name = name;
+            ConfigVersion = version;
             Props = props;
         }
 
-        public static Preset CreateDefault() => new("Default");
+        public static Preset CreateDefault() => new(5);
     }
 }

@@ -50,14 +50,14 @@ namespace ReProcessor.Managers
             ApplyAll(_cfg.Presets[_cfg.Current].Props);
         }
 
-        public Preset SaveAll(string name)
+        public Preset SaveAll()
         {
             if (!BloomSupported)
             {
                 throw new InvalidOperationException("Bloom support isn't available, method isn't allowed to be called.");
             }
 
-            var rtn = new Preset(name);
+            var rtn = new Preset(5);
             var cameraSettings = rtn.Props;
 
             

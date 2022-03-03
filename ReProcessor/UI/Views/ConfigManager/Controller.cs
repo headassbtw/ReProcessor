@@ -52,7 +52,7 @@ namespace ReProcessor.UI.Views.ConfigManager
         [UIAction("Save")]
         private void Save()
         {
-            _cfg.Presets[choice] = _cam.SaveAll(choice);
+            _cfg.Presets[choice] = _cam.SaveAll();
             _cfg.Save(choice);
             _conf.Preset = choice;
         }
@@ -60,6 +60,8 @@ namespace ReProcessor.UI.Views.ConfigManager
         [UIAction("#post-parse")]
         public void PostParse()
         {
+            
+            
             CfgList.tableView.SelectCellWithIdx(0);
             Reload();
         }

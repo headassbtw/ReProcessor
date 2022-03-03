@@ -37,6 +37,7 @@ namespace ReProcessor.Managers
             if (!Presets.ContainsKey(name))
             {
                 _log.Notice($"Preset {name} does not exist, or is not loaded");
+                Current = "Default";
             }
             
         }
@@ -44,13 +45,15 @@ namespace ReProcessor.Managers
         public void GetPresets()
         {
             Presets.Clear();
+            var def = Preset.CreateDefault();
+            Presets.Add("Default",def);
             var presets = Directory.GetFiles(PresetSavePath);
             foreach (var preset in presets)
             {
-                try
+                if(preset.ToLower() != "default") try
                 {
                     Preset pr = LoadJson(preset);
-                    Presets.Add(pr.Name, pr);
+                    Presets.Add(Path.GetFileNameWithoutExtension(preset), pr);
                 }
                 catch (ArgumentException e)
                 {
@@ -91,12 +94,12 @@ namespace ReProcessor.Managers
             try
             {
                 using var jsonTextReader = new JsonTextReader(streamReader);
-                return _jsonSerializer.Deserialize<Preset>(jsonTextReader) ?? new Preset(Path.GetFileName(path));
+                return _jsonSerializer.Deserialize<Preset>(jsonTextReader) ?? new Preset(5);
             }
             catch (Exception e)
             {
                _log.Warn(e);
-               return new Preset(Path.GetFileName(path));
+               return new Preset(5);
             }
         }
 
