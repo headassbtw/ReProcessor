@@ -4,7 +4,7 @@ using Zenject;
 
 namespace ReProcessor
 {
-    internal class LastResort : MonoBehaviour
+    internal class LastResort : MonoBehavior
     {
         private CamManager _cam = null!;
 
