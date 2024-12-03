@@ -5,11 +5,11 @@
   <PropertyGroup>
     <AssemblyName>ReProcessor</AssemblyName>
     <Authors>headassbtw</Authors>
-    <Version>2.0.1</Version>
-    <GameVersion>1.24.0</GameVersion>
+    <Version>2.1.0</Version>
+    <GameVersion>1.39.1</GameVersion>
     <Description>bloom moment</Description>
     <ProjectHome></ProjectHome>
-    <ProjectSource></ProjectSource>
+    <ProjectSource>https://github.com/headassbtw/ReProcessor</ProjectSource>
     <Donate></Donate>
   </PropertyGroup>
   <ItemGroup>

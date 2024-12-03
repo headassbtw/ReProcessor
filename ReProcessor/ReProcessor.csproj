@@ -13,9 +13,9 @@
         <Product>ReProcessor</Product>
         <Copyright>Copyright © headassbtw</Copyright>
         <LangVersion>9</LangVersion>
-        <PackageVersion>2.0.1</PackageVersion>
-        <AssemblyVersion>2.0.1</AssemblyVersion>
-        <FileVersion>2.0.1</FileVersion>
+        <PackageVersion>2.1.0</PackageVersion>
+        <AssemblyVersion>2.1.0</AssemblyVersion>
+        <FileVersion>2.1.0</FileVersion>
     </PropertyGroup>
     <PropertyGroup Condition="$(DefineConstants.Contains('CIBuild')) OR '$(NCrunch)' == '1'">
         <DisableCopyToPlugins>True</DisableCopyToPlugins>
