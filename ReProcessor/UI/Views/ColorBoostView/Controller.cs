@@ -18,6 +18,8 @@ using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 
+#pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
+
 namespace ReProcessor.UI.Views.TestView
 {
     [ViewDefinition("ReProcessor.UI.Views.ColorBoostView.View.bsml")]
@@ -46,20 +48,20 @@ namespace ReProcessor.UI.Views.TestView
         [UIParams]
         BSMLParserParams parserParams;
         
-        [UIComponent("cb-items")]
-        private ScrollableSettingsContainerTag Settings;
+        [UIObject("cb-items")]
+        private GameObject Settings;
 
         //me
         void YeetChildren(GameObject obj)
         {
             int c = obj.transform.childCount;
+            Destroy(obj.transform.GetChild(0).gameObject);
             for (int i = 0; i < c; i++)
             {
-                
-                Destroy(obj.transform.GetChild(0).gameObject);
                 Destroy(obj.transform.GetChild(i).gameObject);
             }
         }
+        
         [UIComponent("tmps")] SliderSetting tmp_slider;
         [UIComponent("tmpd")] DropDownListSetting tmp_dropdown;
         
@@ -67,14 +69,26 @@ namespace ReProcessor.UI.Views.TestView
         {
             var sld = UnityEngine.Object.Instantiate(TemplateSlider, parent, false);
 
-            //sld.transform.position -= new Vector3(0, 2000, 0);
-            //sld.transform.SetParent(parent);
             sld.gameObject.SetActive(true);
             sld.name = name;
             sld.transform.GetChild(0).GetComponent<CurvedTextMeshPro>().text = name;
+            sld.UpdateOnChange = true;
             sld.Setup();
             sld.ApplyValue();
             return sld;
+        }
+        
+        DropDownListSetting CreateDropdown(string name, Transform parent)
+        {
+            var dropdown = UnityEngine.Object.Instantiate(TemplateDropdown, parent, false);
+
+            dropdown.gameObject.SetActive(true);
+            dropdown.name = name;
+            //dropdown.transform.GetChild(0).GetComponent<CurvedTextMeshPro>().text = name;
+            dropdown.UpdateOnChange = true;
+            dropdown.Setup();
+            dropdown.ApplyValue();
+            return dropdown;
         }
 
         private Transform _Container;
@@ -114,7 +128,8 @@ namespace ReProcessor.UI.Views.TestView
             YeetChildren(d.transform.parent.gameObject);
             BeatSaberUI.CreateText(_Container.GetComponent<RectTransform>(), "Select a preset to start", Vector2.right);
             if(!_conf.Introduced)
-                SharedCoroutineStarter.instance.StartCoroutine(SingleFrameGoBrrThanksGame());
+                StartCoroutine(SingleFrameGoBrrThanksGame());
+                //SharedCoroutineStarter.instance.StartCoroutine(SingleFrameGoBrrThanksGame());
         }
 
 
@@ -124,26 +139,14 @@ namespace ReProcessor.UI.Views.TestView
         [UIAction("Test")]
         public void ReloadProps()
         {
-            
             NotifyPropertyChanged();
             _log.Notice($"Running on {gameObject.name}");
-            var c = gameObject.transform
-                .GetChild(0) //BSMLBackground?
-                .GetChild(0) //BSMLVerticalLayoutGroup
-                .GetChild(1) //BSMLVerticalLayoutGroup
-                .GetChild(0) //BSMLScrollableSettingsContainer
-                .GetChild(1) //Viewport
-                .GetChild(0) //BSMLScrollViewContent
-                .GetChild(0) //BSMLScrollViewContentContainer
-                ; //lmao
-            //var c = _Container;
-
-            YeetChildren(c.gameObject);
+            YeetChildren(Settings);
+            
             foreach (var prop in _cfgManager.TempPreset.Props)
             {
                 if (prop.Value.ValueType == typeof(Single))
                 {
-                    
                     if (!_values.ContainsKey(prop.Value.PropertyName))
                     {
                         Type type = _camManager._mainEffect.GetType();
@@ -152,9 +155,9 @@ namespace ReProcessor.UI.Views.TestView
                             type.GetField(prop.Value.PropertyName, bindingFlags)));
                     }
                     
-                    var sld = CreateSlider(prop.Key,c);
-                    sld.associatedValue = _values[prop.Value.PropertyName];
-                    sld.Value = Convert.ToSingle(sld.associatedValue.GetValue());
+                    var sld = CreateSlider(prop.Key, Settings.transform);
+                    sld.AssociatedValue = _values[prop.Value.PropertyName];
+                    sld.Value = Convert.ToSingle(sld.AssociatedValue.GetValue());
                 }
             }
         }

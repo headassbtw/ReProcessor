@@ -26,7 +26,6 @@ namespace ReProcessor.UI
         private readonly Assembly _assembly;
         private SiraLog _log;
         private readonly DiContainer _container;
-        private readonly TimeTweeningManager _tweeningManager;
         private readonly LevelSelectionNavigationController _levelSelectionNavigationController;
         //private static readonly Color _emptyColor = new Color(0.15f, 0f, 0f, 1f);
 
@@ -40,24 +39,12 @@ namespace ReProcessor.UI
                 }
                 return null;
             }
-            set
-            {
-                if (_image != null && value.HasValue)
-                {
-                    Color oldColor = _image.color;
-                    _tweeningManager.KillAllTweens(_image);
-                    var tween = new FloatTween(0f, 1f, val => _image!.color = Color.Lerp(oldColor, value.Value, val), 1f, EaseType.InOutSine);
-                    _tweeningManager.AddTween(tween, _image);
-                    tween.onCompleted = delegate () { _image!.DefaultColor = value.Value; };
-                }
-            }
         }
 
-        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder, TimeTweeningManager tweeningManager,
+        public ButtonManager(DiContainer container, UBinder<Plugin, PluginMetadata> metadataBinder,
             LevelSelectionNavigationController levelSelectionNavigationController, SiraLog log)
         {
             _container = container;
-            _tweeningManager = tweeningManager;
             _assembly = metadataBinder.Value.Assembly;
             _levelSelectionNavigationController = levelSelectionNavigationController;
             _log = log;

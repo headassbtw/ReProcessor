@@ -42,7 +42,7 @@ namespace ReProcessor.UI.Views.TestView
         public void cfgSelect(TableView _, int row)
         {
             
-            choice = CfgList.data[row].text;
+            choice = CfgList.Data[row].Text;
             _conf.Preset = choice;
             Apply();
         }
@@ -75,14 +75,14 @@ namespace ReProcessor.UI.Views.TestView
         void Reload()
         {
             _cfg.GetPresets();
-            CfgList.data.Clear();
+            CfgList.Data.Clear();
 
             foreach (var item in _cfg.Presets)
             {
                 var cfgCell = new CustomListTableData.CustomCellInfo(item.Key);
-                CfgList.data.Add(cfgCell);
+                CfgList.Data.Add(cfgCell);
             }
-            CfgList.tableView.ReloadData();
+            CfgList.TableView.ReloadData();
         }
     }
 }

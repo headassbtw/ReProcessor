@@ -19,7 +19,7 @@ namespace ReProcessor.Files
             if (items == null)
             {
                 throw new InvalidExpressionException();
-                return LoadJson(path);
+                //return LoadJson(path);
             }
             return items;
         }
